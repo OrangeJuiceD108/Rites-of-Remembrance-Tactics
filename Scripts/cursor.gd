@@ -1,8 +1,9 @@
-extends Node
+class_name Cursor extends Node
+
 
 var cursor_position := Vector2.ZERO
 
-# TODO: Function to get mouse input
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		cursor_position = event.position
