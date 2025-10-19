@@ -11,6 +11,6 @@ config_version=5
 [application]
 
 config/name="Rites of Remembrance Tactical"
-run/main_scene="uid://bfb1sra5dsesy"
+run/main_scene="uid://bshu5pb00rhay"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"

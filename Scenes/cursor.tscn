@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfb1sra5dsesy"]
+[gd_scene load_steps=2 format=3 uid="uid://mil0y5xo8uek"]
 
-[ext_resource type="Script" uid="uid://bpe0eh3rgevh3" path="res://Scripts/cursor.gd" id="1_lc1oi"]
+[ext_resource type="Script" uid="uid://bpe0eh3rgevh3" path="res://Scripts/cursor.gd" id="1_8pp82"]
 
-[node name="Cursor" type="Node2D"]
-script = ExtResource("1_lc1oi")
+[node name="Cursor" type="Node"]
+script = ExtResource("1_8pp82")
