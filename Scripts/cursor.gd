@@ -13,5 +13,5 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if event is InputEventMouseMotion:
 		cursor_position = event.position
-	elif event is InputEventMouseButton:
+	elif event is InputEventMouseButton && event.pressed:
 		print(map_manager.grid.is_within_bounds(event.position))
