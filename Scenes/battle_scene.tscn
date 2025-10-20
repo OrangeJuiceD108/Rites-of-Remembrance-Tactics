@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://bshu5pb00rhay"]
+[gd_scene load_steps=7 format=3 uid="uid://bshu5pb00rhay"]
 
 [ext_resource type="PackedScene" uid="uid://mil0y5xo8uek" path="res://Scenes/cursor.tscn" id="1_b25br"]
 [ext_resource type="Script" uid="uid://c0vpw1mdgfoyo" path="res://Scripts/Managers/map_manager.gd" id="2_anwxn"]
 [ext_resource type="Script" uid="uid://bsf7g6w3rbamn" path="res://Scripts/Managers/unit_manager.gd" id="3_anwxn"]
 [ext_resource type="Resource" uid="uid://duyaml2hs2sfu" path="res://Resources/test_grid.tres" id="3_e5vbs"]
+[ext_resource type="Script" uid="uid://cefurk7w3fwrd" path="res://Scripts/Managers/enemy_unit_manager.gd" id="5_gt16y"]
+[ext_resource type="Script" uid="uid://cgmc18pfi2hox" path="res://Scripts/Managers/player_unit_manager.gd" id="6_20f6w"]
 
 [node name="BattleScene" type="Node2D"]
 
@@ -15,3 +17,9 @@ grid = ExtResource("3_e5vbs")
 
 [node name="Unit Manager" type="Node" parent="."]
 script = ExtResource("3_anwxn")
+
+[node name="Enemy Unit Manager" type="Node" parent="Unit Manager"]
+script = ExtResource("5_gt16y")
+
+[node name="Player Unit Manager" type="Node" parent="Unit Manager"]
+script = ExtResource("6_20f6w")

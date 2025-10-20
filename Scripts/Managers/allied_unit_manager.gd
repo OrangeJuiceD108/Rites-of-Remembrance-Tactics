@@ -1,0 +1,1 @@
+class_name Allied_Unit_Manger extends Node

@@ -3,7 +3,7 @@ class_name Cursor extends Node2D
 
 var cursor_position := Vector2.ZERO
 
-@onready var map_manager := get_node("../Map Manager")
+@onready var map_manager = get_node("../Map Manager") as Map_Manager
 
 # TODO: Needs to check how recent the last input was so that we don't do the same input 20 times
 func _unhandled_input(event: InputEvent) -> void:
