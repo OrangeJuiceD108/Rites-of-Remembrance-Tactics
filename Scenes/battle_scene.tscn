@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://bshu5pb00rhay"]
+[gd_scene load_steps=5 format=3 uid="uid://bshu5pb00rhay"]
 
 [ext_resource type="PackedScene" uid="uid://mil0y5xo8uek" path="res://Scenes/cursor.tscn" id="1_b25br"]
 [ext_resource type="Script" uid="uid://c0vpw1mdgfoyo" path="res://Scripts/Managers/map_manager.gd" id="2_anwxn"]
+[ext_resource type="Script" uid="uid://bsf7g6w3rbamn" path="res://Scripts/Managers/unit_manager.gd" id="3_anwxn"]
 [ext_resource type="Resource" uid="uid://duyaml2hs2sfu" path="res://Resources/test_grid.tres" id="3_e5vbs"]
 
 [node name="BattleScene" type="Node2D"]
 
 [node name="Cursor" parent="." instance=ExtResource("1_b25br")]
 
-[node name="Map_Manager" type="Node" parent="."]
+[node name="Map Manager" type="Node" parent="."]
 script = ExtResource("2_anwxn")
 grid = ExtResource("3_e5vbs")
+
+[node name="Unit Manager" type="Node" parent="."]
+script = ExtResource("3_anwxn")
