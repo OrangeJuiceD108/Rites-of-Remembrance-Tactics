@@ -6,7 +6,15 @@ class_name Grid extends Resource
 # TODO: STORE MAP
 
 func get_cell(loc: Vector2) -> Vector2:
-	return (loc/cell_size).floor()
+	return grid_clamp((loc/cell_size).floor())
+
+
+func get_loc_by_cell(cell: Vector2) -> Vector2:
+	return cell * cell_size + cell_size/2
+
+
+func snap_to_cell(cell: Vector2) -> Vector2:
+	return get_loc_by_cell(cell)
 
 
 # Should check when a given position (not tile) is within grid bounds
@@ -15,7 +23,7 @@ func is_within_bounds(loc: Vector2) -> bool:
 
 
 # Should return a given grid position as clamped within grid bounds
-func clamp(grid_loc: Vector2) -> Vector2:
+func grid_clamp(grid_loc: Vector2) -> Vector2:
 	var out := grid_loc
 	out.x = clamp(out.x, 0, size.x - 1.0)
 	out.y = clamp(out.y, 0, size.y - 1.0)
