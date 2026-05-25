@@ -1,7 +1,9 @@
+@abstract
 class_name Unit extends Node2D
 
-var grid_position : Vector2
-var move_radius : Array[Vector2]
+var grid_position : Vector2i
+var move_speed : int # TESTING Temporary instance var, probably will be changed
+var attack_range : Vector2i # TESTING Temporary instance var, probably will be changed
 
 static func is_opposing_faction(unit_1: Unit, unit_2: Unit) -> bool:
 	if (unit_1 is Player_Unit or unit_1 is Allied_Unit) and unit_2 is Enemy_Unit:
@@ -10,7 +12,50 @@ static func is_opposing_faction(unit_1: Unit, unit_2: Unit) -> bool:
 		return true
 	return false
 
-# TODO: Change position func
+# FIXME: Change position func
 func change_position(grid_pos: Vector2):
 	grid_position = grid_pos
 	# TODO: Change physical position
+
+# FIXME: Finish get_move_radius
+func get_move_radius() -> Array[Vector2i]:
+	var final_array : Array[Vector2i]
+	var queue := [[grid_position, 0]]
+	var adjacencies := [Vector2i(0, 1), Vector2i(1, 0), Vector2i(0, -1), Vector2i(-1, 0)]
+	
+	while !queue.is_empty():
+		var current_item = queue.pop_back()
+		final_array.append(current_item[0])
+		
+		if current_item[1] > move_speed:
+			continue
+		
+		for direction in adjacencies:
+			if final_array.has(current_item[0] + direction):
+				continue
+			# TODO: Add other checks here!
+			
+			queue.push_front([current_item[0] + direction, current_item[1] - 1])
+	
+	return final_array
+
+func get_attack_radius(move_radius: Array[Vector2i]) -> Array[Vector2i]:
+	var final_array : Array[Vector2i]
+	var offsets := _get_attack_offsets(attack_range[0], attack_range[1])
+	
+	for tile in move_radius:
+		for o in offsets:
+			var new_tile = tile + o
+			if !final_array.has(new_tile):
+				final_array.append(new_tile)
+	
+	return final_array
+
+func _get_attack_offsets(min_range: int, max_range: int) -> Array[Vector2i]:
+	var offsets = []
+	for x in range(-max_range, max_range):
+		for y in range(-max_range, max_range):
+			var dist = abs(x) + abs(y)
+			if min_range <= dist <= max_range:
+				offsets.append(Vector2i(x, y))
+	return offsets

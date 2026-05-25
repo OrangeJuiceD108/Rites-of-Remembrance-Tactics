@@ -1,19 +1,20 @@
 class_name Grid extends Resource
 
-@export var size := Vector2(20,20)
-@export var cell_size := Vector2(16, 16)
+@export var size := Vector2i(20,20)
+@export var cell_size := Vector2i(16, 16)
 
 # TODO: STORE MAP
 
-func get_cell(loc: Vector2) -> Vector2:
-	return grid_clamp((loc/cell_size).floor())
+# Takes world position (float) and returns grid position (integer)
+func get_cell(loc: Vector2) -> Vector2i:
+	return grid_clamp(Vector2i((loc / Vector2(cell_size)).floor()))
 
 
-func get_loc_by_cell(cell: Vector2) -> Vector2:
-	return cell * cell_size + cell_size/2
+func get_loc_by_cell(cell: Vector2i) -> Vector2:
+	return Vector2(cell * cell_size) + Vector2(cell_size) / 2.0
 
 
-func snap_to_cell(cell: Vector2) -> Vector2:
+func snap_to_cell(cell: Vector2i) -> Vector2:
 	return get_loc_by_cell(cell)
 
 
@@ -23,13 +24,12 @@ func is_within_bounds(loc: Vector2) -> bool:
 
 
 # Should return a given grid position as clamped within grid bounds
-func grid_clamp(grid_loc: Vector2) -> Vector2:
-	var out := grid_loc
-	out.x = clamp(out.x, 0, size.x - 1.0)
-	out.y = clamp(out.y, 0, size.y - 1.0)
-	return out
-
+func grid_clamp(grid_loc: Vector2i) -> Vector2i:
+	return Vector2i(
+		clamp(grid_loc.x, 0, size.x - 1),
+		clamp(grid_loc.y, 0, size.y - 1)
+	)
 
 # Should return a given grid positon as an index to a 1D array
-func as_index(grid_loc: Vector2) -> int:
-	return int(grid_loc.x + grid_loc.y * size.x)
+func as_index(grid_loc: Vector2i) -> int:
+	return grid_loc.x + grid_loc.y * size.x
