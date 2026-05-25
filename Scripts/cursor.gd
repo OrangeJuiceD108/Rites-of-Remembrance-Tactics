@@ -20,4 +20,4 @@ func disable_cursor():
 
 func enable_cursor():
 	set_process_unhandled_input(true)
-	$Sprite2D.visible = false
+	$Sprite2D.visible = true
