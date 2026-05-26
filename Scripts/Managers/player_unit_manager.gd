@@ -7,9 +7,11 @@ func _ready() -> void:
 		if child is Player_Unit:
 			player_units.append(child)
 
-# TODO: Implement get_unit_at_cell
 func get_unit_at_cell(cell: Vector2i) -> Player_Unit:
-	push_error("not implemented")
+	for unit in player_units:
+		if unit.grid_position == cell:
+			return unit
+	return null
 
 # TODO: Implement select_unit
 func select_unit(unit: Player_Unit):
