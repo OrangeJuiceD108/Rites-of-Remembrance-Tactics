@@ -29,11 +29,16 @@ func _on_cell_clicked(cell: Vector2i):
 			# Basically builds the menu that should come up, along with temporarily moving the unit
 			# Cases that we need to handle here:
 			#  - Spot is empty and within move range (Wait/Items)
-			#  - Spot has enemy and within attack range (Attack)
-			#  - Spot has speakable character and within speaking range (Talk)
-			#  - Spot has player within interaction range (Trade/Rescue)
-			#  - Spot has player within spell range (Heal/Teleport)
-			#  - Spot is fails all above conditions (Ignore Event)
+			#    - and has enemy within attack range (Attack)
+			#    - and has speakable character within speaking range (Talk)
+			#    - and has player within interaction range (Trade/Rescue)
+			#    - and has player within spell range (Heal/Teleport)
+			#  - (NOTE: This can be implemented later) Spot is not empty, but spot meets one of the following conditions: 
+			#    - Spot has enemy and is within attack range of a reachable empty spot (Highlight Attack)
+			#    - Spot has speakable character and is within speaking range of another reachable spot (Highlight Speak)
+			#    - Spot has player and is within interaction range of another reachable spot (Highlight Trade)
+			#    - Spot has player and is within heal range of another reachable spot (Highlight Heal)
+			#  - Spot fails all above conditions (Ignore Event or Deselect)
 			# This would be a really great spot for one of those number enums, 
 			# so that each of these menu buttons can just be an integer that we add to a number
 			# Possible setup:
