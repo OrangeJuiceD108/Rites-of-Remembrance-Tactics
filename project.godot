@@ -14,3 +14,7 @@ config/name="Rites of Remembrance Tactical"
 run/main_scene="uid://bshu5pb00rhay"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Constants="*res://Scripts/Autoloads/constants.gd"

@@ -8,7 +8,7 @@ var cursor_position := Vector2i(8, 8)
 
 signal cell_clicked(cell: Vector2i)
 
-func _unhandled_input(event: InputEvent) -> void:	
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		cursor_cell = grid.get_cell(event.position)
 		cursor_position = grid.snap_to_cell(cursor_cell)

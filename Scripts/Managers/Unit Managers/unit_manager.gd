@@ -13,6 +13,8 @@ var state = State.IDLE
 func _ready():
 	var cursor = $"../Cursor"
 	cursor.cell_clicked.connect(_on_cell_clicked)
+	var ui_manager = $"../UI Manager"
+	ui_manager.action_menu.action_chosen.connect(_on_action_chosen)
 
 # TODO: Implement _on_cell_clicked
 func _on_cell_clicked(cell: Vector2i):
@@ -33,6 +35,7 @@ func _handle_idle_click(cell: Vector2i):
 		pass
 	pass
 
+# TODO: finish _handle_unit_selected_click
 func _handle_unit_selected_click(cell: Vector2i):
 	# TODO: Cell w/ unit logic
 	# Basically builds the menu that should come up, along with temporarily moving the unit
@@ -60,3 +63,23 @@ func _handle_unit_selected_click(cell: Vector2i):
 	# - 2   = Items
 	# - 1   = Wait
 	pass
+
+# TODO: finish _on_action_chosen
+func _on_action_chosen(action: Constants.ActionFlags):
+	match action:
+		Constants.ActionFlags.TALK:
+			pass
+		Constants.ActionFlags.ATTACK:
+			pass
+		Constants.ActionFlags.HEAL:
+			pass
+		Constants.ActionFlags.TELEPORT:
+			pass
+		Constants.ActionFlags.RESCUE:
+			pass
+		Constants.ActionFlags.TRADE:
+			pass
+		Constants.ActionFlags.ITEMS:
+			pass
+		Constants.ActionFlags.WAIT:
+			pass

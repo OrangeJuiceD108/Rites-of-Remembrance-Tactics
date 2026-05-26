@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://mil0y5xo8uek" path="res://Scenes/cursor.tscn" id="1_b25br"]
 [ext_resource type="Texture2D" uid="uid://dbjwqhu2e0lrq" path="res://Assets/Sprites/pixil-frame-0.png" id="2_20f6w"]
 [ext_resource type="Script" uid="uid://c0vpw1mdgfoyo" path="res://Scripts/Managers/map_manager.gd" id="2_anwxn"]
-[ext_resource type="Script" uid="uid://bsf7g6w3rbamn" path="res://Scripts/Managers/unit_manager.gd" id="3_anwxn"]
+[ext_resource type="Script" uid="uid://bsf7g6w3rbamn" path="res://Scripts/Managers/Unit Managers/unit_manager.gd" id="3_anwxn"]
 [ext_resource type="Resource" uid="uid://duyaml2hs2sfu" path="res://Resources/test_grid.tres" id="3_e5vbs"]
-[ext_resource type="Script" uid="uid://cefurk7w3fwrd" path="res://Scripts/Managers/enemy_unit_manager.gd" id="5_gt16y"]
-[ext_resource type="Script" uid="uid://cgmc18pfi2hox" path="res://Scripts/Managers/player_unit_manager.gd" id="6_20f6w"]
+[ext_resource type="Script" uid="uid://cefurk7w3fwrd" path="res://Scripts/Managers/Unit Managers/enemy_unit_manager.gd" id="5_gt16y"]
+[ext_resource type="Script" uid="uid://cgmc18pfi2hox" path="res://Scripts/Managers/Unit Managers/player_unit_manager.gd" id="6_20f6w"]
 
 [node name="BattleScene" type="Node2D"]
 
@@ -29,3 +29,10 @@ script = ExtResource("5_gt16y")
 
 [node name="Player Unit Manager" type="Node" parent="Unit Manager"]
 script = ExtResource("6_20f6w")
+
+[node name="UI Manager" type="Node" parent="."]
+
+[node name="Action Menu" type="VBoxContainer" parent="UI Manager"]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
