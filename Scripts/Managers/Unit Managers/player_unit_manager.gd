@@ -3,14 +3,16 @@ class_name Player_Unit_Manager extends Node
 @export var move_cell_sprite : Texture2D
 @export var attack_cell_sprite : Texture2D
 
-var player_units: Array[Player_Unit]
+var player_units : Array[Player_Unit]
+var occupied_tiles : Array[Vector2i]
 
-var selected_unit: Player_Unit
+var selected_unit : Player_Unit
 
-var move_cells: Array[Vector2i]
-var attack_cells: Array[Vector2i]
+var move_cells : Array[Vector2i]
+var attack_cells : Array[Vector2i]
 
 var cell_sprite_container : Node2D
+var staged_attack_radius : Node2D
 
 signal unit_selected(targeting_cells: Array[Vector2i])
 signal unit_deselected()
@@ -19,6 +21,7 @@ func _ready() -> void:
 	for child in get_children():
 		if child is Player_Unit:
 			player_units.append(child)
+			occupied_tiles.append(child.grid_position)
 
 func get_unit_at_cell(cell: Vector2i) -> Player_Unit:
 	for unit in player_units:
@@ -32,6 +35,28 @@ func select_unit(unit: Player_Unit):
 	attack_cells = unit.get_attack_radius(move_cells)
 	unit_selected.emit(move_cells + attack_cells)
 	_populate_ranges(move_cells, attack_cells)
+
+func stage_unit(cell: Vector2i, a_cells: Array[Vector2i]):
+	selected_unit.stage_move(cell)
+	_hide_ranges()
+	_populate_staged_attack(a_cells)
+
+func _populate_staged_attack(a_cells: Array[Vector2i]):
+	if staged_attack_radius != null:
+		push_error("Staged attack has already been populated")
+	
+	staged_attack_radius = Node2D.new()
+	add_child(staged_attack_radius)
+	
+	for cell in a_cells:
+		var sprite = Sprite2D.new()
+		sprite.texture = attack_cell_sprite
+		sprite.position = GameState.grid.get_loc_by_cell(cell)
+		staged_attack_radius.add_child(sprite)
+
+func _clear_staged_attack():
+	staged_attack_radius.queue_free()
+	staged_attack_radius = null
 
 func _populate_ranges(m_cells: Array[Vector2i], a_cells: Array[Vector2i]):
 	if cell_sprite_container != null:

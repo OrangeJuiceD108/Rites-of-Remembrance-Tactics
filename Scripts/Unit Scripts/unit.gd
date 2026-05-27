@@ -1,9 +1,13 @@
 @abstract
 class_name Unit extends Node2D
 
-var grid_position : Vector2i # TESTING you need to instantiate this big dawg
+var grid_position : Vector2i 
 @export var move_speed : int # TESTING Temporary instance var, probably will be changed
 @export var attack_range : Vector2i # TESTING Temporary instance var, probably will be changed
+@onready var sprite := $"Sprite2D"
+
+func _ready():
+	grid_position = GameState.grid.get_cell(position) #FIXME This way of instantiating grid position probably isn't permanent
 
 static func is_opposing_faction(unit_1: Unit, unit_2: Unit) -> bool:
 	if (unit_1 is Player_Unit or unit_1 is Allied_Unit) and unit_2 is Enemy_Unit:
@@ -16,6 +20,7 @@ static func is_opposing_faction(unit_1: Unit, unit_2: Unit) -> bool:
 func change_position(grid_pos: Vector2):
 	grid_position = grid_pos
 	# TODO: Change physical position
+	# TODO: Change position in occupied tiles (maybe this method is implemented by all child classes so that I can change where this goes?)
 
 # FIXME: Finish get_move_radius
 func get_move_radius() -> Array[Vector2i]:

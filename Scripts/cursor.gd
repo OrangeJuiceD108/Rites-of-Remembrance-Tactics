@@ -11,6 +11,7 @@ signal cell_clicked(cell: Vector2i)
 
 func _ready(): 
 	$"../Unit Manager/Player Unit Manager".unit_selected.connect(_lock_cursor)
+	$"../Unit Manager/Player Unit Manager".unit_deselected.connect(_unlock_cursor)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -33,6 +34,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _lock_cursor(targeting_tiles: Array[Vector2i]):
 	selectable_tiles = targeting_tiles
+
+func _unlock_cursor():
+	selectable_tiles.clear()
 
 func disable_cursor():
 	set_process_unhandled_input(false)
