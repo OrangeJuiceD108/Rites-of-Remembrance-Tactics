@@ -14,7 +14,7 @@ func _ready():
 	var cursor = $"../Cursor"
 	cursor.cell_clicked.connect(_on_cell_clicked)
 	var ui_manager = $"../UI Manager"
-	ui_manager.action_menu.action_chosen.connect(_on_action_chosen)
+	ui_manager.action_chosen.connect(_on_action_chosen)
 
 # TODO: Implement _on_cell_clicked
 func _on_cell_clicked(cell: Vector2i):
