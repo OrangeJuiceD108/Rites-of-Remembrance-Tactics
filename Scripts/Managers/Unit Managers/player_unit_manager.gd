@@ -10,7 +10,10 @@ var selected_unit: Player_Unit
 var move_cells: Array[Vector2i]
 var attack_cells: Array[Vector2i]
 
-var cell_sprites: Array[Sprite2D]
+var cell_sprite_container : Node2D
+
+signal unit_selected(targeting_cells: Array[Vector2i])
+signal unit_deselected()
 
 func _ready() -> void:
 	for child in get_children():
@@ -27,19 +30,35 @@ func select_unit(unit: Player_Unit):
 	selected_unit = unit
 	move_cells = unit.get_move_radius()
 	attack_cells = unit.get_attack_radius(move_cells)
-	_display_ranges(move_cells, attack_cells)
+	unit_selected.emit(move_cells + attack_cells)
+	_populate_ranges(move_cells, attack_cells)
 
-func _display_ranges(m_cells: Array[Vector2i], a_cells: Array[Vector2i]):
+func _populate_ranges(m_cells: Array[Vector2i], a_cells: Array[Vector2i]):
+	if cell_sprite_container != null:
+		push_error("Ranges have already been populated")
+		return
+	
+	cell_sprite_container = Node2D.new()
+	add_child(cell_sprite_container)
+	
 	for cell in m_cells:
 		var sprite = Sprite2D.new()
 		sprite.texture = move_cell_sprite
 		sprite.position = GameState.grid.get_loc_by_cell(cell)
-		cell_sprites.append(sprite)
-		add_child(sprite)
+		cell_sprite_container.add_child(sprite)
 	a_cells = a_cells.filter(func(item): return not m_cells.has(item))
 	for cell in a_cells:
 		var sprite = Sprite2D.new()
 		sprite.texture = attack_cell_sprite
 		sprite.position = GameState.grid.get_loc_by_cell(cell)
-		cell_sprites.append(sprite)
-		add_child(sprite)
+		cell_sprite_container.add_child(sprite)
+
+func _clear_ranges():
+	cell_sprite_container.queue_free()
+	cell_sprite_container = null
+
+func _display_ranges():
+	cell_sprite_container.show()
+
+func _hide_ranges():
+	cell_sprite_container.hide()

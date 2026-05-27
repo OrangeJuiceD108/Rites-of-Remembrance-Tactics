@@ -1,4 +1,4 @@
-class_name UI_Manager extends Node
+class_name UI_Manager extends Control
 
 @onready var action_menu = $"Action Menu"
 

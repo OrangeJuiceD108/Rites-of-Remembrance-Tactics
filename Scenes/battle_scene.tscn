@@ -52,11 +52,18 @@ texture = ExtResource("9_wb0gu")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
-[node name="UI Manager" type="Node" parent="."]
+[node name="UI Manager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
 script = ExtResource("8_ed262")
 
 [node name="Action Menu" type="VBoxContainer" parent="UI Manager"]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 0
 script = ExtResource("9_ms847")
