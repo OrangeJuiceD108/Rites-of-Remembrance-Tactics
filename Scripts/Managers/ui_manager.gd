@@ -15,10 +15,13 @@ func show_actions_menu(actions: int, cell: Vector2):
 	var menu_offset = Vector2(16, 0)
 	action_menu.position = world_position + menu_offset
 	action_menu.build(actions)
+	$"../Cursor".disable_cursor()
 	action_menu.visible = true
 
 func hide_action_menu():
+	$"../Cursor".enable_cursor()
 	action_menu.visible = false
 
 func _on_action_chosen(action: Constants.ActionFlags):
 	action_chosen.emit(action)
+	hide_action_menu()

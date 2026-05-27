@@ -90,18 +90,51 @@ func _handle_occupied_cell_click(cell: Vector2i):
 func _on_action_chosen(action: Constants.ActionFlags):
 	match action:
 		Constants.ActionFlags.TALK:
-			pass
+			_action_talk()
 		Constants.ActionFlags.ATTACK:
-			pass
+			_action_attack()
 		Constants.ActionFlags.HEAL:
-			pass
+			_action_heal()
 		Constants.ActionFlags.TELEPORT:
-			pass
+			_action_teleport()
 		Constants.ActionFlags.RESCUE:
-			pass
+			_action_rescue()
 		Constants.ActionFlags.TRADE:
-			pass
+			_action_teleport()
 		Constants.ActionFlags.ITEMS:
-			pass
+			_action_items()
 		Constants.ActionFlags.WAIT:
-			pass
+			_action_wait()
+
+# TODO: Implement _action_talk()
+func _action_talk():
+	pass
+
+# TODO: Implement _action_attack()
+func _action_attack():
+	pass
+
+# TODO: Implement _action_heal()
+func _action_heal():
+	pass
+
+# TODO: Implement _action_teleport()
+func _action_teleport():
+	pass
+
+# TODO: Implement _action_rescue()
+func _action_rescue():
+	pass
+
+# TODO: Implement _action_trade()
+func _action_trade():
+	pass
+
+# TODO: Implement _action_items()
+func _action_items():
+	pass
+
+# TODO: Implement _action_wait()
+func _action_wait():
+	player_manager.confirm_move()
+	state = State.IDLE

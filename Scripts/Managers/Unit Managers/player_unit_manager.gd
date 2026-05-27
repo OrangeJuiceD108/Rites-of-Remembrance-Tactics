@@ -36,10 +36,20 @@ func select_unit(unit: Player_Unit):
 	unit_selected.emit(move_cells + attack_cells)
 	_populate_ranges(move_cells, attack_cells)
 
+func deselect_unit():
+	selected_unit = null
+	_clear_staged_attack()
+	_clear_ranges()
+	unit_deselected.emit()
+
 func stage_unit(cell: Vector2i, a_cells: Array[Vector2i]):
 	selected_unit.stage_move(cell)
 	_hide_ranges()
 	_populate_staged_attack(a_cells)
+
+func confirm_move():
+	selected_unit.confirm_move()
+	deselect_unit()
 
 func _populate_staged_attack(a_cells: Array[Vector2i]):
 	if staged_attack_radius != null:

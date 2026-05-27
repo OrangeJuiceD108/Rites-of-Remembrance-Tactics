@@ -17,9 +17,9 @@ static func is_opposing_faction(unit_1: Unit, unit_2: Unit) -> bool:
 	return false
 
 # FIXME: Change position func
-func change_position(grid_pos: Vector2):
-	grid_position = grid_pos
-	# TODO: Change physical position
+func change_position(cell: Vector2i):
+	position = GameState.grid.get_loc_by_cell(cell)
+	grid_position = cell
 	# TODO: Change position in occupied tiles (maybe this method is implemented by all child classes so that I can change where this goes?)
 
 # FIXME: Finish get_move_radius

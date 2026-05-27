@@ -15,22 +15,25 @@ func _ready():
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		cursor_cell = GameState.grid.get_cell(event.position)
-		
-		if selectable_tiles.size() > 0:
-			var nearest_tile = selectable_tiles[0]
-			var nearest_distance = abs(nearest_tile.x - cursor_cell.x) + abs(nearest_tile.y - cursor_cell.y)
-			for tile in selectable_tiles:
-				var new_distance = abs(tile.x - cursor_cell.x) + abs(tile.y - cursor_cell.y)
-				if new_distance < nearest_distance:
-					nearest_tile = tile
-					nearest_distance = new_distance
-			cursor_cell = nearest_tile
-		
-		cursor_position = GameState.grid.snap_to_cell(cursor_cell)
-		position = cursor_position
+		_set_cursor_position(event.position)
 	elif event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
 		cell_clicked.emit(cursor_cell)
+
+func _set_cursor_position(new_position: Vector2):
+	cursor_cell = GameState.grid.get_cell(new_position)
+	
+	if selectable_tiles.size() > 0:
+		var nearest_tile = selectable_tiles[0]
+		var nearest_distance = abs(nearest_tile.x - cursor_cell.x) + abs(nearest_tile.y - cursor_cell.y)
+		for tile in selectable_tiles:
+			var new_distance = abs(tile.x - cursor_cell.x) + abs(tile.y - cursor_cell.y)
+			if new_distance < nearest_distance:
+				nearest_tile = tile
+				nearest_distance = new_distance
+		cursor_cell = nearest_tile
+	
+	cursor_position = GameState.grid.snap_to_cell(cursor_cell)
+	position = cursor_position
 
 func _lock_cursor(targeting_tiles: Array[Vector2i]):
 	selectable_tiles = targeting_tiles
@@ -43,5 +46,6 @@ func disable_cursor():
 	$Sprite2D.visible = false
 
 func enable_cursor():
+	_set_cursor_position(get_global_mouse_position())
 	set_process_unhandled_input(true)
 	$Sprite2D.visible = true

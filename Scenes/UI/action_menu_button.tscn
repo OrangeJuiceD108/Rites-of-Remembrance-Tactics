@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://craa7tm3puosj"]
+
+[ext_resource type="FontFile" uid="uid://bnocubeeufjr3" path="res://Assets/Fonts/PixeloidSans.ttf" id="1_wcy83"]
+
+[node name="Button" type="Button"]
+theme_override_fonts/font = ExtResource("1_wcy83")
+theme_override_font_sizes/font_size = 9
+text = "Attack"

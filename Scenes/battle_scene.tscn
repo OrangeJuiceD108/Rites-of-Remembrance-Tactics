@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bshu5pb00rhay"]
+[gd_scene load_steps=16 format=3 uid="uid://bshu5pb00rhay"]
 
 [ext_resource type="PackedScene" uid="uid://mil0y5xo8uek" path="res://Scenes/cursor.tscn" id="1_b25br"]
 [ext_resource type="Texture2D" uid="uid://dbjwqhu2e0lrq" path="res://Assets/Sprites/pixil-frame-0.png" id="2_20f6w"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://lm2chlv04p5v" path="res://Assets/Sprites/Free 1x.png" id="9_wb0gu"]
 [ext_resource type="Texture2D" uid="uid://d26qirm76x0xs" path="res://Assets/Sprites/attackSprite.png" id="9_xdap8"]
 [ext_resource type="Script" uid="uid://d1agw3ganpcvv" path="res://Scripts/Managers/Unit Managers/allied_unit_manager.gd" id="12_xdap8"]
+[ext_resource type="PackedScene" uid="uid://craa7tm3puosj" path="res://Scenes/UI/action_menu_button.tscn" id="15_f856b"]
 
 [node name="BattleScene" type="Node2D"]
 
@@ -42,7 +43,7 @@ attack_cell_sprite = ExtResource("9_xdap8")
 
 [node name="Test Unit" type="Node2D" parent="Unit Manager/Player Unit Manager"]
 z_index = 5
-position = Vector2(8, 8)
+position = Vector2(24, 24)
 script = ExtResource("8_f4ggb")
 move_speed = 5
 attack_range = Vector2i(2, 2)
@@ -66,8 +67,10 @@ script = ExtResource("8_ed262")
 
 [node name="Action Menu" type="VBoxContainer" parent="UI Manager"]
 visible = false
+z_index = 10
 layout_mode = 0
-offset_right = 40.0
+offset_right = 31.0
 offset_bottom = 40.0
 mouse_filter = 0
 script = ExtResource("9_ms847")
+button_scene = ExtResource("15_f856b")
