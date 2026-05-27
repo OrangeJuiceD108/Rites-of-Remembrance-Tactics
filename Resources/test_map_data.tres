@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Map_Data" load_steps=3 format=3 uid="uid://tqmbpkncy0yn"]
+
+[ext_resource type="Resource" uid="uid://duyaml2hs2sfu" path="res://Resources/test_grid.tres" id="1_avt72"]
+[ext_resource type="Script" uid="uid://bu5t81y6inqkj" path="res://Scripts/Resources/map_data.gd" id="1_jn053"]
+
+[resource]
+script = ExtResource("1_jn053")
+grid = ExtResource("1_avt72")
+metadata/_custom_type_script = "uid://bu5t81y6inqkj"

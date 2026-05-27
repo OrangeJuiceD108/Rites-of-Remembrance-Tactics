@@ -1,6 +1,5 @@
 class_name UI_Manager extends Node
 
-@onready var grid = $"../Map Manager".grid
 @onready var action_menu = $"Action Menu"
 
 signal action_chosen(action: Constants.ActionFlags)
@@ -9,7 +8,7 @@ func _ready():
 	action_menu.action_chosen.connect(_on_action_chosen)
 
 func show_actions_menu(actions: int, cell: Vector2):
-	var world_position = grid.get_loc_by_cell(cell)
+	var world_position = GameState.grid.get_loc_by_cell(cell)
 	
 	# FIXME: There needs to be some logic here to make the offset, 
 	#        in cases where its close to the edge of the screen

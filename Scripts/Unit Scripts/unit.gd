@@ -1,9 +1,9 @@
 @abstract
 class_name Unit extends Node2D
 
-var grid_position : Vector2i
-var move_speed : int # TESTING Temporary instance var, probably will be changed
-var attack_range : Vector2i # TESTING Temporary instance var, probably will be changed
+var grid_position : Vector2i # TESTING you need to instantiate this big dawg
+@export var move_speed : int # TESTING Temporary instance var, probably will be changed
+@export var attack_range : Vector2i # TESTING Temporary instance var, probably will be changed
 
 static func is_opposing_faction(unit_1: Unit, unit_2: Unit) -> bool:
 	if (unit_1 is Player_Unit or unit_1 is Allied_Unit) and unit_2 is Enemy_Unit:
@@ -27,7 +27,7 @@ func get_move_radius() -> Array[Vector2i]:
 		var current_item = queue.pop_back()
 		final_array.append(current_item[0])
 		
-		if current_item[1] > move_speed:
+		if current_item[1] >= move_speed:
 			continue
 		
 		for direction in adjacencies:
@@ -35,7 +35,7 @@ func get_move_radius() -> Array[Vector2i]:
 				continue
 			# TODO: Add other checks here!
 			
-			queue.push_front([current_item[0] + direction, current_item[1] - 1])
+			queue.push_front([current_item[0] + direction, current_item[1] + 1])
 	
 	return final_array
 
@@ -52,10 +52,10 @@ func get_attack_radius(move_radius: Array[Vector2i]) -> Array[Vector2i]:
 	return final_array
 
 func _get_attack_offsets(min_range: int, max_range: int) -> Array[Vector2i]:
-	var offsets = []
-	for x in range(-max_range, max_range):
-		for y in range(-max_range, max_range):
+	var offsets : Array[Vector2i]
+	for x in range(-max_range, max_range + 1):
+		for y in range(-max_range, max_range + 1):
 			var dist = abs(x) + abs(y)
-			if min_range <= dist <= max_range:
+			if min_range <= dist && dist <= max_range:
 				offsets.append(Vector2i(x, y))
 	return offsets
