@@ -10,8 +10,8 @@ var selectable_tiles : Array[Vector2i]
 signal cell_clicked(cell: Vector2i)
 
 func _ready(): 
-	$"../Unit Manager/Player Unit Manager".unit_selected.connect(_lock_cursor)
-	$"../Unit Manager/Player Unit Manager".unit_deselected.connect(_unlock_cursor)
+	$"../Unit Manager/Player Unit Manager".unit_selected.connect(lock_cursor)
+	$"../Unit Manager/Player Unit Manager".unit_deselected.connect(unlock_cursor)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -35,10 +35,10 @@ func _set_cursor_position(new_position: Vector2):
 	cursor_position = GameState.grid.snap_to_cell(cursor_cell)
 	position = cursor_position
 
-func _lock_cursor(targeting_tiles: Array[Vector2i]):
+func lock_cursor(targeting_tiles: Array[Vector2i]):
 	selectable_tiles = targeting_tiles
 
-func _unlock_cursor():
+func unlock_cursor():
 	selectable_tiles.clear()
 
 func disable_cursor():

@@ -1,4 +1,5 @@
 enum ActionFlags {
+	NONE = 0,
 	WAIT = 1,
 	ITEMS = 2,
 	TRADE = 4,

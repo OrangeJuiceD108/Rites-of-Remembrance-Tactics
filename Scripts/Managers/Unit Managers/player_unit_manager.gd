@@ -10,6 +10,7 @@ var selected_unit : Player_Unit
 
 var move_cells : Array[Vector2i]
 var attack_cells : Array[Vector2i]
+var staged_attack_cells : Array[Vector2i]
 
 var cell_sprite_container : Node2D
 var staged_attack_radius : Node2D
@@ -45,6 +46,7 @@ func deselect_unit():
 func stage_unit(cell: Vector2i, a_cells: Array[Vector2i]):
 	selected_unit.stage_move(cell)
 	_hide_ranges()
+	staged_attack_cells = a_cells
 	_populate_staged_attack(a_cells)
 
 func confirm_move():

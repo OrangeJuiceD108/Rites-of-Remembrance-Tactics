@@ -3,8 +3,6 @@ class_name Grid extends Resource
 @export var size := Vector2i(20,20)
 @export var cell_size := Vector2i(16, 16)
 
-# TODO: STORE MAP
-
 # Takes world position (float) and returns grid position (integer)
 func get_cell(loc: Vector2) -> Vector2i:
 	return grid_clamp(Vector2i((loc / Vector2(cell_size)).floor()))

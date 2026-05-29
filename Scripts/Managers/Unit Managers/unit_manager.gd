@@ -9,16 +9,15 @@ var occupied_tiles : Array[Vector2i]:
 @onready var ally_manager = get_node("Allied Unit Manager") as Allied_Unit_Manger
 
 @onready var ui_manager = $"../UI Manager"
+@onready var cursor = $"../Cursor"
 
 # TODO: I'll need more states at some point I'm sure
 enum State {IDLE, UNIT_SELECTED, UNIT_STAGED, ACTION_SELECTED} 
 var state = State.IDLE
+var current_action = Constants.ActionFlags.NONE
 
 func _ready():
-	var cursor = $"../Cursor"
 	cursor.cell_clicked.connect(_on_cell_clicked)
-	
-	ui_manager = $"../UI Manager"
 	ui_manager.action_chosen.connect(_on_action_chosen)
 
 # TODO: Implement _on_cell_clicked
@@ -28,6 +27,8 @@ func _on_cell_clicked(cell: Vector2i):
 			_handle_idle_click(cell)
 		State.UNIT_SELECTED:
 			_handle_unit_selected_click(cell)
+		State.ACTION_SELECTED:
+			_handle_action_selected(cell)
 	pass
 
 func _handle_idle_click(cell: Vector2i):
@@ -86,7 +87,53 @@ func _handle_occupied_cell_click(cell: Vector2i):
 	# Or case that spot is not empty and fails all above conditions (Ignore Event or Deselect)
 	push_error("Not Implemented")
 
-# TODO: finish _on_action_chosen
+func _handle_action_selected(cell: Vector2i):
+	match current_action:
+		Constants.ActionFlags.TALK:
+			_handle_action_talk(cell)
+		Constants.ActionFlags.ATTACK:
+			_handle_action_attack(cell)
+		Constants.ActionFlags.HEAL:
+			_handle_action_heal(cell)
+		Constants.ActionFlags.TELEPORT:
+			_handle_action_teleport(cell)
+		Constants.ActionFlags.RESCUE:
+			_handle_action_rescue(cell)
+		Constants.ActionFlags.TRADE:
+			_handle_action_trade(cell)
+		_:
+			push_error("current_action mismatch error")
+
+# TODO: finish handle_action_talk
+func _handle_action_talk(cell: Vector2i):
+	pass
+
+# TODO: finish handle_action_attack
+func _handle_action_attack(cell: Vector2i):
+	# TODO: Run the attack
+	print("Got his ass!")
+	
+	player_manager.confirm_move()
+	state = State.IDLE
+	current_action = Constants.ActionFlags.NONE
+	# TODO: Exhaust unit
+
+# TODO: finish handle_action_heal
+func _handle_action_heal(cell: Vector2i):
+	pass
+
+# TODO: finish handle_action_teleport
+func _handle_action_teleport(cell: Vector2i):
+	pass
+
+# TODO: finish handle_action_rescue
+func _handle_action_rescue(cell: Vector2i):
+	pass
+
+# TODO: finish handle_action_trade
+func _handle_action_trade(cell: Vector2i):
+	pass
+
 func _on_action_chosen(action: Constants.ActionFlags):
 	match action:
 		Constants.ActionFlags.TALK:
@@ -110,9 +157,14 @@ func _on_action_chosen(action: Constants.ActionFlags):
 func _action_talk():
 	pass
 
-# TODO: Implement _action_attack()
 func _action_attack():
-	pass
+	var attackable_cells = player_manager.staged_attack_cells.filter(func(item): return enemy_manager.occupied_tiles.has(item))
+	if attackable_cells.size() == 0:
+		push_error("Something when wrong, 0 attackable cells")
+	cursor.lock_cursor(attackable_cells)
+	
+	state = State.ACTION_SELECTED
+	current_action = Constants.ActionFlags.ATTACK
 
 # TODO: Implement _action_heal()
 func _action_heal():
@@ -134,7 +186,6 @@ func _action_trade():
 func _action_items():
 	pass
 
-# TODO: Implement _action_wait()
 func _action_wait():
 	player_manager.confirm_move()
 	state = State.IDLE

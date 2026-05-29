@@ -20,7 +20,7 @@ static func is_opposing_faction(unit_1: Unit, unit_2: Unit) -> bool:
 func change_position(cell: Vector2i):
 	position = GameState.grid.get_loc_by_cell(cell)
 	grid_position = cell
-	# TODO: Change position in occupied tiles (maybe this method is implemented by all child classes so that I can change where this goes?)
+	# FIXME: Change position in occupied tiles (maybe this method is implemented by all child classes so that I can change where this goes?)
 
 # FIXME: Finish get_move_radius
 func get_move_radius() -> Array[Vector2i]:

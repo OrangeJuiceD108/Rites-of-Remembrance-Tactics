@@ -4,7 +4,6 @@ class_name Action_Menu extends VBoxContainer
 
 signal action_chosen(action: Constants.ActionFlags)
 
-# TODO: Finish build
 func build(actions: int):
 	for child in get_children():
 		child.queue_free()
@@ -25,7 +24,6 @@ func build(actions: int):
 	_add_button("Items", Constants.ActionFlags.ITEMS)
 	_add_button("Wait", Constants.ActionFlags.WAIT)
 
-# TODO: Finish _add_button
 func _add_button(label: String, flag: int):
 	var button = button_scene.instantiate()
 	button.text = label
