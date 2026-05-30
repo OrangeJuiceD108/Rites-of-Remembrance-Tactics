@@ -9,3 +9,14 @@ enum ActionFlags {
 	ATTACK = 64,
 	TALK = 128,
 }
+
+enum Stats {
+	HP = 0,
+	STR = 1,
+	MAG = 2,
+	SKL = 3,
+	SPD = 4,
+	LCK = 5,
+	DEF = 6,
+	RES = 7
+}

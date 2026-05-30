@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Constants="*res://Scripts/Autoloads/constants.gd"
 GameState="*res://Scripts/Autoloads/game_state.gd"
+EventBus="*res://Scripts/Autoloads/event_bus.gd"
 
 [display]
 

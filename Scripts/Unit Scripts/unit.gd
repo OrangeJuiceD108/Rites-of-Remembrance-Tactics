@@ -2,6 +2,7 @@
 class_name Unit extends Node2D
 
 var grid_position : Vector2i 
+var unit_class : Unit_Class
 @export var move_speed : int # TESTING Temporary instance var, probably will be changed
 @export var attack_range : Vector2i # TESTING Temporary instance var, probably will be changed
 @onready var sprite := $"Sprite2D"
