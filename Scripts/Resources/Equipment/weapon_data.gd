@@ -1,9 +1,15 @@
 class_name Weapon_Data extends Equipment_Data
 
-enum Type {ANIMA, AXE, BOW, DARK, EMPTY, LANCE, LIGHT, SWORD}
-@export var weapon_type : Type
+@export var type : Constants.WeaponType
 
-enum WeaponRank {E, D, C, B, A, S}
+enum WeaponRank {
+	S = 5, 
+	A = 4, 
+	B = 3,
+	C = 2, 
+	D = 1, 
+	E = 0
+}
 @export var weapon_rank : WeaponRank
 
 @export var attack_range : Vector2i
@@ -23,7 +29,7 @@ enum WeaponRank {E, D, C, B, A, S}
 # If signature weapon of a specific unit, this stores the name; otherwise null
 @export var signature_unit : String 
 
-@export var physical_weapon : bool
+@export var physical : bool
 
 @export var reaver : bool
 

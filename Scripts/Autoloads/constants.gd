@@ -1,3 +1,5 @@
+extends Node
+
 enum ActionFlags {
 	NONE = 0,
 	WAIT = 1,
@@ -10,7 +12,7 @@ enum ActionFlags {
 	TALK = 128,
 }
 
-enum Stats {
+enum Stat {
 	HP = 0,
 	STR = 1,
 	MAG = 2,
@@ -19,4 +21,35 @@ enum Stats {
 	LCK = 5,
 	DEF = 6,
 	RES = 7
+}
+
+enum WeaponType {
+	NONE,
+	ANIMA, 
+	AXE, 
+	BOW, 
+	DARK, 
+	EMPTY, 
+	LANCE, 
+	LIGHT, 
+	SWORD
+}
+
+var WeaponAdvantage = {
+	WeaponType.ANIMA:
+		WeaponType.LIGHT,
+	WeaponType.AXE:
+		WeaponType.LANCE,
+	WeaponType.BOW:
+		WeaponType.NONE,
+	WeaponType.DARK:
+		WeaponType.LIGHT,
+	WeaponType.EMPTY:
+		WeaponType.NONE,
+	WeaponType.LANCE:
+		WeaponType.SWORD,
+	WeaponType.LIGHT:
+		WeaponType.DARK,
+	WeaponType.SWORD:
+		WeaponType.AXE
 }

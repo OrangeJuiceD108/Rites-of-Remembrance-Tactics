@@ -4,7 +4,7 @@ class_name Unit_Class extends Resource
 
 @export var default_portrait : Texture2D
 
-@export var proficiencies : Array[Weapon_Data.Type]
+@export var proficiencies : Array[Constants.WeaponType]
 
 @export var promotions : Array[Unit_Class]
 
