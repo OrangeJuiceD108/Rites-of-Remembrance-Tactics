@@ -4,12 +4,12 @@ var occupied_tiles : Array[Vector2i]:
 	get: 
 		return player_manager.occupied_tiles + enemy_manager.occupied_tiles + ally_manager.occupied_tiles
 
-@onready var enemy_manager = get_node("Enemy Unit Manager") as Enemy_Unit_Manager
-@onready var player_manager = get_node("Player Unit Manager") as Player_Unit_Manager
-@onready var ally_manager = get_node("Allied Unit Manager") as Allied_Unit_Manger
+@onready var enemy_manager : Enemy_Unit_Manager = $"Enemy Unit Manager"
+@onready var player_manager : Player_Unit_Manager = $"Player Unit Manager"
+@onready var ally_manager : Allied_Unit_Manger = $"Allied Unit Manager"
 
-@onready var ui_manager = $"../UI Manager"
-@onready var cursor = $"../Cursor"
+@onready var ui_manager : UI_Manager = $"../UI Manager"
+@onready var cursor : Cursor = $"../Cursor"
 
 # TODO: I'll need more states at some point I'm sure
 enum State {IDLE, UNIT_SELECTED, UNIT_STAGED, ACTION_SELECTED} 

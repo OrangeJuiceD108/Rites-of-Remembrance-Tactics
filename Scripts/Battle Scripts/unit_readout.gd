@@ -16,13 +16,12 @@ var constitution : int
 
 var tags : Array[Unit_Class.Tag]
 
-# TODO: Finish constructor
 func _init(unit: Unit):
 	unit_class = unit.unit_class
 	
-	# TODO: Assign the weapon
+	weapon = unit.inventory.equipped_weapon
 	
-	# TODO: Assign stats
+	stats = unit.stats
 	activation_rate_stats = stats.duplicate()
 	
 	stat_multipliers.resize(8)
@@ -30,6 +29,6 @@ func _init(unit: Unit):
 	activation_multipliers.resize(8)
 	activation_multipliers.fill(1)
 	
-	#TODO: Assign constitution
+	constitution = unit.constitution
 	
 	tags = unit.unit_class.tags

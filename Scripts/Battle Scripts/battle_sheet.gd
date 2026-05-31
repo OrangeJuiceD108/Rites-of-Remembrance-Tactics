@@ -67,9 +67,8 @@ var crit_evade_mod
 func _init(unit_readout: Unit_Readout, enemy_readout: Unit_Readout):
 	unit = unit_readout
 	
-	# TODO: Assign weapon
-	# FIXME: Get enemy_weapon
-	var enemy_weapon : Weapon
+	weapon = unit.weapon
+	var enemy_weapon = enemy_readout.weapon
 	
 	if weapon_advantage(weapon.data, enemy_weapon.data):
 		advantage = Advantage.ADVANTAGE
@@ -87,3 +86,4 @@ static func weapon_advantage(weapon_one: Weapon_Data, weapon_two: Weapon_Data):
 		return true
 	if weapon_one.reaver != weapon_two.reaver and Constants.WeaponAdvantage[weapon_two.type] == weapon_one.type:
 		return true
+	return false

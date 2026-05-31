@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bshu5pb00rhay"]
+[gd_scene load_steps=18 format=3 uid="uid://bshu5pb00rhay"]
 
 [ext_resource type="PackedScene" uid="uid://mil0y5xo8uek" path="res://Scenes/cursor.tscn" id="1_b25br"]
 [ext_resource type="Texture2D" uid="uid://dbjwqhu2e0lrq" path="res://Assets/Sprites/pixil-frame-0.png" id="2_20f6w"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://dinq04oenst3p" path="res://Scripts/Managers/ui_manager.gd" id="8_ed262"]
 [ext_resource type="Script" uid="uid://c6kgcl6blh7no" path="res://Scripts/Unit Scripts/player_unit.gd" id="8_f4ggb"]
 [ext_resource type="Script" uid="uid://dts8a2ge86ooj" path="res://Scripts/UI/action_menu.gd" id="9_ms847"]
+[ext_resource type="Script" uid="uid://en0qmn8r5yr7" path="res://Scripts/Unit Scripts/Unit Components/inventory.gd" id="9_vuvll"]
 [ext_resource type="Texture2D" uid="uid://lm2chlv04p5v" path="res://Assets/Sprites/Free 1x.png" id="9_wb0gu"]
 [ext_resource type="Texture2D" uid="uid://d26qirm76x0xs" path="res://Assets/Sprites/attackSprite.png" id="9_xdap8"]
 [ext_resource type="Script" uid="uid://d1agw3ganpcvv" path="res://Scripts/Managers/Unit Managers/allied_unit_manager.gd" id="12_xdap8"]
@@ -47,6 +48,9 @@ texture = ExtResource("9_wb0gu")
 region_enabled = true
 region_rect = Rect2(20, 0, 16, 16)
 
+[node name="Inventory" type="Node" parent="Unit Manager/Enemy Unit Manager/Test Enemy"]
+script = ExtResource("9_vuvll")
+
 [node name="Player Unit Manager" type="Node" parent="Unit Manager"]
 script = ExtResource("6_20f6w")
 move_cell_sprite = ExtResource("8_84vmf")
@@ -57,13 +61,16 @@ z_index = 5
 position = Vector2(24, 24)
 script = ExtResource("8_f4ggb")
 move_speed = 5
-attack_range = Vector2i(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="Unit Manager/Player Unit Manager/Test Unit"]
 texture_filter = 1
 texture = ExtResource("9_wb0gu")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
+
+[node name="Inventory" type="Node" parent="Unit Manager/Player Unit Manager/Test Unit"]
+script = ExtResource("9_vuvll")
+attack_range = Vector2i(2, 2)
 
 [node name="Allied Unit Manager" type="Node" parent="Unit Manager"]
 script = ExtResource("12_xdap8")

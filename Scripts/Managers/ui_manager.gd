@@ -23,7 +23,7 @@ func hide_action_menu():
 	action_menu.visible = false
 
 # TODO: Complete show_weapons_menu
-func show_weapons_menu(weapons, cell: Vector2):
+func show_weapons_menu(weapons: Array[Weapon], cell: Vector2):
 	pass
 
 # TODO: Complete hide_weapons_menu

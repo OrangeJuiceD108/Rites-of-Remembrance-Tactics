@@ -2,10 +2,12 @@
 class_name Unit extends Node2D
 
 var grid_position : Vector2i 
-var unit_class : Unit_Class
-@export var move_speed : int # TESTING Temporary instance var, probably will be changed
-@export var attack_range : Vector2i # TESTING Temporary instance var, probably will be changed
-@onready var sprite := $"Sprite2D"
+@export var unit_class : Unit_Class
+var stats : Array[int] # FIXME This needs to be initialized
+var constitution : int # FIXME This needs to be initialized
+@export var move_speed : int # FIXME Temporary instance var, will be changed
+@onready var sprite : Sprite2D = $"Sprite2D"
+@onready var inventory : Inventory = $"Inventory"
 
 func _ready():
 	grid_position = GameState.grid.get_cell(position) #FIXME This way of instantiating grid position probably isn't permanent
@@ -47,7 +49,7 @@ func get_move_radius() -> Array[Vector2i]:
 
 func get_attack_radius(move_radius: Array[Vector2i]) -> Array[Vector2i]:
 	var final_array : Array[Vector2i]
-	var offsets := _get_attack_offsets(attack_range[0], attack_range[1])
+	var offsets := _get_attack_offsets(inventory.attack_range[0], inventory.attack_range[1])
 	
 	for tile in move_radius:
 		for o in offsets:
