@@ -70,7 +70,6 @@ region_rect = Rect2(0, 0, 16, 16)
 
 [node name="Inventory" type="Node" parent="Unit Manager/Player Unit Manager/Test Unit"]
 script = ExtResource("9_vuvll")
-attack_range = Vector2i(2, 2)
 
 [node name="Allied Unit Manager" type="Node" parent="Unit Manager"]
 script = ExtResource("12_xdap8")

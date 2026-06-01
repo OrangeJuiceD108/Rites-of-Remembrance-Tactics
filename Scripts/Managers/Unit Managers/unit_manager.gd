@@ -111,7 +111,7 @@ func _handle_action_talk(cell: Vector2i):
 # TODO: finish handle_action_attack
 func _handle_action_attack(cell: Vector2i):
 	# TODO: Run the attack
-	print("Got his ass!")
+	print("Got his ass!") #FIXME Temporary debug statement
 	
 	player_manager.confirm_move()
 	state = State.IDLE
@@ -158,6 +158,8 @@ func _action_talk():
 	pass
 
 func _action_attack():
+	# TODO: Weapon select
+	
 	var attackable_cells = player_manager.staged_attack_cells.filter(func(item): return enemy_manager.occupied_tiles.has(item))
 	if attackable_cells.size() == 0:
 		push_error("Something when wrong, 0 attackable cells")
