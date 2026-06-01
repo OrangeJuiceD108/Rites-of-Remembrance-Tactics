@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bshu5pb00rhay"]
+[gd_scene load_steps=22 format=3 uid="uid://bshu5pb00rhay"]
 
 [ext_resource type="PackedScene" uid="uid://mil0y5xo8uek" path="res://Scenes/cursor.tscn" id="1_b25br"]
 [ext_resource type="Texture2D" uid="uid://dbjwqhu2e0lrq" path="res://Assets/Sprites/pixil-frame-0.png" id="2_20f6w"]
@@ -16,7 +16,11 @@
 [ext_resource type="Texture2D" uid="uid://lm2chlv04p5v" path="res://Assets/Sprites/Free 1x.png" id="9_wb0gu"]
 [ext_resource type="Texture2D" uid="uid://d26qirm76x0xs" path="res://Assets/Sprites/attackSprite.png" id="9_xdap8"]
 [ext_resource type="Script" uid="uid://d1agw3ganpcvv" path="res://Scripts/Managers/Unit Managers/allied_unit_manager.gd" id="12_xdap8"]
+[ext_resource type="Script" uid="uid://dnqec14citrsc" path="res://Scripts/Equipment/weapon.gd" id="14_kre2b"]
+[ext_resource type="Resource" uid="uid://53w3gasr7cf0" path="res://Resources/Weapons/iron_sword.tres" id="15_5gdnp"]
 [ext_resource type="PackedScene" uid="uid://craa7tm3puosj" path="res://Scenes/UI/action_menu_button.tscn" id="15_f856b"]
+[ext_resource type="Script" uid="uid://bab8r7o5qekg3" path="res://Scripts/UI/inventory_menu.gd" id="18_kbww3"]
+[ext_resource type="PackedScene" uid="uid://dalvta44tdjlj" path="res://Scenes/UI/item_menu_button.tscn" id="19_vol83"]
 
 [node name="BattleScene" type="Node2D"]
 
@@ -43,6 +47,7 @@ position = Vector2(136, 136)
 script = ExtResource("7_778cw")
 
 [node name="Sprite2D" type="Sprite2D" parent="Unit Manager/Enemy Unit Manager/Test Enemy"]
+z_index = 2
 texture_filter = 1
 texture = ExtResource("9_wb0gu")
 region_enabled = true
@@ -50,6 +55,10 @@ region_rect = Rect2(20, 0, 16, 16)
 
 [node name="Inventory" type="Node" parent="Unit Manager/Enemy Unit Manager/Test Enemy"]
 script = ExtResource("9_vuvll")
+
+[node name="Node" type="Node" parent="Unit Manager/Enemy Unit Manager/Test Enemy/Inventory"]
+script = ExtResource("14_kre2b")
+data = ExtResource("15_5gdnp")
 
 [node name="Player Unit Manager" type="Node" parent="Unit Manager"]
 script = ExtResource("6_20f6w")
@@ -63,6 +72,7 @@ script = ExtResource("8_f4ggb")
 move_speed = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="Unit Manager/Player Unit Manager/Test Unit"]
+z_index = 2
 texture_filter = 1
 texture = ExtResource("9_wb0gu")
 region_enabled = true
@@ -70,6 +80,10 @@ region_rect = Rect2(0, 0, 16, 16)
 
 [node name="Inventory" type="Node" parent="Unit Manager/Player Unit Manager/Test Unit"]
 script = ExtResource("9_vuvll")
+
+[node name="Node" type="Node" parent="Unit Manager/Player Unit Manager/Test Unit/Inventory"]
+script = ExtResource("14_kre2b")
+data = ExtResource("15_5gdnp")
 
 [node name="Allied Unit Manager" type="Node" parent="Unit Manager"]
 script = ExtResource("12_xdap8")
@@ -91,3 +105,11 @@ offset_bottom = 40.0
 mouse_filter = 0
 script = ExtResource("9_ms847")
 button_scene = ExtResource("15_f856b")
+
+[node name="Inventory Menu" type="VBoxContainer" parent="UI Manager"]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("18_kbww3")
+button_scene = ExtResource("19_vol83")

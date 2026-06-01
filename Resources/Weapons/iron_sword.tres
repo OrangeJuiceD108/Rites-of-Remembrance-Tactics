@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Weapon_Data" load_steps=3 format=3 uid="uid://53w3gasr7cf0"]
+
+[ext_resource type="Script" uid="uid://by872ddbap75p" path="res://Scripts/Resources/Equipment/weapon_data.gd" id="1_nihc7"]
+[ext_resource type="Script" uid="uid://0uolyvccrg13" path="res://Scripts/Resources/Skills/skill.gd" id="2_skebx"]
+
+[resource]
+script = ExtResource("1_nihc7")
+type = 8
+attack_range = Vector2i(1, 1)
+weight = 5
+might = 5
+hit_rate = 90
+weapon_experience = 1
+base_durability = 46
+physical = true
+name = "Iron Sword"
+description = "-"
+sell_price = 460
+metadata/_custom_type_script = "uid://by872ddbap75p"

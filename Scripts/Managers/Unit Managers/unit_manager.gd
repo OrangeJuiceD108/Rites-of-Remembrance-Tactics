@@ -19,6 +19,7 @@ var current_action = Constants.ActionFlags.NONE
 func _ready():
 	cursor.cell_clicked.connect(_on_cell_clicked)
 	ui_manager.action_chosen.connect(_on_action_chosen)
+	ui_manager.weapon_chosen.connect(_on_weapon_chosen)
 
 # TODO: Implement _on_cell_clicked
 func _on_cell_clicked(cell: Vector2i):
@@ -158,15 +159,7 @@ func _action_talk():
 	pass
 
 func _action_attack():
-	# TODO: Weapon select
-	
-	var attackable_cells = player_manager.staged_attack_cells.filter(func(item): return enemy_manager.occupied_tiles.has(item))
-	if attackable_cells.size() == 0:
-		push_error("Something when wrong, 0 attackable cells")
-	cursor.lock_cursor(attackable_cells)
-	
-	state = State.ACTION_SELECTED
-	current_action = Constants.ActionFlags.ATTACK
+	ui_manager.show_weapons_menu(player_manager.selected_unit.inventory)
 
 # TODO: Implement _action_heal()
 func _action_heal():
@@ -191,3 +184,12 @@ func _action_items():
 func _action_wait():
 	player_manager.confirm_move()
 	state = State.IDLE
+
+func _on_weapon_chosen():
+	var attackable_cells = player_manager.staged_attack_cells.filter(func(item): return enemy_manager.occupied_tiles.has(item))
+	if attackable_cells.size() == 0:
+		push_error("Something when wrong, 0 attackable cells")
+	cursor.lock_cursor(attackable_cells)
+	
+	state = State.ACTION_SELECTED
+	current_action = Constants.ActionFlags.ATTACK

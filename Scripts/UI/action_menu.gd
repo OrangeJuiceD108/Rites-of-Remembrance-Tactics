@@ -4,6 +4,9 @@ class_name Action_Menu extends VBoxContainer
 
 signal action_chosen(action: Constants.ActionFlags)
 
+func _ready():
+	set_anchors_preset(Control.PRESET_TOP_LEFT)
+
 func build(actions: int):
 	for child in get_children():
 		child.queue_free()

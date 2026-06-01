@@ -56,7 +56,7 @@ var resistance_mod : int
 
 var avoid : int:
 	get:
-		return attack_speed + unit.stats[Constants.Stat.LCK] + avoid_mod
+		return attack_speed * 2 + unit.stats[Constants.Stat.LCK] + avoid_mod
 var avoid_mod : int
 
 var crit_evade : int:

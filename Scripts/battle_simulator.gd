@@ -1,5 +1,6 @@
 class_name Battle_Simulator
-
+# FIXME: Units without weapons
+# FIXME: Weapon durability
 static func run_battle(attacker: Unit, defender: Unit):
 	var attacker_readout : Unit_Readout = Unit_Readout.new(attacker)
 	var defender_readout : Unit_Readout = Unit_Readout.new(defender)

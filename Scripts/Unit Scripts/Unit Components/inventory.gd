@@ -4,12 +4,14 @@ class_name Inventory extends Node
 var attack_range : Vector2i = Vector2i(999, 0)
 
 func _ready():
-	var children = get_children().filter(func(child): return child is Weapon)
+	var children = get_weapons()
 	
 	for child in children:
 		attack_range[0] = attack_range[0] if attack_range[0] <= child.data.attack_range[0] else child.data.attack_range[0]
 		attack_range[1] = attack_range[1] if attack_range[1] >= child.data.attack_range[1] else child.data.attack_range[1]
 
+# FIXME: Restrict units from equipping weapons that they
+#        aren't proficient in or don't have the skills to use
 func equip(weapon: Weapon):
 	equipped_weapon = weapon
 	EventBus.on_equip.emit(get_parent(), weapon)
@@ -27,9 +29,12 @@ func remove(equipment: Equipment):
 		return
 	remove_child(equipment)
 	
-	var children = get_children().filter(func(child): return child is Weapon)
+	var children = get_weapons()
 	
 	var new_range = Vector2i(999, 0)
 	for child in children:
 		new_range[0] = new_range[0] if new_range[0] <= child.data.attack_range[0] else child.data.attack_range[0]
 		new_range[1] = new_range[1] if new_range[1] >= child.data.attack_range[1] else child.data.attack_range[1]
+
+func get_weapons():
+	return get_children().filter(func(child): return child is Weapon)
