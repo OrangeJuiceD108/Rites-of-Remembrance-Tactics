@@ -72,6 +72,16 @@ static func _generate_reports(attacks: Array[Attack_Result]):
 		attacks[0].defender: Battle_Report.new(attacks[0].defender, attacks)
 	}
 	
+	var effective_level = {
+		attacks[0].attacker: attacks[0].attacker.level,
+		attacks[0].defender: attacks[0].defender.level
+	}
+	
+	var accumulated_xp = {
+		attacks[0].attacker: 0,
+		attacks[0].defender: 0
+	}
+	
 	for i in attacks:
 		if not i.hit:
 			continue
@@ -82,17 +92,24 @@ static func _generate_reports(attacks: Array[Attack_Result]):
 		reports[defender].damage += i.damage
 		
 		reports[attacker].weapon_experience += attacker.weapon.data.weapon_experience
-		reports[attacker].experience += (31 + defender.level - attacker.level + defender.unit_class.experience_bonus_damage - attacker.unit_class.experience_bonus_damage) / attacker.unit_class.class_power
+		var damage_xp = (31 + effective_level[defender] - effective_level[attacker] + defender.unit_class.experience_bonus_damage - attacker.unit_class.experience_bonus_damage) / attacker.unit_class.class_power
+		
+		reports[attacker].experience += damage_xp
+		accumulated_xp[attacker] += damage_xp
 		
 		if reports[defender].damage >= defender.hp:
-			var base_xp_main = defender.level * defender.unit_class.class_power + defender.unit_class.experience_bonus_defeat
-			var base_xp_sub = (attacker.level * attacker.unit_class.class_power + attacker.unit_class.experience_bonus_defeat)
+			var base_xp_main = effective_level[defender] * defender.unit_class.class_power + defender.unit_class.experience_bonus_defeat
+			var base_xp_sub = (effective_level[attacker] * attacker.unit_class.class_power + attacker.unit_class.experience_bonus_defeat)
 			if base_xp_main - base_xp_sub <= 0:
 				base_xp_sub /= 2
 			
 			reports[attacker].experience += base_xp_main - base_xp_sub + 20 + defender.unit_class.additional_defeat_bonus
 			
-			break
+			return reports
+		
+		while accumulated_xp[attacker] >= 100:
+			accumulated_xp[attacker] -= 100
+			effective_level[attacker] += 1
 	
 	reports[attacks[0].defender].experience = max(reports[attacks[0].defender].experience, 1)
 	reports[attacks[0].attacker].experience = max(reports[attacks[0].attacker].experience, 1)
