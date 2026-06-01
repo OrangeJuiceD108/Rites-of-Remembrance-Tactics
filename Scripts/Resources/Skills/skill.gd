@@ -3,7 +3,7 @@ class_name Skill extends Resource
 
 var name : String
 
-enum CallSignal {BATTLE_STARTED, ATTACK_CALCULATING, ATTACK_LANDED, BATTLE_ENDED}
+enum CallSignal {EQUIP, BATTLE_STARTED, ATTACK_CALCULATING, ATTACK_SEQUENCING, ATTACK_LANDED, BATTLE_ENDED}
 var call_signals : Array[CallSignal]
 
 enum SkillSource {NONE, UNIT, ITEM, WEAPON}
@@ -11,7 +11,7 @@ var skill_source : SkillSource = SkillSource.NONE
 
 # FIXME: Wrong data types
 var attached_item : Item_Data
-var attached_weapon : Weapon_Data
+var attached_weapon : Weapon
 var attached_unit : Unit
 
 func _init():
@@ -20,24 +20,24 @@ func _init():
 
 @abstract
 # TODO: Add types (unit: Unit, weapon: Weapon)
-func on_equip()
+func on_equip(unit: Unit, weapon: Weapon)
 
 @abstract
 # TODO: Add types (attacker_stats: Unit_Readout, defender_stats: Unit_Readout)
-func on_battle_started()
+func on_battle_started(attacker_readout: Unit_Readout, defender_readout: Unit_Readout)
 
 @abstract
 # TODO: Add types (attacker_sheet: Battle_Sheet, defender_sheet: Battle_Sheet)
-func on_attack_calculating()
+func on_attack_calculating(attacker_sheet: Battle_Sheet, defender_sheet: Battle_Sheet)
 
 @abstract
 # TODO: Add types (attacks: Array[int], attacker: Array[Unit]
-func on_attack_sequencing()
+func on_attack_sequencing(attacks: Array[Battle_Simulator.Attack_Data])
 
 @abstract
 # TODO: Add types (attacker_stats: Unit_Readout, defender_stats: Unit_Readout, damage: int)
-func on_attack_landed()
+func on_attack_landed(attack_results: Array[Battle_Simulator.Attack_Result])
 
 @abstract
 # TODO: Add types (attacker_report: Battle_Report, defender_report: Battle_Report)
-func on_battle_ended()
+func on_battle_ended(attacker_report: Battle_Simulator.Battle_Report, defender_report: Battle_Simulator.Battle_Report)

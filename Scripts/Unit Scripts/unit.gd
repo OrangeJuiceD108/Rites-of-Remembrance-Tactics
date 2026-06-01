@@ -3,6 +3,8 @@ class_name Unit extends Node2D
 
 var grid_position : Vector2i 
 @export var unit_class : Unit_Class
+var level : int
+var hp : int
 var stats : Array[int] # FIXME This needs to be initialized
 var constitution : int # FIXME This needs to be initialized
 @export var move_speed : int # FIXME Temporary instance var, will be changed

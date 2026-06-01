@@ -1,10 +1,12 @@
 class_name Unit_Readout extends Node
 
 var unit_class : Unit_Class
+var level : int
 
 var weapon : Weapon
 
 # Base states
+var hp : int
 var stats : Array[int]
 var stat_multipliers : Array[int]
 
@@ -18,9 +20,11 @@ var tags : Array[Unit_Class.Tag]
 
 func _init(unit: Unit):
 	unit_class = unit.unit_class
+	level = unit.level
 	
 	weapon = unit.inventory.equipped_weapon
 	
+	hp = unit.hp
 	stats = unit.stats
 	activation_rate_stats = stats.duplicate()
 	

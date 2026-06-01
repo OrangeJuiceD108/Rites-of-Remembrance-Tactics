@@ -20,3 +20,9 @@ enum Tag {ARMORED, BEAST, DRAGON, MONSTER, UNARMORED}
 @export var base_growth_rates : Array[int] = [80, 40, 40, 30, 25, 30, 20, 20]
 @export var base_stats : Array[int] = [18, 5, 5, 5, 5, 0, 5, 3]
 @export var promotion_gains : Array[int] = [0, 0, 0, 0, 0, 0, 0, 0]
+
+@export var experience_bonus_damage : int = 0
+@export var experience_bonus_defeat : int = 0
+@export var additional_defeat_bonus : int = 0
+
+@export var class_power : int = 3
