@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bshu5pb00rhay"]
+[gd_scene load_steps=24 format=3 uid="uid://bshu5pb00rhay"]
 
 [ext_resource type="PackedScene" uid="uid://mil0y5xo8uek" path="res://Scenes/cursor.tscn" id="1_b25br"]
 [ext_resource type="Texture2D" uid="uid://dbjwqhu2e0lrq" path="res://Assets/Sprites/pixil-frame-0.png" id="2_20f6w"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://bjy5c0t0vjwbb" path="res://Assets/Sprites/moveSprite.png" id="8_84vmf"]
 [ext_resource type="Script" uid="uid://dinq04oenst3p" path="res://Scripts/Managers/ui_manager.gd" id="8_ed262"]
 [ext_resource type="Script" uid="uid://c6kgcl6blh7no" path="res://Scripts/Unit Scripts/player_unit.gd" id="8_f4ggb"]
-[ext_resource type="Resource" uid="uid://dx0omlh4qlxqk" path="res://Resources/Classes/myrmidon.tres" id="8_qncpg"]
 [ext_resource type="Script" uid="uid://dts8a2ge86ooj" path="res://Scripts/UI/action_menu.gd" id="9_ms847"]
 [ext_resource type="Script" uid="uid://en0qmn8r5yr7" path="res://Scripts/Unit Scripts/Unit Components/inventory.gd" id="9_vuvll"]
 [ext_resource type="Texture2D" uid="uid://lm2chlv04p5v" path="res://Assets/Sprites/Free 1x.png" id="9_wb0gu"]
@@ -48,7 +47,6 @@ script = ExtResource("5_gt16y")
 [node name="Test Enemy" type="Node2D" parent="Unit Manager/Enemy Unit Manager"]
 position = Vector2(136, 136)
 script = ExtResource("7_778cw")
-unit_class = ExtResource("8_qncpg")
 
 [node name="Sprite2D" type="Sprite2D" parent="Unit Manager/Enemy Unit Manager/Test Enemy"]
 z_index = 2
@@ -57,9 +55,8 @@ texture = ExtResource("9_wb0gu")
 region_enabled = true
 region_rect = Rect2(20, 0, 16, 16)
 
-[node name="Inventory" type="Node" parent="Unit Manager/Enemy Unit Manager/Test Enemy" node_paths=PackedStringArray("equipped_weapon")]
+[node name="Inventory" type="Node" parent="Unit Manager/Enemy Unit Manager/Test Enemy"]
 script = ExtResource("9_vuvll")
-equipped_weapon = NodePath("Weapon")
 
 [node name="Weapon" parent="Unit Manager/Enemy Unit Manager/Test Enemy/Inventory" instance=ExtResource("10_5gdnp")]
 data = ExtResource("15_5gdnp")
@@ -73,7 +70,7 @@ attack_cell_sprite = ExtResource("9_xdap8")
 z_index = 5
 position = Vector2(24, 24)
 script = ExtResource("8_f4ggb")
-unit_class = ExtResource("8_qncpg")
+move_speed = 5
 
 [node name="Sprite2D" type="Sprite2D" parent="Unit Manager/Player Unit Manager/Test Unit"]
 z_index = 2
@@ -82,9 +79,8 @@ texture = ExtResource("9_wb0gu")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
-[node name="Inventory" type="Node" parent="Unit Manager/Player Unit Manager/Test Unit" node_paths=PackedStringArray("equipped_weapon")]
+[node name="Inventory" type="Node" parent="Unit Manager/Player Unit Manager/Test Unit"]
 script = ExtResource("9_vuvll")
-equipped_weapon = NodePath("Weapon")
 
 [node name="Weapon" parent="Unit Manager/Player Unit Manager/Test Unit/Inventory" instance=ExtResource("10_5gdnp")]
 data = ExtResource("15_5gdnp")
@@ -101,10 +97,9 @@ script = ExtResource("12_xdap8")
 
 [node name="UI Manager" type="Control" parent="."]
 layout_mode = 3
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 mouse_filter = 1
 script = ExtResource("8_ed262")
 
@@ -128,7 +123,5 @@ button_scene = ExtResource("19_vol83")
 
 [node name="Unit Summary" parent="UI Manager" instance=ExtResource("23_ys5i7")]
 visible = false
-layout_mode = 1
-anchors_preset = -1
-offset_right = 0.0
-offset_bottom = 0.0
+layout_mode = 0
+offset_right = 100.0

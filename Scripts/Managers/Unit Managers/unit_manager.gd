@@ -159,7 +159,7 @@ func _action_talk():
 	pass
 
 func _action_attack():
-	ui_manager.show_weapons_menu(player_manager.selected_unit.inventory)
+	ui_manager.show_weapons_menu(player_manager.selected_unit)
 
 # TODO: Implement _action_heal()
 func _action_heal():

@@ -15,5 +15,5 @@ base_durability = 46
 physical = true
 name = "Iron Sword"
 description = "-"
-sell_price = 460
+cost = 460
 metadata/_custom_type_script = "uid://by872ddbap75p"

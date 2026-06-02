@@ -12,16 +12,24 @@ var weapon_rank : Weapon_Data.WeaponRank
 var weapon_experience : int
 
 var hp : int
-var stats : Array[int] # FIXME This needs to be initialized
-var constitution : int # FIXME This needs to be initialized
-
-@export var move_speed : int # FIXME Temporary instance var, will be changed
+var stats : Dictionary[Constants.Stat, int] 
+var constitution : int 
+var move_speed : int 
 
 @onready var sprite : Sprite2D = $"Sprite2D"
 @onready var inventory : Inventory = $"Inventory"
 
 func _ready():
 	grid_position = GameState.grid.get_cell(position) #FIXME This way of instantiating grid position probably isn't permanent
+	
+	# FIXME: Need to handle units that are higher than level one
+	if stats.size() == 0:
+		level = 1
+		stats = unit_class.base_stats.duplicate()
+		constitution = unit_class.base_constitution
+		move_speed = unit_class.base_speed
+	
+	hp = stats[Constants.Stat.HP]
 
 static func is_opposing_faction(unit_1: Unit, unit_2: Unit) -> bool:
 	if (unit_1 is Player_Unit or unit_1 is Allied_Unit) and unit_2 is Enemy_Unit:

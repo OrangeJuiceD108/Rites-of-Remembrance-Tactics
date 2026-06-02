@@ -1,0 +1,114 @@
+[gd_scene load_steps=3 format=3 uid="uid://x5450tsh8xbp"]
+
+[ext_resource type="Script" uid="uid://bv164eh5iv3el" path="res://Scripts/UI/unit_summary.gd" id="1_bui42"]
+[ext_resource type="FontFile" uid="uid://bnocubeeufjr3" path="res://Assets/Fonts/PixeloidSans.ttf" id="2_86rv2"]
+
+[node name="Unit Summary" type="VBoxContainer"]
+custom_minimum_size = Vector2(100, 41)
+offset_right = 90.0
+offset_bottom = 41.0
+script = ExtResource("1_bui42")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Type" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Type Label" type="Label" parent="PanelContainer/VBoxContainer/Type"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_86rv2")
+theme_override_font_sizes/font_size = 9
+text = "Type:"
+
+[node name="Type" type="Label" parent="PanelContainer/VBoxContainer/Type"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_86rv2")
+theme_override_font_sizes/font_size = 9
+text = "Sword"
+
+[node name="Atk Crit Container" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Attack" type="HBoxContainer" parent="PanelContainer/VBoxContainer/Atk Crit Container"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="Atk Label" type="Label" parent="PanelContainer/VBoxContainer/Atk Crit Container/Attack"]
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_86rv2")
+theme_override_font_sizes/font_size = 9
+text = "Atk:"
+
+[node name="Atk" type="Label" parent="PanelContainer/VBoxContainer/Atk Crit Container/Attack"]
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_86rv2")
+theme_override_font_sizes/font_size = 9
+text = "100"
+
+[node name="Critical" type="HBoxContainer" parent="PanelContainer/VBoxContainer/Atk Crit Container"]
+custom_minimum_size = Vector2(44, 0)
+layout_mode = 2
+alignment = 2
+
+[node name="Crit Label" type="Label" parent="PanelContainer/VBoxContainer/Atk Crit Container/Critical"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_86rv2")
+theme_override_font_sizes/font_size = 9
+text = "Crit:"
+
+[node name="Crit" type="Label" parent="PanelContainer/VBoxContainer/Atk Crit Container/Critical"]
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_86rv2")
+theme_override_font_sizes/font_size = 9
+text = "100"
+
+[node name="Hit Avoid Container" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Hit" type="HBoxContainer" parent="PanelContainer/VBoxContainer/Hit Avoid Container"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="Hit Label" type="Label" parent="PanelContainer/VBoxContainer/Hit Avoid Container/Hit"]
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_86rv2")
+theme_override_font_sizes/font_size = 9
+text = "Hit:"
+
+[node name="Hit" type="Label" parent="PanelContainer/VBoxContainer/Hit Avoid Container/Hit"]
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_86rv2")
+theme_override_font_sizes/font_size = 9
+text = "100"
+
+[node name="Avoid" type="HBoxContainer" parent="PanelContainer/VBoxContainer/Hit Avoid Container"]
+custom_minimum_size = Vector2(44, 0)
+layout_mode = 2
+alignment = 2
+
+[node name="Avoid Label" type="Label" parent="PanelContainer/VBoxContainer/Hit Avoid Container/Avoid"]
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_86rv2")
+theme_override_font_sizes/font_size = 9
+text = "Avoid:"
+
+[node name="Avoid" type="Label" parent="PanelContainer/VBoxContainer/Hit Avoid Container/Avoid"]
+custom_minimum_size = Vector2(18, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_86rv2")
+theme_override_font_sizes/font_size = 9
+text = "23"

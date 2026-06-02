@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Weapon_Data" load_steps=3 format=3 uid="uid://tl4npjwa2e6g"]
+
+[ext_resource type="Script" uid="uid://by872ddbap75p" path="res://Scripts/Resources/Equipment/weapon_data.gd" id="1_21klv"]
+[ext_resource type="Script" uid="uid://0uolyvccrg13" path="res://Scripts/Resources/Skills/skill.gd" id="2_7eghj"]
+
+[resource]
+script = ExtResource("1_21klv")
+weapon_rank = 1
+attack_range = Vector2i(1, 1)
+weight = 10
+might = 8
+hit_rate = 75
+weapon_experience = 1
+base_durability = 30
+physical = true
+name = "Steel Sword"
+description = "-"
+cost = 600
+metadata/_custom_type_script = "uid://by872ddbap75p"

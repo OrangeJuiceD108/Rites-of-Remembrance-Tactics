@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="Unit_Class" load_steps=3 format=3 uid="uid://dx0omlh4qlxqk"]
+
+[ext_resource type="Script" uid="uid://c5g43rf2go6uh" path="res://Scripts/Resources/unit_class.gd" id="1_xm41e"]
+[ext_resource type="Script" uid="uid://0uolyvccrg13" path="res://Scripts/Resources/Skills/skill.gd" id="2_2vmnr"]
+
+[resource]
+script = ExtResource("1_xm41e")
+name = "Myrmidon"
+proficiencies = Array[int]([8])
+base_speed = 5
+base_constitution = 8
+base_growth_rates = Dictionary[int, int]({
+0: 70,
+1: 35,
+2: 0,
+3: 40,
+4: 40,
+5: 30,
+6: 15,
+7: 20
+})
+base_stats = Dictionary[int, int]({
+0: 18,
+1: 4,
+2: 1,
+3: 9,
+4: 9,
+5: 0,
+6: 2,
+7: 0
+})
+metadata/_custom_type_script = "uid://c5g43rf2go6uh"

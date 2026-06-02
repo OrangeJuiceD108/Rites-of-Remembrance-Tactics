@@ -2,9 +2,13 @@ class_name UI_Manager extends Control
 
 @onready var action_menu = $"Action Menu"
 @onready var inventory_menu = $"Inventory Menu"
+@onready var unit_summary = $"Unit Summary"
 
 signal action_chosen(action: Constants.ActionFlags)
 signal weapon_chosen()
+
+func _enter_tree():
+	size = get_viewport_rect().size
 
 func _ready():
 	action_menu.action_chosen.connect(_on_action_chosen)
@@ -20,23 +24,22 @@ func show_actions_menu(actions: int, cell: Vector2):
 	action_menu.position = world_position + menu_offset
 	action_menu.build(actions)
 	$"../Cursor".disable_cursor()
-	print("cursor disable - actions")
 	action_menu.visible = true
 
 func hide_action_menu():
 	$"../Cursor".enable_cursor()
-	print("cursor enable - actions")
 	action_menu.visible = false
 
-func show_weapons_menu(inventory: Inventory):
-	inventory_menu.build_attack(inventory)
+func show_weapons_menu(unit: Unit):
+	unit_summary.build_summary(unit)
+	inventory_menu.build_attack(unit.inventory)
 	$"../Cursor".disable_cursor()
-	print("cursor disable - weapons")
+	unit_summary.visible = true
 	inventory_menu.visible = true
 
 func hide_weapons_menu():
 	$"../Cursor".enable_cursor()
-	print("cursor enable - weapons")
+	unit_summary.visible = false
 	inventory_menu.visible = false
 
 func _on_action_chosen(action: Constants.ActionFlags):

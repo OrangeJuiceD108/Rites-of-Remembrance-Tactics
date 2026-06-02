@@ -7,11 +7,11 @@ var weapon : Weapon
 
 # Base states
 var hp : int
-var stats : Array[int]
+var stats : Dictionary[Constants.Stat, int]
 var stat_multipliers : Array[int]
 
 # Same as base stats unless a skill like Rightful King modifies skill activation rate
-var activation_rate_stats : Array[int]
+var activation_rate_stats : Dictionary[Constants.Stat, int]
 var activation_multipliers : Array[int]
 
 var constitution : int

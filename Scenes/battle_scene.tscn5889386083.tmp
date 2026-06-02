@@ -128,7 +128,5 @@ button_scene = ExtResource("19_vol83")
 
 [node name="Unit Summary" parent="UI Manager" instance=ExtResource("23_ys5i7")]
 visible = false
-layout_mode = 1
-anchors_preset = -1
-offset_right = 0.0
-offset_bottom = 0.0
+layout_mode = 0
+offset_right = 100.0
