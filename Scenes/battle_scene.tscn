@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bshu5pb00rhay"]
+[gd_scene load_steps=26 format=3 uid="uid://bshu5pb00rhay"]
 
 [ext_resource type="PackedScene" uid="uid://mil0y5xo8uek" path="res://Scenes/cursor.tscn" id="1_b25br"]
 [ext_resource type="Texture2D" uid="uid://dbjwqhu2e0lrq" path="res://Assets/Sprites/pixil-frame-0.png" id="2_20f6w"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://bab8r7o5qekg3" path="res://Scripts/UI/inventory_menu.gd" id="18_kbww3"]
 [ext_resource type="PackedScene" uid="uid://dalvta44tdjlj" path="res://Scenes/UI/item_menu_button.tscn" id="19_vol83"]
 [ext_resource type="PackedScene" uid="uid://x5450tsh8xbp" path="res://Scenes/UI/unit_summary.tscn" id="23_ys5i7"]
+[ext_resource type="PackedScene" uid="uid://dl7an4nc2x3yj" path="res://Scenes/UI/unit_quick_info.tscn" id="25_ejyr1"]
 
 [node name="BattleScene" type="Node2D"]
 
@@ -46,7 +47,7 @@ script = ExtResource("3_anwxn")
 script = ExtResource("5_gt16y")
 
 [node name="Test Enemy" type="Node2D" parent="Unit Manager/Enemy Unit Manager"]
-position = Vector2(136, 136)
+position = Vector2(136, 248)
 script = ExtResource("7_778cw")
 unit_class = ExtResource("8_qncpg")
 
@@ -101,6 +102,7 @@ script = ExtResource("12_xdap8")
 
 [node name="UI Manager" type="Control" parent="."]
 layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -120,6 +122,7 @@ button_scene = ExtResource("15_f856b")
 
 [node name="Inventory Menu" type="VBoxContainer" parent="UI Manager"]
 visible = false
+z_index = 10
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
@@ -128,7 +131,13 @@ button_scene = ExtResource("19_vol83")
 
 [node name="Unit Summary" parent="UI Manager" instance=ExtResource("23_ys5i7")]
 visible = false
+z_index = 10
 layout_mode = 1
 anchors_preset = -1
 offset_right = 0.0
 offset_bottom = 0.0
+
+[node name="Unit Quick Info" parent="UI Manager" instance=ExtResource("25_ejyr1")]
+visible = false
+z_index = 10
+layout_mode = 0

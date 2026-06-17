@@ -7,6 +7,7 @@ var selectable_tiles : Array[Vector2i]
 
 @onready var map_manager = get_node("../Map Manager") as Map_Manager
 
+signal moved(cell: Vector2i)
 signal cell_clicked(cell: Vector2i)
 
 func _ready(): 
@@ -16,6 +17,7 @@ func _ready():
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		_set_cursor_position(event.position)
+		moved.emit(cursor_cell)
 	elif event is InputEventMouseButton && event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
 		cell_clicked.emit(cursor_cell)
 

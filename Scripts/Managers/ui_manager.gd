@@ -3,6 +3,7 @@ class_name UI_Manager extends Control
 @onready var action_menu = $"Action Menu"
 @onready var inventory_menu = $"Inventory Menu"
 @onready var unit_summary = $"Unit Summary"
+@onready var unit_quick_info = $"Unit Quick Info"
 
 signal action_chosen(action: Constants.ActionFlags)
 signal weapon_chosen()
@@ -41,6 +42,24 @@ func hide_weapons_menu():
 	$"../Cursor".enable_cursor()
 	unit_summary.visible = false
 	inventory_menu.visible = false
+
+func show_unit_quick_info(unit: Unit):
+	var direction : Vector2i
+	
+	var cursor_position = get_viewport().get_mouse_position()
+	var viewport_size = get_viewport_rect().size
+	
+	if cursor_position.x / viewport_size.x < 0.5 && cursor_position.y / viewport_size.y < 0.5:
+		direction = Vector2i.DOWN
+	else:
+		direction = Vector2i.UP
+	
+	unit_quick_info.shift_corner(direction)
+	unit_quick_info.update_unit(unit)
+	unit_quick_info.visible = true
+
+func hide_unit_quick_info():
+	unit_quick_info.visible = false
 
 func _on_action_chosen(action: Constants.ActionFlags):
 	hide_action_menu()

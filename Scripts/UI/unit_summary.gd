@@ -9,14 +9,11 @@ class_name Unit_Summary extends VBoxContainer
 var unit : Unit
 
 func _ready(): 
-	var viewport_size = get_viewport_rect().size
-	var height_fraction = size.y / viewport_size.y
-	var width_fraction = size.x / viewport_size.x
-	
-	anchor_bottom = 0.98
-	anchor_top = anchor_bottom - height_fraction
-	anchor_right = 0.98
-	anchor_left = anchor_right - width_fraction
+	var anchors = Constants.get_anchors_for_corner(self, Vector2i.DOWN + Vector2i.RIGHT)
+	anchor_top = anchors[Vector2i.UP]
+	anchor_bottom = anchors[Vector2i.DOWN]
+	anchor_left = anchors[Vector2i.LEFT]
+	anchor_right = anchors[Vector2i.RIGHT]
 
 func build_summary(u: Unit):
 	unit = u

@@ -18,8 +18,34 @@ var current_action = Constants.ActionFlags.NONE
 
 func _ready():
 	cursor.cell_clicked.connect(_on_cell_clicked)
+	cursor.moved.connect(_on_cursor_moved)
 	ui_manager.action_chosen.connect(_on_action_chosen)
 	ui_manager.weapon_chosen.connect(_on_weapon_chosen)
+
+func _on_cursor_moved(cell: Vector2i):
+	var unit = get_unit_at_cell(cell)
+	if unit:
+		ui_manager.show_unit_quick_info(unit)
+	else: 
+		ui_manager.hide_unit_quick_info()
+
+func get_unit_at_cell(cell: Vector2i):
+	if !occupied_tiles.has(cell):
+		return null
+	
+	print(occupied_tiles)
+	var unit : Unit
+	
+	unit = enemy_manager.get_unit_at_cell(cell)
+	if unit:
+		return unit
+	
+	unit = player_manager.get_unit_at_cell(cell)
+	if unit:
+		return unit
+	
+	unit = ally_manager.get_unit_at_cell(cell)
+	return unit
 
 # TODO: Implement _on_cell_clicked
 func _on_cell_clicked(cell: Vector2i):
@@ -30,7 +56,6 @@ func _on_cell_clicked(cell: Vector2i):
 			_handle_unit_selected_click(cell)
 		State.ACTION_SELECTED:
 			_handle_action_selected(cell)
-	pass
 
 func _handle_idle_click(cell: Vector2i):
 	var unit = player_manager.get_unit_at_cell(cell)
@@ -40,7 +65,6 @@ func _handle_idle_click(cell: Vector2i):
 	else:
 		# TODO: This should try to get a unit here for enemy, then ally. If neither work, should bring up the menu I think
 		pass
-	pass
 
 func _handle_unit_selected_click(cell: Vector2i):
 	if cell == player_manager.selected_unit.grid_position:

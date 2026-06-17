@@ -5,8 +5,11 @@ class_name Inventory_Menu extends VBoxContainer
 signal weapon_chosen()
 
 func _ready():
-	anchor_top = 0.02
-	anchor_left = 0.02
+	var anchors = Constants.get_anchors_for_corner(self, Vector2i.UP + Vector2i.LEFT)
+	anchor_top = anchors[Vector2i.UP]
+	anchor_bottom = anchors[Vector2i.DOWN]
+	anchor_left = anchors[Vector2i.LEFT]
+	anchor_right = anchors[Vector2i.RIGHT]
 
 func build_attack(inventory: Inventory):
 	for child in get_children():
