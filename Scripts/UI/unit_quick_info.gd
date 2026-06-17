@@ -4,6 +4,7 @@ class_name Unit_Quick_Info extends PanelContainer
 @onready var current_hp_label := $"HBoxContainer/VBoxContainer/HBoxContainer/Current HP"
 @onready var max_hp_label := $"HBoxContainer/VBoxContainer/HBoxContainer/Max HP"
 @onready var health_bar := $"HBoxContainer/VBoxContainer/ProgressBar"
+@onready var portrait := $"HBoxContainer/Portrait"
 
 func update_unit(unit: Unit):
 	unit_name_label.text = unit.name
@@ -13,6 +14,8 @@ func update_unit(unit: Unit):
 	
 	health_bar.value = unit.hp
 	health_bar.max_value = unit.stats[Constants.Stat.HP]
+	
+	# TODO: UPDATE PORTRAIT
 
 func shift_corner(loc: Vector2i):
 	print(loc)
