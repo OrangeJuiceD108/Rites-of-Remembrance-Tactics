@@ -1,7 +1,12 @@
 class_name Allied_Unit_Manger extends Node
 
 var units: Array[Allied_Unit]
-var occupied_tiles : Array[Vector2i]
+var occupied_tiles : Array[Vector2i]:
+	get:
+		var tiles : Array[Vector2i]
+		for unit in units:
+			tiles.append(unit.grid_position)
+		return tiles
 
 func _ready() -> void:
 	for child in get_children():

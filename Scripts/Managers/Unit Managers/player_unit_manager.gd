@@ -4,7 +4,12 @@ class_name Player_Unit_Manager extends Node
 @export var attack_cell_sprite : Texture2D
 
 var units : Array[Player_Unit]
-var occupied_tiles : Array[Vector2i]
+var occupied_tiles : Array[Vector2i]:
+	get:
+		var tiles : Array[Vector2i]
+		for unit in units:
+			tiles.append(unit.grid_position)
+		return tiles
 
 var selected_unit : Player_Unit
 
@@ -21,14 +26,10 @@ signal unit_deselected()
 func _ready() -> void:
 	for child in get_children():
 		if child is Player_Unit:
-			print(child.grid_position)
 			units.append(child)
 			occupied_tiles.append(child.grid_position)
 
 func get_unit_at_cell(cell: Vector2i):
-	if !occupied_tiles.has(cell):
-		return null
-	
 	for unit in units:
 		if unit.grid_position == cell:
 			return unit
