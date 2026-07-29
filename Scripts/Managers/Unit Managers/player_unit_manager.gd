@@ -33,8 +33,6 @@ func get_unit_at_cell(cell: Vector2i):
 	for unit in units:
 		if unit.grid_position == cell:
 			return unit
-	
-	push_error("Tile incorrectly occupied")
 	return null
 
 func select_unit(unit: Player_Unit):

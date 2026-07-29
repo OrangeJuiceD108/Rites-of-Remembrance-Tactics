@@ -18,7 +18,6 @@ func update_unit(unit: Unit):
 	# TODO: UPDATE PORTRAIT
 
 func shift_corner(loc: Vector2i):
-	print(loc)
 	if loc != Vector2i.UP && loc != Vector2i.DOWN:
 		push_error("Incorrect shift params for Unit Quick Info")
 	

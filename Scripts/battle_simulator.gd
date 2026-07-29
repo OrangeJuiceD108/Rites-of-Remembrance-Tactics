@@ -30,6 +30,11 @@ static func run_battle(attacker: Unit, defender: Unit):
 	EventBus.on_battle_ended.emit(atk_reports[attacker_readout], atk_reports[defender_readout])
 	
 	# TODO: Apply changes
+	# Apply Damage
+	attacker.hp -= atk_reports[attacker_readout].damage
+	defender.hp -= atk_reports[defender_readout].damage
+	# Apply Experience
+	# Apply Weapon_Experience
 
 static func _compute_attack_data(attacker: Battle_Sheet, defender: Battle_Sheet):
 	var crit_rate = attacker.crit_rate - defender.crit_rate

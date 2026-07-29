@@ -33,7 +33,6 @@ func get_unit_at_cell(cell: Vector2i):
 	if !occupied_tiles.has(cell):
 		return null
 	
-	print(occupied_tiles)
 	var unit : Unit
 	
 	unit = enemy_manager.get_unit_at_cell(cell)
