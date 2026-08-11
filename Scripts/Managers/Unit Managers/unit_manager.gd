@@ -135,7 +135,13 @@ func _handle_action_talk(cell: Vector2i):
 # TODO: finish handle_action_attack
 func _handle_action_attack(cell: Vector2i):
 	# TODO: Run the attack
-	print("Got his ass!") #FIXME Temporary debug statement
+	#print("Got his ass!") #FIXME Temporary debug statement
+	
+	var target = enemy_manager.get_unit_at_cell(cell)
+	if target == null:
+		return
+	
+	Battle_Simulator.run_battle(player_manager.selected_unit, target)
 	
 	player_manager.confirm_move()
 	state = State.IDLE

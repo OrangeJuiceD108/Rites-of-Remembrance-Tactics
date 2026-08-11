@@ -135,6 +135,9 @@ class Attack_Data:
 		crit_rate = cr
 		hit_rate = hr
 		damage = dmg
+	
+	func duplicate():
+		return Attack_Data.new(attacker, defender, crit_rate, hit_rate, damage)
 
 class Attack_Result:
 	var attacker : Unit_Readout

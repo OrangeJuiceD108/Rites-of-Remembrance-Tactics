@@ -5,7 +5,7 @@ var unit : Unit_Readout
 # Speed of attacker
 var attack_speed : int:
 	get:
-		var restrictive_weight = weapon.weapon_data.weight - unit.constitution
+		var restrictive_weight = weapon.data.weight - unit.constitution
 		if restrictive_weight < 0:
 			restrictive_weight = 0
 		return unit.stats[Constants.Stat.SPD] - restrictive_weight + attack_speed_mod
