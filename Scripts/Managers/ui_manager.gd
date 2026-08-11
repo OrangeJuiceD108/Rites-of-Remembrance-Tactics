@@ -43,6 +43,7 @@ func hide_weapons_menu():
 	unit_summary.visible = false
 	inventory_menu.visible = false
 
+# TODO: Need to make sure that quick info is hidden when you go to attack, so ui doesn't cover weapon ui. Might not happen here.
 func show_unit_quick_info(unit: Unit):
 	var direction : Vector2i
 	
