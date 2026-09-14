@@ -38,6 +38,7 @@ enum Tag {ARMORED, BEAST, DRAGON, MONSTER, UNARMORED}
 	Constants.Stat.DEF : 5,
 	Constants.Stat.RES : 3,
 	}
+
 @export var promotion_gains : Dictionary[Constants.Stat, int] = {
 	Constants.Stat.HP : 0,
 	Constants.Stat.STR : 0,

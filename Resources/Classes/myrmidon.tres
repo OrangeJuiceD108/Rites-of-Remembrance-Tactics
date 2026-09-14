@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Unit_Class" load_steps=3 format=3 uid="uid://dx0omlh4qlxqk"]
+[gd_resource type="Resource" script_class="Unit_Class" format=3 uid="uid://dx0omlh4qlxqk"]
 
 [ext_resource type="Script" uid="uid://c5g43rf2go6uh" path="res://Scripts/Resources/unit_class.gd" id="1_xm41e"]
 [ext_resource type="Script" uid="uid://0uolyvccrg13" path="res://Scripts/Resources/Skills/skill.gd" id="2_2vmnr"]

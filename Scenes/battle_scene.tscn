@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bshu5pb00rhay"]
+[gd_scene format=3 uid="uid://bshu5pb00rhay"]
 
 [ext_resource type="PackedScene" uid="uid://mil0y5xo8uek" path="res://Scenes/cursor.tscn" id="1_b25br"]
 [ext_resource type="Texture2D" uid="uid://dbjwqhu2e0lrq" path="res://Assets/Sprites/pixil-frame-0.png" id="2_20f6w"]
@@ -26,81 +26,81 @@
 [ext_resource type="PackedScene" uid="uid://x5450tsh8xbp" path="res://Scenes/UI/unit_summary.tscn" id="23_ys5i7"]
 [ext_resource type="PackedScene" uid="uid://dl7an4nc2x3yj" path="res://Scenes/UI/unit_quick_info.tscn" id="25_ejyr1"]
 
-[node name="BattleScene" type="Node2D"]
+[node name="BattleScene" type="Node2D" unique_id=1232431842]
 
-[node name="Cursor" parent="." instance=ExtResource("1_b25br")]
+[node name="Cursor" parent="." unique_id=354903339 instance=ExtResource("1_b25br")]
 position = Vector2(8, 8)
 
-[node name="Sprite2D" type="Sprite2D" parent="Cursor"]
+[node name="Sprite2D" type="Sprite2D" parent="Cursor" unique_id=889907251]
 z_index = 10
 texture_filter = 1
 texture = ExtResource("2_20f6w")
 
-[node name="Map Manager" type="Node" parent="."]
+[node name="Map Manager" type="Node" parent="." unique_id=963683314]
 script = ExtResource("2_anwxn")
 map_data = ExtResource("4_84vmf")
 
-[node name="Unit Manager" type="Node" parent="."]
+[node name="Unit Manager" type="Node" parent="." unique_id=1941506250]
 script = ExtResource("3_anwxn")
 
-[node name="Enemy Unit Manager" type="Node" parent="Unit Manager"]
+[node name="Enemy Unit Manager" type="Node" parent="Unit Manager" unique_id=758092391]
 script = ExtResource("5_gt16y")
 
-[node name="Test Enemy" type="Node2D" parent="Unit Manager/Enemy Unit Manager"]
+[node name="Test Enemy" type="Node2D" parent="Unit Manager/Enemy Unit Manager" unique_id=1489556755]
 position = Vector2(136, 248)
 script = ExtResource("7_778cw")
 unit_class = ExtResource("8_qncpg")
 
-[node name="Sprite2D" type="Sprite2D" parent="Unit Manager/Enemy Unit Manager/Test Enemy"]
+[node name="Sprite2D" type="Sprite2D" parent="Unit Manager/Enemy Unit Manager/Test Enemy" unique_id=1982883427]
 z_index = 2
 texture_filter = 1
 texture = ExtResource("9_wb0gu")
 region_enabled = true
 region_rect = Rect2(20, 0, 16, 16)
 
-[node name="Inventory" type="Node" parent="Unit Manager/Enemy Unit Manager/Test Enemy" node_paths=PackedStringArray("equipped_weapon")]
+[node name="Inventory" type="Node" parent="Unit Manager/Enemy Unit Manager/Test Enemy" unique_id=767009526 node_paths=PackedStringArray("equipped_weapon")]
 script = ExtResource("9_vuvll")
 equipped_weapon = NodePath("Weapon")
 
-[node name="Weapon" parent="Unit Manager/Enemy Unit Manager/Test Enemy/Inventory" instance=ExtResource("10_5gdnp")]
+[node name="Weapon" parent="Unit Manager/Enemy Unit Manager/Test Enemy/Inventory" unique_id=677645893 instance=ExtResource("10_5gdnp")]
 data = ExtResource("15_5gdnp")
 
-[node name="Player Unit Manager" type="Node" parent="Unit Manager"]
+[node name="Player Unit Manager" type="Node" parent="Unit Manager" unique_id=837523693]
 script = ExtResource("6_20f6w")
 move_cell_sprite = ExtResource("8_84vmf")
 attack_cell_sprite = ExtResource("9_xdap8")
 
-[node name="Test Unit" type="Node2D" parent="Unit Manager/Player Unit Manager"]
+[node name="Test Unit" type="Node2D" parent="Unit Manager/Player Unit Manager" unique_id=1846461461]
 z_index = 5
 position = Vector2(24, 24)
 script = ExtResource("8_f4ggb")
 unit_class = ExtResource("8_qncpg")
 
-[node name="Sprite2D" type="Sprite2D" parent="Unit Manager/Player Unit Manager/Test Unit"]
+[node name="Sprite2D" type="Sprite2D" parent="Unit Manager/Player Unit Manager/Test Unit" unique_id=1689997940]
 z_index = 2
 texture_filter = 1
 texture = ExtResource("9_wb0gu")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
-[node name="Inventory" type="Node" parent="Unit Manager/Player Unit Manager/Test Unit" node_paths=PackedStringArray("equipped_weapon")]
+[node name="Inventory" type="Node" parent="Unit Manager/Player Unit Manager/Test Unit" unique_id=1445508334 node_paths=PackedStringArray("equipped_weapon")]
 script = ExtResource("9_vuvll")
 equipped_weapon = NodePath("Weapon")
 
-[node name="Weapon" parent="Unit Manager/Player Unit Manager/Test Unit/Inventory" instance=ExtResource("10_5gdnp")]
+[node name="Weapon" parent="Unit Manager/Player Unit Manager/Test Unit/Inventory" unique_id=863149261 instance=ExtResource("10_5gdnp")]
 data = ExtResource("15_5gdnp")
 
-[node name="Weapon2" parent="Unit Manager/Player Unit Manager/Test Unit/Inventory" instance=ExtResource("10_5gdnp")]
+[node name="Weapon2" parent="Unit Manager/Player Unit Manager/Test Unit/Inventory" unique_id=1203320539 instance=ExtResource("10_5gdnp")]
 data = ExtResource("16_ys5i7")
 
-[node name="Weapon3" parent="Unit Manager/Player Unit Manager/Test Unit/Inventory" instance=ExtResource("10_5gdnp")]
+[node name="Weapon3" parent="Unit Manager/Player Unit Manager/Test Unit/Inventory" unique_id=1315325888 instance=ExtResource("10_5gdnp")]
 data = ExtResource("15_5gdnp")
 durability = 15
 
-[node name="Allied Unit Manager" type="Node" parent="Unit Manager"]
+[node name="Allied Unit Manager" type="Node" parent="Unit Manager" unique_id=118504483]
 script = ExtResource("12_xdap8")
 
-[node name="UI Manager" type="Control" parent="."]
+[node name="UI Manager" type="Control" parent="." unique_id=2037411589]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -110,7 +110,7 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("8_ed262")
 
-[node name="Action Menu" type="VBoxContainer" parent="UI Manager"]
+[node name="Action Menu" type="VBoxContainer" parent="UI Manager" unique_id=19769032]
 visible = false
 z_index = 10
 layout_mode = 0
@@ -120,7 +120,7 @@ mouse_filter = 0
 script = ExtResource("9_ms847")
 button_scene = ExtResource("15_f856b")
 
-[node name="Inventory Menu" type="VBoxContainer" parent="UI Manager"]
+[node name="Inventory Menu" type="VBoxContainer" parent="UI Manager" unique_id=860073143]
 visible = false
 z_index = 10
 layout_mode = 0
@@ -129,7 +129,7 @@ offset_bottom = 40.0
 script = ExtResource("18_kbww3")
 button_scene = ExtResource("19_vol83")
 
-[node name="Unit Summary" parent="UI Manager" instance=ExtResource("23_ys5i7")]
+[node name="Unit Summary" parent="UI Manager" unique_id=568590766 instance=ExtResource("23_ys5i7")]
 visible = false
 z_index = 10
 layout_mode = 1
@@ -137,7 +137,7 @@ anchors_preset = -1
 offset_right = 0.0
 offset_bottom = 0.0
 
-[node name="Unit Quick Info" parent="UI Manager" instance=ExtResource("25_ejyr1")]
+[node name="Unit Quick Info" parent="UI Manager" unique_id=2080571300 instance=ExtResource("25_ejyr1")]
 visible = false
 z_index = 10
 layout_mode = 0

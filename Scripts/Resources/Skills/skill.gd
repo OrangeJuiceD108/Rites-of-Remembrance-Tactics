@@ -19,25 +19,19 @@ func _init():
 	assert(skill_source != SkillSource.NONE, get_script().get_global_name() + " has not set skill_source!")
 
 @abstract
-# TODO: Add types (unit: Unit, weapon: Weapon)
 func on_equip(unit: Unit, weapon: Weapon)
 
 @abstract
-# TODO: Add types (attacker_stats: Unit_Readout, defender_stats: Unit_Readout)
 func on_battle_started(attacker_readout: Unit_Readout, defender_readout: Unit_Readout)
 
 @abstract
-# TODO: Add types (attacker_sheet: Battle_Sheet, defender_sheet: Battle_Sheet)
 func on_attack_calculating(attacker_sheet: Battle_Sheet, defender_sheet: Battle_Sheet)
 
 @abstract
-# TODO: Add types (attacks: Array[int], attacker: Array[Unit]
 func on_attack_sequencing(attacks: Array[Battle_Simulator.Attack_Data])
 
 @abstract
-# TODO: Add types (attacker_stats: Unit_Readout, defender_stats: Unit_Readout, damage: int)
 func on_attack_landed(attack_results: Array[Battle_Simulator.Attack_Result])
 
 @abstract
-# TODO: Add types (attacker_report: Battle_Report, defender_report: Battle_Report)
 func on_battle_ended(attacker_report: Battle_Simulator.Battle_Report, defender_report: Battle_Simulator.Battle_Report)
