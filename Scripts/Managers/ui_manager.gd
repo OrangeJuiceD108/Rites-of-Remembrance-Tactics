@@ -25,6 +25,7 @@ func show_actions_menu(actions: int, cell: Vector2):
 	action_menu.position = world_position + menu_offset
 	action_menu.build(actions)
 	$"../Cursor".disable_cursor()
+	hide_unit_quick_info()
 	action_menu.visible = true
 
 func hide_action_menu():
@@ -35,6 +36,7 @@ func show_weapons_menu(unit: Unit):
 	unit_summary.build_summary(unit)
 	inventory_menu.build_attack(unit.inventory)
 	$"../Cursor".disable_cursor()
+	hide_unit_quick_info()
 	unit_summary.visible = true
 	inventory_menu.visible = true
 
@@ -43,7 +45,6 @@ func hide_weapons_menu():
 	unit_summary.visible = false
 	inventory_menu.visible = false
 
-# TODO: Need to make sure that quick info is hidden when you go to attack, so ui doesn't cover weapon ui. Might not happen here.
 func show_unit_quick_info(unit: Unit):
 	var direction : Vector2i
 	

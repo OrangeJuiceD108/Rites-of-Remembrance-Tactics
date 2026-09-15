@@ -66,7 +66,6 @@ func _handle_idle_click(cell: Vector2i):
 		pass
 
 func _handle_unit_selected_click(cell: Vector2i):
-	ui_manager.hide_unit_quick_info()
 	if cell == player_manager.selected_unit.grid_position:
 		_handle_empty_cell_click(cell)
 	elif !occupied_tiles.has(cell) and player_manager.move_cells.has(cell):
