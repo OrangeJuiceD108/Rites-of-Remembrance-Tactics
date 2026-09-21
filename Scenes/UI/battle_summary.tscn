@@ -5,18 +5,45 @@
 [ext_resource type="Theme" uid="uid://bu0jvkca718sm" path="res://Themes/base_ui.tres" id="3_ey8de"]
 [ext_resource type="FontFile" uid="uid://bnocubeeufjr3" path="res://Assets/Fonts/PixeloidSans.ttf" id="4_8pqgm"]
 [ext_resource type="FontFile" uid="uid://enslqpxw1wa2" path="res://Assets/Fonts/PixeloidSans-Bold.ttf" id="5_an37g"]
+[ext_resource type="Texture2D" uid="uid://bjy5c0t0vjwbb" path="res://Assets/Sprites/moveSprite.png" id="6_ey8de"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rxntd"]
+bg_color = Color(0.5647059, 0.4509804, 0.33333334, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m2uku"]
+bg_color = Color(0.3882353, 0.5294118, 0.6666667, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4gjug"]
+bg_color = Color(0.3882353, 0.5294118, 0.6666667, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ie18w"]
+bg_color = Color(0.92941177, 0.38431373, 0.105882354, 1)
+anti_aliasing = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8oc6l"]
+bg_color = Color(0.92941177, 0.38431373, 0.105882354, 1)
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+anti_aliasing = false
 
 [node name="Battle Summary" type="PanelContainer" unique_id=974342808]
 offset_right = 40.0
 offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_rxntd")
 script = ExtResource("1_iwd1c")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1185518039]
 layout_mode = 2
+theme_override_constants/separation = 0
 alignment = 1
 
 [node name="Layer 1" type="PanelContainer" parent="VBoxContainer" unique_id=685777564]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m2uku")
 
 [node name="Hbox" type="HBoxContainer" parent="VBoxContainer/Layer 1" unique_id=2029680459]
 layout_mode = 2
@@ -36,36 +63,46 @@ horizontal_alignment = 1
 
 [node name="Layer 2" type="HBoxContainer" parent="VBoxContainer" unique_id=1765271335]
 layout_mode = 2
+theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Player Stats" type="VBoxContainer" parent="VBoxContainer/Layer 2" unique_id=1671872211]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Layer 2" unique_id=14706857]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4gjug")
+
+[node name="Player Stats" type="VBoxContainer" parent="VBoxContainer/Layer 2/PanelContainer" unique_id=1671872211]
 layout_mode = 2
 
-[node name="HP" type="Label" parent="VBoxContainer/Layer 2/Player Stats" unique_id=251439380]
-custom_minimum_size = Vector2(18, 0)
+[node name="HP" type="Label" parent="VBoxContainer/Layer 2/PanelContainer/Player Stats" unique_id=251439380]
+custom_minimum_size = Vector2(21, 0)
 layout_mode = 2
 theme = ExtResource("3_ey8de")
 text = "100"
+horizontal_alignment = 1
 
-[node name="Mt" type="Label" parent="VBoxContainer/Layer 2/Player Stats" unique_id=1149403849]
-custom_minimum_size = Vector2(18, 0)
+[node name="Mt" type="Label" parent="VBoxContainer/Layer 2/PanelContainer/Player Stats" unique_id=1149403849]
+custom_minimum_size = Vector2(21, 0)
 layout_mode = 2
 theme = ExtResource("3_ey8de")
 text = "100"
+horizontal_alignment = 1
 
-[node name="Hit" type="Label" parent="VBoxContainer/Layer 2/Player Stats" unique_id=2022029085]
-custom_minimum_size = Vector2(18, 0)
+[node name="Hit" type="Label" parent="VBoxContainer/Layer 2/PanelContainer/Player Stats" unique_id=2022029085]
+custom_minimum_size = Vector2(21, 0)
 layout_mode = 2
 theme = ExtResource("3_ey8de")
 text = "100"
+horizontal_alignment = 1
 
-[node name="Crit" type="Label" parent="VBoxContainer/Layer 2/Player Stats" unique_id=1113735477]
-custom_minimum_size = Vector2(18, 0)
+[node name="Crit" type="Label" parent="VBoxContainer/Layer 2/PanelContainer/Player Stats" unique_id=1113735477]
+custom_minimum_size = Vector2(21, 0)
 layout_mode = 2
 theme = ExtResource("3_ey8de")
 text = "100"
+horizontal_alignment = 1
 
 [node name="Stat Text" type="VBoxContainer" parent="VBoxContainer/Layer 2" unique_id=458965346]
+custom_minimum_size = Vector2(27, 0)
 layout_mode = 2
 
 [node name="HP" type="RichTextLabel" parent="VBoxContainer/Layer 2/Stat Text" unique_id=1375994435]
@@ -108,39 +145,44 @@ text = "[center][b]Crit[/b][/center]"
 fit_content = true
 autowrap_mode = 0
 
-[node name="Enemy Stats" type="VBoxContainer" parent="VBoxContainer/Layer 2" unique_id=842360683]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/Layer 2" unique_id=479565695]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ie18w")
+
+[node name="Enemy Stats" type="VBoxContainer" parent="VBoxContainer/Layer 2/PanelContainer2" unique_id=842360683]
 layout_mode = 2
 
-[node name="HP" type="Label" parent="VBoxContainer/Layer 2/Enemy Stats" unique_id=1152924330]
-custom_minimum_size = Vector2(18, 0)
+[node name="HP" type="Label" parent="VBoxContainer/Layer 2/PanelContainer2/Enemy Stats" unique_id=1152924330]
+custom_minimum_size = Vector2(21, 0)
 layout_mode = 2
 theme = ExtResource("3_ey8de")
 text = "100"
-horizontal_alignment = 2
+horizontal_alignment = 1
 
-[node name="Mt" type="Label" parent="VBoxContainer/Layer 2/Enemy Stats" unique_id=1256355007]
-custom_minimum_size = Vector2(18, 0)
+[node name="Mt" type="Label" parent="VBoxContainer/Layer 2/PanelContainer2/Enemy Stats" unique_id=1256355007]
+custom_minimum_size = Vector2(21, 0)
 layout_mode = 2
 theme = ExtResource("3_ey8de")
 text = "100"
-horizontal_alignment = 2
+horizontal_alignment = 1
 
-[node name="Hit" type="Label" parent="VBoxContainer/Layer 2/Enemy Stats" unique_id=1085278557]
-custom_minimum_size = Vector2(18, 0)
+[node name="Hit" type="Label" parent="VBoxContainer/Layer 2/PanelContainer2/Enemy Stats" unique_id=1085278557]
+custom_minimum_size = Vector2(21, 0)
 layout_mode = 2
 theme = ExtResource("3_ey8de")
 text = "100"
-horizontal_alignment = 2
+horizontal_alignment = 1
 
-[node name="Crit" type="Label" parent="VBoxContainer/Layer 2/Enemy Stats" unique_id=1844049405]
-custom_minimum_size = Vector2(18, 0)
+[node name="Crit" type="Label" parent="VBoxContainer/Layer 2/PanelContainer2/Enemy Stats" unique_id=1844049405]
+custom_minimum_size = Vector2(21, 0)
 layout_mode = 2
 theme = ExtResource("3_ey8de")
 text = "100"
-horizontal_alignment = 2
+horizontal_alignment = 1
 
 [node name="Layer3" type="PanelContainer" parent="VBoxContainer" unique_id=1036097347]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8oc6l")
 
 [node name="Vbox" type="VBoxContainer" parent="VBoxContainer/Layer3" unique_id=163354796]
 layout_mode = 2
@@ -159,7 +201,7 @@ horizontal_alignment = 1
 
 [node name="Enemy Weapon Image" type="TextureRect" parent="VBoxContainer/Layer3/Vbox/Hbox" unique_id=470902789]
 layout_mode = 2
-texture = ExtResource("2_u2sj1")
+texture = ExtResource("6_ey8de")
 stretch_mode = 2
 
 [node name="Enemy Weapon" type="Label" parent="VBoxContainer/Layer3/Vbox" unique_id=463876462]
