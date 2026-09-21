@@ -1,0 +1,1 @@
+class_name Battle_Summary extends PanelContainer

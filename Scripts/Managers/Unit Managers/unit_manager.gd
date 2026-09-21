@@ -24,6 +24,7 @@ func _ready():
 
 func _on_cursor_moved(cell: Vector2i):
 	var unit = get_unit_at_cell(cell)
+	# TODO: Tweak to show battle preview when in the
 	if unit:
 		ui_manager.show_unit_quick_info(unit)
 	else: 
@@ -134,9 +135,6 @@ func _handle_action_talk(cell: Vector2i):
 
 # TODO: finish handle_action_attack
 func _handle_action_attack(cell: Vector2i):
-	# TODO: Run the attack
-	#print("Got his ass!") #FIXME Temporary debug statement
-	
 	var target = enemy_manager.get_unit_at_cell(cell)
 	if target == null:
 		return
