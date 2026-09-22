@@ -1,16 +1,5 @@
 class_name Battle_Simulator
 
-# TODO: Finish generate_battle_preview function
-static func generate_battle_preview(attacker: Unit, defender: Unit):
-	var context : Battle_Context = Battle_Context.generate(attacker, defender)
-	
-	# TODO: Initialize battle_preview
-	var battle_preview : Battle_Preview
-	
-	EventBus.on_battle_previewing.emit(battle_preview)
-	
-	return battle_preview
-
 # FIXME: Units without weapons
 # FIXME: Weapon durability
 static func run_battle(attacker: Unit, defender: Unit):
