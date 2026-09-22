@@ -16,7 +16,7 @@ static func generate_battle_preview(attacker: Unit, defender: Unit):
 static func run_battle(attacker: Unit, defender: Unit):
 	var context : Battle_Context = Battle_Context.generate(attacker, defender)
 	
-	var atk_sequence = _sequence_attacks(context.atk_attack, context.def_attack, context.speed_advantage)
+	var atk_sequence = _sequence_attacks(context.attacker_attack, context.defender_attack, context.speed_advantage)
 	
 	EventBus.on_attack_sequencing.emit(atk_sequence)
 	

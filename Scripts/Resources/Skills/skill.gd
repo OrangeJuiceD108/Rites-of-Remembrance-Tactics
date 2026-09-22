@@ -27,11 +27,14 @@ func on_battle_started(attacker_readout: Unit_Readout, defender_readout: Unit_Re
 @abstract
 func on_attack_calculating(attacker_sheet: Battle_Sheet, defender_sheet: Battle_Sheet)
 
-@abstract
-func on_attack_sequencing(attacks: Array[Battle_Simulator.Attack_Data])
+@abstract 
+func on_battle_previewing(battle_preview: Battle_Preview)
 
 @abstract
-func on_attack_landed(attack_results: Array[Battle_Simulator.Attack_Result])
+func on_attack_sequencing(attacks: Array[Attack_Data])
 
 @abstract
-func on_battle_ended(attacker_report: Battle_Simulator.Battle_Report, defender_report: Battle_Simulator.Battle_Report)
+func on_attack_landed(attack_results: Array[Attack_Result])
+
+@abstract
+func on_battle_ended(attacker_report: Battle_Report, defender_report: Battle_Report)

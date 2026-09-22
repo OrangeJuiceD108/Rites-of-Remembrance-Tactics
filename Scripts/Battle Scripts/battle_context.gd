@@ -26,11 +26,11 @@ static func generate(attacker: Unit, defender: Unit):
 	var atk_sheet : Battle_Sheet = Battle_Sheet.new(attacker_readout, defender_readout)
 	var def_sheet : Battle_Sheet = Battle_Sheet.new(defender_readout, attacker_readout)
 	
-	EventBus.on_attack_calculating.emit(attacker_sheet, defender_sheet)
+	EventBus.on_attack_calculating.emit(atk_sheet, def_sheet)
 	
-	var atk_attack = Attack_Data.generate(attacker_sheet, defender_sheet)
-	var def_attack = Attack_Data.generate(defender_sheet, attacker_sheet)
+	var atk_attack = Attack_Data.generate(atk_sheet, def_sheet)
+	var def_attack = Attack_Data.generate(def_sheet, atk_sheet)
 	
-	var spd_adv = attacker_sheet.attack_speed - defender_sheet.attack_speed
+	var spd_adv = atk_sheet.attack_speed - def_sheet.attack_speed
 	
 	return Battle_Context.new(atk_sheet, def_sheet, atk_attack, def_attack, spd_adv)
