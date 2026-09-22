@@ -1,23 +1,22 @@
 class_name Battle_Simulator
+
+# TODO: Finish generate_battle_preview function
+static func generate_battle_preview(attacker: Unit, defender: Unit):
+	var context : Battle_Context = Battle_Context.generate(attacker, defender)
+	
+	# TODO: Initialize battle_preview
+	var battle_preview : Battle_Preview
+	
+	EventBus.on_battle_previewing.emit(battle_preview)
+	
+	return battle_preview
+
 # FIXME: Units without weapons
 # FIXME: Weapon durability
 static func run_battle(attacker: Unit, defender: Unit):
-	var attacker_readout : Unit_Readout = Unit_Readout.new(attacker)
-	var defender_readout : Unit_Readout = Unit_Readout.new(defender)
+	var context : Battle_Context = Battle_Context.generate(attacker, defender)
 	
-	EventBus.on_battle_started.emit(attacker_readout, defender_readout)
-	
-	var attacker_sheet : Battle_Sheet = Battle_Sheet.new(attacker_readout, defender_readout)
-	var defender_sheet : Battle_Sheet = Battle_Sheet.new(defender_readout, attacker_readout)
-	
-	EventBus.on_attack_calculating.emit(attacker_sheet, defender_sheet)
-	
-	var atk_attack = _compute_attack_data(attacker_sheet, defender_sheet)
-	var def_attack = _compute_attack_data(defender_sheet, attacker_sheet)
-	
-	var speed_advantage = attacker_sheet.attack_speed - defender_sheet.attack_speed
-	
-	var atk_sequence = _sequence_attacks(atk_attack, def_attack, speed_advantage)
+	var atk_sequence = _sequence_attacks(context.atk_attack, context.def_attack, context.speed_advantage)
 	
 	EventBus.on_attack_sequencing.emit(atk_sequence)
 	
@@ -27,21 +26,15 @@ static func run_battle(attacker: Unit, defender: Unit):
 	
 	var atk_reports = _generate_reports(atk_results)
 	
-	EventBus.on_battle_ended.emit(atk_reports[attacker_readout], atk_reports[defender_readout])
+	EventBus.on_battle_ended.emit(atk_reports[context.attacker_sheet.unit], atk_reports[context.defender_sheet.unit])
 	
 	# TODO: Apply changes
 	# Apply Damage
-	attacker.hp -= atk_reports[attacker_readout].damage
-	defender.hp -= atk_reports[defender_readout].damage
+	attacker.hp -= atk_reports[context.attacker_sheet.unit].damage
+	defender.hp -= atk_reports[context.defender_sheet.unit].damage
+	# Apply Weapon Durability Changes
 	# Apply Experience
 	# Apply Weapon_Experience
-
-static func _compute_attack_data(attacker: Battle_Sheet, defender: Battle_Sheet):
-	var crit_rate = attacker.crit_rate - defender.crit_rate
-	var accuracy = attacker.accuracy - defender.avoid
-	var damage = attacker.attack - (defender.defense if attacker.weapon.data.physical else defender.resistance)
-	
-	return Attack_Data.new(attacker.unit, defender.unit, crit_rate, accuracy, damage)
 
 static func _sequence_attacks(atk_attack: Attack_Data, def_attack: Attack_Data, speed_advantage: int):
 	var atk_count = 2 if speed_advantage >= 4 else 1
@@ -121,48 +114,3 @@ static func _generate_reports(attacks: Array[Attack_Result]):
 	reports[attacks[0].attacker].experience = max(reports[attacks[0].attacker].experience, 1)
 	
 	return reports
-
-class Attack_Data:
-	var attacker : Unit_Readout
-	var defender : Unit_Readout
-	var crit_rate : int
-	var hit_rate : int
-	var damage : int
-	
-	func _init(a: Unit_Readout, d: Unit_Readout, cr: int, hr: int, dmg: int):
-		attacker = a
-		defender = d
-		crit_rate = cr
-		hit_rate = hr
-		damage = dmg
-	
-	func duplicate():
-		return Attack_Data.new(attacker, defender, crit_rate, hit_rate, damage)
-
-class Attack_Result:
-	var attacker : Unit_Readout
-	var defender : Unit_Readout
-	var crit : bool
-	var hit : bool
-	var damage : int
-	
-	func _init(a: Unit_Readout, d: Unit_Readout, c: bool, h: bool, dmg: int):
-		attacker = a
-		defender = d
-		crit = c
-		hit = h
-		damage = dmg
-
-class Battle_Report:
-	var unit : Unit_Readout
-	var attack_sequence : Array[Attack_Result]
-	var damage : int
-	var experience : int
-	var weapon_experience : int
-	
-	func _init(u: Unit_Readout, atks: Array[Attack_Result]):
-		unit = u
-		attack_sequence = atks
-		damage = 0
-		experience = 0
-		weapon_experience = 0
