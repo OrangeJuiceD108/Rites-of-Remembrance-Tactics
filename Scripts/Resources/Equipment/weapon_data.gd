@@ -1,6 +1,7 @@
 class_name Weapon_Data extends Equipment_Data
 
 # TODO: Enforce property setting, so errors like missing weapon type don't occur
+# TODO: Weapon image
 
 @export var type : Constants.WeaponType
 
