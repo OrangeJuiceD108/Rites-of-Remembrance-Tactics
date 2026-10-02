@@ -22,7 +22,7 @@ func update_preview(player: Unit, enemy: Unit):
 	# TODO: Assign weapon image
 
 func _update_stats(stats: VBoxContainer, sheet: Battle_Sheet, attack: Attack_Data):
-	stats.get_node("HP").text = sheet.unit.hp
+	stats.get_node("HP").text = str(sheet.unit.hp)
 	stats.get_node("Mt").text = str(attack.damage)
 	stats.get_node("Hit").text = str(attack.hit_rate)
 	stats.get_node("Crit").text = str(attack.crit_rate)

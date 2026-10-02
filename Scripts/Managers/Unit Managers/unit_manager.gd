@@ -22,13 +22,35 @@ func _ready():
 	ui_manager.action_chosen.connect(_on_action_chosen)
 	ui_manager.weapon_chosen.connect(_on_weapon_chosen)
 
+#func _on_cursor_moved(cell: Vector2i):
+	#var unit = get_unit_at_cell(cell)
+	## TODO: Tweak to show battle preview when in the
+	#if unit:
+		#ui_manager.show_unit_quick_info(unit)
+	#else: 
+		#ui_manager.hide_unit_quick_info()
+
 func _on_cursor_moved(cell: Vector2i):
+	if state == State.ACTION_SELECTED and current_action == Constants.ActionFlags.ATTACK:
+		_on_cursor_moved_attack(cell)
+	else:
+		_on_cursor_moved_quick(cell)
+
+# FIXME: Temp function until refactor
+func _on_cursor_moved_quick(cell: Vector2i):
 	var unit = get_unit_at_cell(cell)
-	# TODO: Tweak to show battle preview when in the
 	if unit:
 		ui_manager.show_unit_quick_info(unit)
 	else: 
 		ui_manager.hide_unit_quick_info()
+
+# FIXME: Temp function until refactor
+func _on_cursor_moved_attack(cell: Vector2i):
+	var unit = get_unit_at_cell(cell)
+	if unit:
+		ui_manager.show_battle_summary(player_manager.selected_unit, unit)
+	else:
+		ui_manager.hide_battle_summary()
 
 func get_unit_at_cell(cell: Vector2i):
 	if !occupied_tiles.has(cell):
@@ -140,6 +162,7 @@ func _handle_action_attack(cell: Vector2i):
 		return
 	
 	Battle_Simulator.run_battle(player_manager.selected_unit, target)
+	ui_manager.hide_battle_summary()
 	
 	player_manager.confirm_move()
 	state = State.IDLE
@@ -175,7 +198,7 @@ func _on_action_chosen(action: Constants.ActionFlags):
 		Constants.ActionFlags.RESCUE:
 			_action_rescue()
 		Constants.ActionFlags.TRADE:
-			_action_teleport()
+			_action_trade()
 		Constants.ActionFlags.ITEMS:
 			_action_items()
 		Constants.ActionFlags.WAIT:

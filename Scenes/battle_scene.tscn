@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://dalvta44tdjlj" path="res://Scenes/UI/item_menu_button.tscn" id="19_vol83"]
 [ext_resource type="PackedScene" uid="uid://x5450tsh8xbp" path="res://Scenes/UI/unit_summary.tscn" id="23_ys5i7"]
 [ext_resource type="PackedScene" uid="uid://dl7an4nc2x3yj" path="res://Scenes/UI/unit_quick_info.tscn" id="25_ejyr1"]
+[ext_resource type="PackedScene" uid="uid://buyc1v4vfucll" path="res://Scenes/UI/battle_summary.tscn" id="26_ojquc"]
 
 [node name="BattleScene" type="Node2D" unique_id=1232431842]
 
@@ -138,6 +139,11 @@ offset_right = 0.0
 offset_bottom = 0.0
 
 [node name="Unit Quick Info" parent="UI Manager" unique_id=2080571300 instance=ExtResource("25_ejyr1")]
+visible = false
+z_index = 10
+layout_mode = 0
+
+[node name="Battle Summary" parent="UI Manager" unique_id=974342808 instance=ExtResource("26_ojquc")]
 visible = false
 z_index = 10
 layout_mode = 0
