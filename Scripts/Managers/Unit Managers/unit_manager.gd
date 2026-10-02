@@ -22,14 +22,6 @@ func _ready():
 	ui_manager.action_chosen.connect(_on_action_chosen)
 	ui_manager.weapon_chosen.connect(_on_weapon_chosen)
 
-#func _on_cursor_moved(cell: Vector2i):
-	#var unit = get_unit_at_cell(cell)
-	## TODO: Tweak to show battle preview when in the
-	#if unit:
-		#ui_manager.show_unit_quick_info(unit)
-	#else: 
-		#ui_manager.hide_unit_quick_info()
-
 func _on_cursor_moved(cell: Vector2i):
 	if state == State.ACTION_SELECTED and current_action == Constants.ActionFlags.ATTACK:
 		_on_cursor_moved_attack(cell)

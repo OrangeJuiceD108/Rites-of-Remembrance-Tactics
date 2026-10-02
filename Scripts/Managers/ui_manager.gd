@@ -49,7 +49,7 @@ func hide_weapons_menu():
 func show_unit_quick_info(unit: Unit):
 	var direction : Vector2i
 	
-	var cursor_position = get_viewport().get_mouse_position()
+	var cursor_position = $"../Cursor".get_global_transform_with_canvas().get_origin()
 	var viewport_size = get_viewport_rect().size
 	
 	if cursor_position.x / viewport_size.x < 0.5 && cursor_position.y / viewport_size.y < 0.5:
@@ -67,7 +67,7 @@ func hide_unit_quick_info():
 func show_battle_summary(player: Unit, enemy: Unit):
 	var direction : Vector2i
 	
-	var cursor_position = get_viewport().get_mouse_position()
+	var cursor_position = $"../Cursor".get_global_transform_with_canvas().get_origin()
 	var viewport_size = get_viewport_rect().size
 	
 	if cursor_position.y / viewport_size.y < 0.5:
