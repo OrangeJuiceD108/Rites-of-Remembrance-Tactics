@@ -9,6 +9,9 @@ class_name UI_Manager extends Control
 signal action_chosen(action: Constants.ActionFlags)
 signal weapon_chosen()
 
+var state : State = State.IDLE
+enum State {IDLE, ACTIONS_MENU, WEAPONS_MENU, BATTLE_PREVIEW}
+
 func _enter_tree():
 	size = get_viewport_rect().size
 
@@ -16,7 +19,49 @@ func _ready():
 	action_menu.action_chosen.connect(_on_action_chosen)
 	inventory_menu.weapon_chosen.connect(_on_weapon_chosen)
 
-func show_actions_menu(actions: int, cell: Vector2):
+func change_state(new_state: State, kwargs: Dictionary):
+	match new_state:
+		State.IDLE:
+			_enter_idle()
+		State.ACTIONS_MENU:
+			_enter_actions_menu(kwargs["actions"], kwargs["cell"])
+		State.WEAPONS_MENU:
+			_enter_weapons_menu(kwargs["unit"])
+		State.BATTLE_PREVIEW:
+			_enter_battle_preview(kwargs["attacker"])
+
+func _enter_idle():
+	# TODO: _enter_idle
+	
+	state = State.IDLE
+
+func _enter_actions_menu(actions: int, cell: Vector2i):
+	# TODO: _enter_actions_menu
+	
+	state = State.ACTIONS_MENU
+
+func _enter_weapons_menu(unit: Unit):
+	# TODO: _enter_weapons_menu
+	
+	state = State.WEAPONS_MENU
+
+func _enter_battle_preview(attacker: Unit):
+	# TODO: _enter_battle_preview
+	
+	state = State.BATTLE_PREVIEW
+
+func update_target(unit: Unit):
+	match state:
+		State.IDLE:
+			pass
+		State.BATTLE_PREVIEW:
+			pass
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------
+# OLD CODE BELOW
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+func show_actions_menu(actions: int, cell: Vector2i):
 	var world_position = GameState.grid.get_loc_by_cell(cell)
 	
 	# FIXME: There needs to be some logic here to make the offset, 
