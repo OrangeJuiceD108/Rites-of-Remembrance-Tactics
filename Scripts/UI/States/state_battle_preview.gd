@@ -8,8 +8,6 @@ func _init():
 
 func enter(kwargs: Dictionary):
 	player = kwargs["player"]
-	
-	#battle_summary.show_element(player, enemy)
 
 func exit():
 	battle_summary.hide_element()
