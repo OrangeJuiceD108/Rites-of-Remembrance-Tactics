@@ -9,7 +9,25 @@ class_name Battle_Summary extends PanelContainer
 @onready var enemy_weapon := $"VBoxContainer/Layer3/Vbox/Enemy Weapon"
 @onready var enemy_weapon_image := $"VBoxContainer/Layer3/Vbox/Enemy Weapon"
 
-func update_preview(player: Unit, enemy: Unit):
+func show_element(player: Unit, enemy: Unit):
+	var direction : Vector2i
+	
+	var cursor_position = %"Cursor".get_global_transform_with_canvas().get_origin()
+	var viewport_size = get_viewport_rect().size
+	
+	if cursor_position.y / viewport_size.y < 0.5:
+		direction = Vector2i.RIGHT
+	else:
+		direction = Vector2i.LEFT
+	
+	_shift_corner(direction)
+	_update_preview(player, enemy)
+	visible = true
+
+func hide_element():
+	visible = false
+
+func _update_preview(player: Unit, enemy: Unit):
 	var preview = Battle_Preview.generate(player, enemy)
 	
 	player_unit_name.text = player.name
@@ -27,7 +45,7 @@ func _update_stats(stats: VBoxContainer, sheet: Battle_Sheet, attack: Attack_Dat
 	stats.get_node("Hit").text = str(attack.hit_rate)
 	stats.get_node("Crit").text = str(attack.crit_rate)
 
-func shift_corner(loc: Vector2i):
+func _shift_corner(loc: Vector2i):
 	if loc != Vector2i.LEFT && loc != Vector2i.RIGHT:
 		push_error("Incorrect shift params for Battle Summary")
 	

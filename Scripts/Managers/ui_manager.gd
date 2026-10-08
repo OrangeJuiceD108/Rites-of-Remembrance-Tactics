@@ -1,91 +1,35 @@
 class_name UI_Manager extends Control
 
-@onready var action_menu = $"Action Menu"
-@onready var inventory_menu = $"Inventory Menu"
-@onready var unit_summary = $"Unit Summary"
-@onready var unit_quick_info = $"Unit Quick Info"
-@onready var battle_summary = $"Battle Summary"
+@onready var action_menu : Action_Menu = $"Action Menu"
+@onready var inventory_menu : Inventory_Menu = $"Inventory Menu"
+@onready var unit_summary : Unit_Summary = $"Unit Summary"
+@onready var unit_quick_info : Unit_Quick_Info = $"Unit Quick Info"
+@onready var battle_summary : Battle_Summary = $"Battle Summary"
 
 signal action_chosen(action: Constants.ActionFlags)
 signal weapon_chosen()
+
+var state : UI_State
+var states : Dictionary[UI_State.State, UI_State]
 
 func _enter_tree():
 	size = get_viewport_rect().size
 
 func _ready():
+	for child in $"States".get_children():
+		states[child.state] = child
+	state = states[UI_State.State.IDLE]
+	
 	action_menu.action_chosen.connect(_on_action_chosen)
 	inventory_menu.weapon_chosen.connect(_on_weapon_chosen)
 
-func show_actions_menu(actions: int, cell: Vector2):
-	var world_position = GameState.grid.get_loc_by_cell(cell)
-	
-	# FIXME: There needs to be some logic here to make the offset, 
-	#        in cases where its close to the edge of the screen
-	# FIXME: This should actually be in the menu class, so that it matches the rest
-	var menu_offset = Vector2(16, 0)
-	action_menu.position = world_position + menu_offset
-	action_menu.build(actions)
-	$"../Cursor".disable_cursor()
-	hide_unit_quick_info()
-	action_menu.visible = true
-
-func hide_action_menu():
-	$"../Cursor".enable_cursor()
-	action_menu.visible = false
-
-func show_weapons_menu(unit: Unit):
-	unit_summary.build_summary(unit)
-	inventory_menu.build_attack(unit.inventory)
-	$"../Cursor".disable_cursor()
-	hide_unit_quick_info()
-	unit_summary.visible = true
-	inventory_menu.visible = true
-
-func hide_weapons_menu():
-	$"../Cursor".enable_cursor()
-	unit_summary.visible = false
-	inventory_menu.visible = false
-
-func show_unit_quick_info(unit: Unit):
-	var direction : Vector2i
-	
-	var cursor_position = $"../Cursor".get_global_transform_with_canvas().get_origin()
-	var viewport_size = get_viewport_rect().size
-	
-	if cursor_position.x / viewport_size.x < 0.5 && cursor_position.y / viewport_size.y < 0.5:
-		direction = Vector2i.DOWN
-	else:
-		direction = Vector2i.UP
-	
-	unit_quick_info.shift_corner(direction)
-	unit_quick_info.update_unit(unit)
-	unit_quick_info.visible = true
-
-func hide_unit_quick_info():
-	unit_quick_info.visible = false
-
-func show_battle_summary(player: Unit, enemy: Unit):
-	var direction : Vector2i
-	
-	var cursor_position = $"../Cursor".get_global_transform_with_canvas().get_origin()
-	var viewport_size = get_viewport_rect().size
-	
-	if cursor_position.y / viewport_size.y < 0.5:
-		direction = Vector2i.RIGHT
-	else:
-		direction = Vector2i.LEFT
-	
-	battle_summary.shift_corner(direction)
-	battle_summary.update_preview(player, enemy)
-	battle_summary.visible = true
-
-func hide_battle_summary():
-	battle_summary.visible = false
+func change_state(new_state: UI_State.State, kwargs: Dictionary):
+	state.exit()
+	state = states[new_state]
+	state.enter(kwargs)
 
 func _on_action_chosen(action: Constants.ActionFlags):
-	hide_action_menu()
 	action_chosen.emit(action)
 
 func _on_weapon_chosen():
-	hide_weapons_menu()
 	weapon_chosen.emit()

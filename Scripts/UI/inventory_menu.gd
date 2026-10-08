@@ -11,7 +11,22 @@ func _ready():
 	anchor_left = anchors[Vector2i.LEFT]
 	anchor_right = anchors[Vector2i.RIGHT]
 
-func build_attack(inventory: Inventory):
+func show_element(unit: Unit, weapons_only: bool):
+	if weapons_only: 
+		_build_attack(unit.inventory)
+	else:
+		# TODO: FILL
+		pass
+	# WARNING: CURSOR SCREWING TEMPORARY
+	%"Cursor".disable_cursor()
+	visible = true
+
+func hide_element():
+	# WARNING: CURSOR SCREWING TEMPORARY
+	%"Cursor".enable_cursor()
+	visible = false
+
+func _build_attack(inventory: Inventory):
 	for child in get_children():
 		child.queue_free()
 	

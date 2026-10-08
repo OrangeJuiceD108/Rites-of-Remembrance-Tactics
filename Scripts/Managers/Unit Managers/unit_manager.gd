@@ -8,8 +8,8 @@ var occupied_tiles : Array[Vector2i]:
 @onready var player_manager : Player_Unit_Manager = $"Player Unit Manager"
 @onready var ally_manager : Allied_Unit_Manger = $"Allied Unit Manager"
 
-@onready var ui_manager : UI_Manager = $"../UI Manager"
-@onready var cursor : Cursor = $"../Cursor"
+@onready var ui_manager : UI_Manager = %"UI Manager"
+@onready var cursor : Cursor = %"Cursor"
 
 # TODO: I'll need more states at some point I'm sure
 enum State {IDLE, UNIT_SELECTED, UNIT_STAGED, ACTION_SELECTED} 
@@ -23,26 +23,7 @@ func _ready():
 	ui_manager.weapon_chosen.connect(_on_weapon_chosen)
 
 func _on_cursor_moved(cell: Vector2i):
-	if state == State.ACTION_SELECTED and current_action == Constants.ActionFlags.ATTACK:
-		_on_cursor_moved_attack(cell)
-	else:
-		_on_cursor_moved_quick(cell)
-
-# FIXME: Temp function until refactor
-func _on_cursor_moved_quick(cell: Vector2i):
-	var unit = get_unit_at_cell(cell)
-	if unit:
-		ui_manager.show_unit_quick_info(unit)
-	else: 
-		ui_manager.hide_unit_quick_info()
-
-# FIXME: Temp function until refactor
-func _on_cursor_moved_attack(cell: Vector2i):
-	var unit = get_unit_at_cell(cell)
-	if unit:
-		ui_manager.show_battle_summary(player_manager.selected_unit, unit)
-	else:
-		ui_manager.hide_battle_summary()
+	ui_manager.state.update_target_cell(cell)
 
 func get_unit_at_cell(cell: Vector2i):
 	if !occupied_tiles.has(cell):
@@ -114,7 +95,11 @@ func _handle_empty_cell_click(cell: Vector2i):
 	# TODO: Check to see if unit has heal here!
 	# TODO: Check to see if unit has other spell here!
 	
-	ui_manager.show_actions_menu(actions, cell)
+	var kwargs = {
+		"actions": actions,
+		"cell": cell
+	}
+	ui_manager.change_state(UI_State.State.ACTIONS_MENU, kwargs)
 
 func _handle_occupied_cell_click(cell: Vector2i):
 	# Handles case that spot is not empty, but spot meets one of the following conditions: 
@@ -154,7 +139,7 @@ func _handle_action_attack(cell: Vector2i):
 		return
 	
 	Battle_Simulator.run_battle(player_manager.selected_unit, target)
-	ui_manager.hide_battle_summary()
+	ui_manager.change_state(UI_State.State.IDLE, {})
 	
 	player_manager.confirm_move()
 	state = State.IDLE
@@ -201,7 +186,8 @@ func _action_talk():
 	pass
 
 func _action_attack():
-	ui_manager.show_weapons_menu(player_manager.selected_unit)
+	var kwargs = {"unit": player_manager.selected_unit}
+	ui_manager.change_state(UI_State.State.WEAPONS_MENU, kwargs)
 
 # TODO: Implement _action_heal()
 func _action_heal():
@@ -226,6 +212,7 @@ func _action_items():
 func _action_wait():
 	player_manager.confirm_move()
 	state = State.IDLE
+	ui_manager.change_state(UI_State.State.IDLE, {})
 
 func _on_weapon_chosen():
 	var attackable_cells = player_manager.staged_attack_cells.filter(func(item): return enemy_manager.occupied_tiles.has(item))
@@ -235,3 +222,7 @@ func _on_weapon_chosen():
 	
 	state = State.ACTION_SELECTED
 	current_action = Constants.ActionFlags.ATTACK
+	var kwargs = {
+		"player": player_manager.selected_unit
+	}
+	ui_manager.change_state(UI_State.State.BATTLE_PREVIEW, kwargs)

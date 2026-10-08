@@ -15,7 +15,14 @@ func _ready():
 	anchor_left = anchors[Vector2i.LEFT]
 	anchor_right = anchors[Vector2i.RIGHT]
 
-func build_summary(u: Unit):
+func show_element(new_unit: Unit):
+	_build_summary(new_unit)
+	visible = true
+
+func hide_element():
+	visible = false
+
+func _build_summary(u: Unit):
 	unit = u
 	# TODO: Change photo here
 	populate_summary()
