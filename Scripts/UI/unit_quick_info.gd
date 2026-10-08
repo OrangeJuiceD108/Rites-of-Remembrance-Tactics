@@ -6,7 +6,25 @@ class_name Unit_Quick_Info extends PanelContainer
 @onready var health_bar := $"HBoxContainer/VBoxContainer/ProgressBar"
 @onready var portrait := $"HBoxContainer/Portrait"
 
-func update_unit(unit: Unit):
+func show_element(unit: Unit):
+	var direction : Vector2i
+	
+	var cursor_position = %"Cursor".get_global_transform_with_canvas().get_origin()
+	var viewport_size = get_viewport_rect().size
+	
+	if cursor_position.x / viewport_size.x < 0.5 && cursor_position.y / viewport_size.y < 0.5:
+		direction = Vector2i.DOWN
+	else:
+		direction = Vector2i.UP
+	
+	_shift_corner(direction)
+	_update_unit(unit)
+	visible = true
+
+func hide_element():
+	visible = false
+
+func _update_unit(unit: Unit):
 	unit_name_label.text = unit.name
 	
 	current_hp_label.text = str(unit.hp)
@@ -17,7 +35,7 @@ func update_unit(unit: Unit):
 	
 	# TODO: UPDATE PORTRAIT
 
-func shift_corner(loc: Vector2i):
+func _shift_corner(loc: Vector2i):
 	if loc != Vector2i.UP && loc != Vector2i.DOWN:
 		push_error("Incorrect shift params for Unit Quick Info")
 	

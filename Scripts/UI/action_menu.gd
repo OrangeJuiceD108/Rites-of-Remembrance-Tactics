@@ -4,7 +4,25 @@ class_name Action_Menu extends VBoxContainer
 
 signal action_chosen(action: Constants.ActionFlags)
 
-func build(actions: int):
+func show_element(actions: int, cell: Vector2i):
+	var world_position = GameState.grid.get_loc_by_cell(cell)
+	
+	# FIXME: There needs to be some logic here to make the offset, 
+	#        in cases where its close to the edge of the screen
+	# FIXME: This should actually be in the menu class, so that it matches the rest
+	var menu_offset = Vector2(16, 0)
+	position = world_position + menu_offset
+	_build(actions)
+	# WARNING: TEMPORARY CURSOR SCREWING
+	%"Cursor".disable_cursor()
+	visible = true
+
+func hide_element():
+	# WARNING: TEMPORARY CURSOR SCREWING
+	%"Cursor".enable_cursor()
+	visible = false
+
+func _build(actions: int):
 	for child in get_children():
 		child.queue_free()
 	
