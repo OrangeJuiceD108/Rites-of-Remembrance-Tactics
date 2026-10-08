@@ -22,7 +22,9 @@
 [ext_resource type="PackedScene" uid="uid://craa7tm3puosj" path="res://Scenes/UI/action_menu_button.tscn" id="15_f856b"]
 [ext_resource type="Resource" uid="uid://tl4npjwa2e6g" path="res://Resources/Weapons/steel_sword.tres" id="16_ys5i7"]
 [ext_resource type="Script" uid="uid://bab8r7o5qekg3" path="res://Scripts/UI/inventory_menu.gd" id="18_kbww3"]
+[ext_resource type="Script" uid="uid://b0mq6vs26645a" path="res://Scripts/Managers/Turn Managers/turn_orchestrator.gd" id="19_7cjar"]
 [ext_resource type="PackedScene" uid="uid://dalvta44tdjlj" path="res://Scenes/UI/item_menu_button.tscn" id="19_vol83"]
+[ext_resource type="Script" uid="uid://v423lnsbhbq0" path="res://Scripts/Managers/Turn Managers/player_turn_controller.gd" id="20_ws7nl"]
 [ext_resource type="PackedScene" uid="uid://x5450tsh8xbp" path="res://Scenes/UI/unit_summary.tscn" id="23_ys5i7"]
 [ext_resource type="PackedScene" uid="uid://dl7an4nc2x3yj" path="res://Scenes/UI/unit_quick_info.tscn" id="25_ejyr1"]
 [ext_resource type="PackedScene" uid="uid://buyc1v4vfucll" path="res://Scenes/UI/battle_summary.tscn" id="26_ojquc"]
@@ -107,6 +109,12 @@ durability = 15
 
 [node name="Allied Unit Manager" type="Node" parent="Unit Manager" unique_id=118504483]
 script = ExtResource("12_xdap8")
+
+[node name="Turn Orchestrator" type="Node" parent="." unique_id=1352941330]
+script = ExtResource("19_7cjar")
+
+[node name="Player Turn Controller" type="Node" parent="Turn Orchestrator" unique_id=1974305009]
+script = ExtResource("20_ws7nl")
 
 [node name="UI Manager" type="Control" parent="." unique_id=2037411589]
 unique_name_in_owner = true

@@ -2,6 +2,7 @@ class_name Weapon extends Equipment
 
 @export var data : Weapon_Data
 
+# FIXME: UNEXPORT
 @export var durability : int
 
 func _ready():

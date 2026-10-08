@@ -4,9 +4,12 @@ var occupied_tiles : Array[Vector2i]:
 	get: 
 		return player_manager.occupied_tiles + enemy_manager.occupied_tiles + ally_manager.occupied_tiles
 
+# FIXME: REMOVE THESE REFERENCES
 @onready var enemy_manager : Enemy_Unit_Manager = $"Enemy Unit Manager"
 @onready var player_manager : Player_Unit_Manager = $"Player Unit Manager"
 @onready var ally_manager : Allied_Unit_Manger = $"Allied Unit Manager"
+
+var faction_managers : Dictionary[Faction, Faction_Manager]
 
 @onready var ui_manager : UI_Manager = %"UI Manager"
 @onready var cursor : Cursor = %"Cursor"
@@ -17,30 +20,30 @@ var state = State.IDLE
 var current_action = Constants.ActionFlags.NONE
 
 func _ready():
+	for child in get_children():
+		faction_managers[child.faction] = child
+	
+	# FIXME: REMOVE
 	cursor.cell_clicked.connect(_on_cell_clicked)
 	cursor.moved.connect(_on_cursor_moved)
 	ui_manager.action_chosen.connect(_on_action_chosen)
 	ui_manager.weapon_chosen.connect(_on_weapon_chosen)
 
+func get_unit_at_cell(cell: Vector2i):
+	for child in get_children():
+		var unit : Unit = child.get_unit_at_cell(cell)
+		if unit != null:
+			return unit
+	return null
+
+func get_units_of_faction(faction: Faction):
+	return faction_managers[faction].units
+
+# __________________________________________________________________________________________________________________________
+# FIXME: NOT UNIT MANAGER STUFF
+# __________________________________________________________________________________________________________________________
 func _on_cursor_moved(cell: Vector2i):
 	ui_manager.state.update_target_cell(cell)
-
-func get_unit_at_cell(cell: Vector2i):
-	if !occupied_tiles.has(cell):
-		return null
-	
-	var unit : Unit
-	
-	unit = enemy_manager.get_unit_at_cell(cell)
-	if unit:
-		return unit
-	
-	unit = player_manager.get_unit_at_cell(cell)
-	if unit:
-		return unit
-	
-	unit = ally_manager.get_unit_at_cell(cell)
-	return unit
 
 # TODO: Implement _on_cell_clicked
 func _on_cell_clicked(cell: Vector2i):
