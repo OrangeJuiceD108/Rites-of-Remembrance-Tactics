@@ -29,9 +29,7 @@ func change_state(new_state: UI_State.State, kwargs: Dictionary):
 	state.enter(kwargs)
 
 func _on_action_chosen(action: Constants.ActionFlags):
-	#hide_action_menu()
 	action_chosen.emit(action)
 
 func _on_weapon_chosen():
-	#hide_weapons_menu()
 	weapon_chosen.emit()
