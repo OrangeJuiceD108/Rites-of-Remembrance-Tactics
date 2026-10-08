@@ -1,11 +1,5 @@
 class_name UI_Manager extends Control
 
-@onready var action_menu : Action_Menu = $"Action Menu"
-@onready var inventory_menu : Inventory_Menu = $"Inventory Menu"
-@onready var unit_summary : Unit_Summary = $"Unit Summary"
-@onready var unit_quick_info : Unit_Quick_Info = $"Unit Quick Info"
-@onready var battle_summary : Battle_Summary = $"Battle Summary"
-
 signal action_chosen(action: Constants.ActionFlags)
 signal weapon_chosen()
 
@@ -20,8 +14,8 @@ func _ready():
 		states[child.state] = child
 	state = states[UI_State.State.IDLE]
 	
-	action_menu.action_chosen.connect(_on_action_chosen)
-	inventory_menu.weapon_chosen.connect(_on_weapon_chosen)
+	$"Action Menu".action_chosen.connect(_on_action_chosen)
+	$"Inventory Menu".weapon_chosen.connect(_on_weapon_chosen)
 
 func change_state(new_state: UI_State.State, kwargs: Dictionary):
 	state.exit()
