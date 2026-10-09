@@ -1,35 +1,24 @@
 class_name Unit_Manager extends Node
 
+var faction_managers : Dictionary[Faction, Faction_Manager]
 var occupied_tiles : Array[Vector2i]:
 	get: 
 		return player_manager.occupied_tiles + enemy_manager.occupied_tiles + ally_manager.occupied_tiles
-
-# FIXME: REMOVE THESE REFERENCES
-@onready var enemy_manager : Enemy_Unit_Manager = $"Enemy Unit Manager"
-@onready var player_manager : Player_Unit_Manager = $"Player Unit Manager"
-@onready var ally_manager : Allied_Unit_Manger = $"Allied Unit Manager"
-
-var faction_managers : Dictionary[Faction, Faction_Manager]
-
-@onready var ui_manager : UI_Manager = %"UI Manager"
-@onready var cursor : Cursor = %"Cursor"
-
-# TODO: I'll need more states at some point I'm sure
-enum State {IDLE, UNIT_SELECTED, UNIT_STAGED, ACTION_SELECTED} 
-var state = State.IDLE
-var current_action = Constants.ActionFlags.NONE
 
 func _ready():
 	for child in get_children():
 		faction_managers[child.faction] = child
 	
-	# FIXME: REMOVE
+	# FIXME: NOT UNIT MANAGER STUFF
 	cursor.cell_clicked.connect(_on_cell_clicked)
 	cursor.moved.connect(_on_cursor_moved)
 	ui_manager.action_chosen.connect(_on_action_chosen)
 	ui_manager.weapon_chosen.connect(_on_weapon_chosen)
 
-func get_unit_at_cell(cell: Vector2i):
+func get_unit_at_cell(cell: Vector2i, faction : Faction = null):
+	if faction != null:
+		return faction_managers[faction].get_unit_at_cell(cell)
+	
 	for child in get_children():
 		var unit : Unit = child.get_unit_at_cell(cell)
 		if unit != null:
@@ -42,6 +31,18 @@ func get_units_of_faction(faction: Faction):
 # __________________________________________________________________________________________________________________________
 # FIXME: NOT UNIT MANAGER STUFF
 # __________________________________________________________________________________________________________________________
+
+@onready var enemy_manager : Enemy_Unit_Manager = $"Enemy Unit Manager"
+@onready var player_manager : Player_Unit_Manager = $"Player Unit Manager"
+@onready var ally_manager : Allied_Unit_Manger = $"Allied Unit Manager"
+@onready var ui_manager : UI_Manager = %"UI Manager"
+@onready var cursor : Cursor = %"Cursor"
+
+# TODO: I'll need more states at some point I'm sure
+enum State {IDLE, UNIT_SELECTED, UNIT_STAGED, ACTION_SELECTED} 
+var state = State.IDLE
+var current_action = Constants.ActionFlags.NONE
+
 func _on_cursor_moved(cell: Vector2i):
 	ui_manager.state.update_target_cell(cell)
 

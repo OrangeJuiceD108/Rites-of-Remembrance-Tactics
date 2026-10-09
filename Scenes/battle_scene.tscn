@@ -25,8 +25,14 @@
 [ext_resource type="Script" uid="uid://b0mq6vs26645a" path="res://Scripts/Managers/Turn Managers/turn_orchestrator.gd" id="19_7cjar"]
 [ext_resource type="PackedScene" uid="uid://dalvta44tdjlj" path="res://Scenes/UI/item_menu_button.tscn" id="19_vol83"]
 [ext_resource type="Script" uid="uid://v423lnsbhbq0" path="res://Scripts/Managers/Turn Managers/player_turn_controller.gd" id="20_ws7nl"]
+[ext_resource type="Script" uid="uid://diltqi3twtgot" path="res://Scripts/Managers/States/Player Actions/attack.gd" id="21_ytpxr"]
+[ext_resource type="Script" uid="uid://cxdlvj8ygl7u8" path="res://Scripts/Managers/States/Player Actions/wait.gd" id="22_c4nf3"]
+[ext_resource type="Script" uid="uid://cwtdh83l3xc1u" path="res://Scripts/Managers/States/Player Turn States/player_idle.gd" id="23_e5k3s"]
 [ext_resource type="PackedScene" uid="uid://x5450tsh8xbp" path="res://Scenes/UI/unit_summary.tscn" id="23_ys5i7"]
+[ext_resource type="Script" uid="uid://ldsqrfangmum" path="res://Scripts/Managers/States/Player Turn States/player_unit_selected.gd" id="24_n0n13"]
 [ext_resource type="PackedScene" uid="uid://dl7an4nc2x3yj" path="res://Scenes/UI/unit_quick_info.tscn" id="25_ejyr1"]
+[ext_resource type="Script" uid="uid://chu5j5ditvitn" path="res://Scripts/Managers/States/Player Turn States/player_unit_staged.gd" id="25_nm4fv"]
+[ext_resource type="Script" uid="uid://rp7kusf4btyq" path="res://Scripts/Managers/States/Player Turn States/player_action_selected.gd" id="26_n1mwy"]
 [ext_resource type="PackedScene" uid="uid://buyc1v4vfucll" path="res://Scenes/UI/battle_summary.tscn" id="26_ojquc"]
 [ext_resource type="Script" uid="uid://dobnum318hu58" path="res://Scripts/UI/States/state_ui_idle.gd" id="27_qmv22"]
 [ext_resource type="Script" uid="uid://kr3x70tnkpgy" path="res://Scripts/UI/States/state_actions_menu.gd" id="28_7cjar"]
@@ -111,10 +117,33 @@ durability = 15
 script = ExtResource("12_xdap8")
 
 [node name="Turn Orchestrator" type="Node" parent="." unique_id=1352941330]
+unique_name_in_owner = true
 script = ExtResource("19_7cjar")
 
 [node name="Player Turn Controller" type="Node" parent="Turn Orchestrator" unique_id=1974305009]
 script = ExtResource("20_ws7nl")
+
+[node name="Actions" type="Node" parent="Turn Orchestrator/Player Turn Controller" unique_id=736428722]
+
+[node name="Attack" type="Node" parent="Turn Orchestrator/Player Turn Controller/Actions" unique_id=1839364836]
+script = ExtResource("21_ytpxr")
+
+[node name="Wait" type="Node" parent="Turn Orchestrator/Player Turn Controller/Actions" unique_id=2063302089]
+script = ExtResource("22_c4nf3")
+
+[node name="States" type="Node" parent="Turn Orchestrator/Player Turn Controller" unique_id=1644403914]
+
+[node name="Idle" type="Node" parent="Turn Orchestrator/Player Turn Controller/States" unique_id=1493256684]
+script = ExtResource("23_e5k3s")
+
+[node name="Unit Selected" type="Node" parent="Turn Orchestrator/Player Turn Controller/States" unique_id=529743375]
+script = ExtResource("24_n0n13")
+
+[node name="Unit Staged" type="Node" parent="Turn Orchestrator/Player Turn Controller/States" unique_id=406933659]
+script = ExtResource("25_nm4fv")
+
+[node name="Action Selected" type="Node" parent="Turn Orchestrator/Player Turn Controller/States" unique_id=1814679073]
+script = ExtResource("26_n1mwy")
 
 [node name="UI Manager" type="Control" parent="." unique_id=2037411589]
 unique_name_in_owner = true

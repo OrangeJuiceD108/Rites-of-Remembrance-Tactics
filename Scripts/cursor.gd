@@ -11,8 +11,8 @@ signal moved(cell: Vector2i)
 signal cell_clicked(cell: Vector2i)
 
 func _ready(): 
-	$"../Unit Manager/Player Unit Manager".unit_selected.connect(lock_cursor)
-	$"../Unit Manager/Player Unit Manager".unit_deselected.connect(unlock_cursor)
+	%"Turn Orchestrator/Player Turn Controller".unit_selected.connect(lock_cursor)
+	%"Turn Orchestrator/Player Turn Controller".unit_deselected.connect(unlock_cursor)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
