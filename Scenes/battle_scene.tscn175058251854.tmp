@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://bsf7g6w3rbamn" path="res://Scripts/Managers/Unit Managers/unit_manager.gd" id="3_anwxn"]
 [ext_resource type="Resource" uid="uid://tqmbpkncy0yn" path="res://Resources/test_map_data.tres" id="4_84vmf"]
 [ext_resource type="Script" uid="uid://c7lpbfbjq73wn" path="res://Scripts/Managers/Unit Managers/faction_manager.gd" id="6_7cjar"]
-[ext_resource type="Resource" uid="uid://dujab2jqw8ha1" path="res://Resources/Enemy Registries/test_enemy_registry.tres" id="6_lrrec"]
 [ext_resource type="Resource" uid="uid://rns6qqj7k4wg" path="res://Resources/Factions/test_player_faction.tres" id="7_ws7nl"]
 [ext_resource type="Texture2D" uid="uid://bjy5c0t0vjwbb" path="res://Assets/Sprites/moveSprite.png" id="8_84vmf"]
 [ext_resource type="Script" uid="uid://dinq04oenst3p" path="res://Scripts/Managers/ui_manager.gd" id="8_ed262"]
@@ -54,7 +53,6 @@ map_data = ExtResource("4_84vmf")
 [node name="Unit Manager" type="Node" parent="." unique_id=1941506250]
 unique_name_in_owner = true
 script = ExtResource("3_anwxn")
-enemy_registry = ExtResource("6_lrrec")
 
 [node name="Player Manager" type="Node" parent="Unit Manager" unique_id=1898777696]
 script = ExtResource("6_7cjar")
@@ -102,8 +100,8 @@ script = ExtResource("26_n1mwy")
 
 [node name="Tile Highlighter" type="Node" parent="Turn Orchestrator/Player Turn Controller" unique_id=593576916]
 script = ExtResource("21_juv4x")
-move_cell_sprite = ExtResource("8_84vmf")
-attack_cell_sprite = ExtResource("9_xdap8")
+move_cell_sprite = ExtResource("9_xdap8")
+attack_cell_sprite = ExtResource("8_84vmf")
 
 [node name="UI Manager" type="Control" parent="." unique_id=2037411589]
 unique_name_in_owner = true

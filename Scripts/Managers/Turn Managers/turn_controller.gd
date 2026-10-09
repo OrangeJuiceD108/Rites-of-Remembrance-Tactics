@@ -1,8 +1,12 @@
 @abstract
 class_name Turn_Controller extends Node
 
-@export var faction : Faction
+@export var faction : Faction:
+	set(value):
+		if value == null:
+			print_stack()
+			breakpoint
+		faction = value
 
-func _init():
-	if faction == null:
-		push_error("Factionless turn controller!")
+func _ready():
+	assert(faction != null, "Factionless turn controller!")

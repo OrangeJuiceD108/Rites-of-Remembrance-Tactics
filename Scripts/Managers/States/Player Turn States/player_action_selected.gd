@@ -1,13 +1,15 @@
 class_name Player_Action_Selected extends Player_Turn_State
 
+var selected_action : Action
+
 func _init():
 	state = State.ACTION_SELECTED
 
-func enter(_kwargs: Dictionary):
-	pass
+func enter(kwargs: Dictionary):
+	selected_action = kwargs["action"]
 
-func cell_clicked(_cell: Vector2i):
-	pass
+func cell_clicked(cell: Vector2i):
+	selected_action.confirm_cell(cell)
 
 func exit():
-	pass
+	selected_action = null

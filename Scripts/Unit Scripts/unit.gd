@@ -2,8 +2,10 @@
 class_name Unit extends Node2D
 
 var grid_position : Vector2i 
+var staged_location : Vector2i
 
 @export var unit_class : Unit_Class
+var faction : Faction
 
 var level : int
 var experience : int
@@ -30,17 +32,20 @@ func _ready():
 		move_speed = unit_class.base_speed
 	
 	hp = stats[Constants.Stat.HP]
-
-static func is_opposing_faction(unit_1: Unit, unit_2: Unit) -> bool:
-	if (unit_1 is Player_Unit or unit_1 is Allied_Unit) and unit_2 is Enemy_Unit:
-		return true
-	if unit_1 is Enemy_Unit and (unit_2 is Player_Unit or unit_2 is Allied_Unit):
-		return true
-	return false
+	staged_location = grid_position
 
 func change_position(cell: Vector2i):
 	position = GameState.grid.get_loc_by_cell(cell)
 	grid_position = cell
+
+func stage_move(cell: Vector2i):
+	staged_location = cell
+	var displacement = GameState.grid.get_loc_by_cell(cell) - position
+	sprite.position = displacement
+
+func confirm_move():
+	sprite.position = Vector2.ZERO
+	change_position(staged_location)
 
 # FIXME: Finish get_move_radius
 func get_move_radius() -> Array[Vector2i]:

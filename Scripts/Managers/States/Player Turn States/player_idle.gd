@@ -7,7 +7,7 @@ func enter(_kwargs: Dictionary):
 	controller.deselect_unit()
 
 func cell_clicked(cell: Vector2i):
-	var unit = %"Unit Manager".get_unit_at_cell(cell, player_faction)
+	var unit = %"Unit Manager".get_unit_at_cell(cell, faction)
 	if unit:
 		var kwargs = {"unit": unit}
 		controller.change_state(State.UNIT_SELECTED, kwargs)

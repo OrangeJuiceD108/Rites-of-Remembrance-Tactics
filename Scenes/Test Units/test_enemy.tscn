@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://co2j0l3ldtclf"]
+
+[ext_resource type="Script" uid="uid://cepelibd45615" path="res://Scripts/Unit Scripts/enemy_unit.gd" id="1_gvgw6"]
+[ext_resource type="Resource" uid="uid://dx0omlh4qlxqk" path="res://Resources/Classes/myrmidon.tres" id="2_qm6rs"]
+[ext_resource type="Texture2D" uid="uid://lm2chlv04p5v" path="res://Assets/Sprites/Free 1x.png" id="3_duv33"]
+[ext_resource type="Script" uid="uid://en0qmn8r5yr7" path="res://Scripts/Unit Scripts/Unit Components/inventory.gd" id="4_g2r8g"]
+[ext_resource type="PackedScene" uid="uid://dcxilpqhrids6" path="res://Scenes/Equipment/weapon.tscn" id="5_aeex8"]
+[ext_resource type="Resource" uid="uid://53w3gasr7cf0" path="res://Resources/Weapons/iron_sword.tres" id="6_tmnii"]
+
+[node name="Test Enemy" type="Node2D" unique_id=1804764990]
+script = ExtResource("1_gvgw6")
+unit_class = ExtResource("2_qm6rs")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1002649099]
+z_index = 2
+texture_filter = 1
+texture = ExtResource("3_duv33")
+region_enabled = true
+region_rect = Rect2(20, 0, 16, 16)
+
+[node name="Inventory" type="Node" parent="." unique_id=373546836 node_paths=PackedStringArray("equipped_weapon")]
+script = ExtResource("4_g2r8g")
+equipped_weapon = NodePath("Weapon")
+
+[node name="Weapon" parent="Inventory" unique_id=1010368996 instance=ExtResource("5_aeex8")]
+data = ExtResource("6_tmnii")

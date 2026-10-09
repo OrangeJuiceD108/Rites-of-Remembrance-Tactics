@@ -22,8 +22,5 @@ func cell_clicked(cell: Vector2i):
 func exit():
 	pass
 
-func _empty_cell_clicked(cell: Vector2i):
-	pass
-
 func _occupied_cell_clicked(cell: Vector2i):
 	push_error("Unimplemented")

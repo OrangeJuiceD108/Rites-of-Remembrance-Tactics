@@ -14,12 +14,10 @@ func _ready():
 	for child in get_children():
 		if child is Unit:
 			units.append(child)
+			child.faction = faction
 
 func get_unit_at_cell(cell: Vector2i):
 	for unit in units:
 		if unit.grid_position == cell:
 			return unit
 	return null
-
-# TODO: Stage unit function
-# TODO: Confirm move function
