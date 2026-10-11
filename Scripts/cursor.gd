@@ -11,8 +11,8 @@ signal moved(cell: Vector2i)
 signal cell_clicked(cell: Vector2i)
 
 func _ready(): 
-	%"Turn Orchestrator/Player Turn Controller".unit_selected.connect(lock_cursor)
-	%"Turn Orchestrator/Player Turn Controller".unit_deselected.connect(unlock_cursor)
+	%"Turn Orchestrator/Player Turn Controller".unit_selected.connect(lock)
+	%"Turn Orchestrator/Player Turn Controller".unit_deselected.connect(unlock)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -37,10 +37,10 @@ func _set_cursor_position(new_position: Vector2):
 	cursor_position = GameState.grid.snap_to_cell(cursor_cell)
 	position = cursor_position
 
-func lock_cursor(targeting_tiles: Array[Vector2i]):
+func lock(targeting_tiles: Array[Vector2i]):
 	selectable_tiles = targeting_tiles
 
-func unlock_cursor():
+func unlock():
 	selectable_tiles.clear()
 
 func disable_cursor():

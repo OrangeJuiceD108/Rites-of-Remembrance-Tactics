@@ -7,7 +7,7 @@ var occupied_tiles : Array[Vector2i]:
 	get: 
 		var tiles : Array[Vector2i]
 		for manager in faction_managers.values():
-			tiles.append(manager.occupied_tiles)
+			tiles.append_array(manager.occupied_tiles)
 		return tiles
 
 func _ready():

@@ -5,6 +5,7 @@ var states : Dictionary[Player_Turn_State.State, Player_Turn_State]
 var current_state : Player_Turn_State
 
 var selected_unit : Unit
+var selected_action : Action
 
 var move_cells : Array[Vector2i]
 var attack_cells : Array[Vector2i]

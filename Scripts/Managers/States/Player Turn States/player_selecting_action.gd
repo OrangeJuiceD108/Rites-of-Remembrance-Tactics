@@ -1,7 +1,7 @@
-class_name Player_Unit_Staged extends Player_Turn_State
+class_name Player_Selecting_Action extends Player_Turn_State
 
 func _init():
-	state = State.UNIT_STAGED
+	state = State.SELECTING_ACTION
 
 func enter(kwargs: Dictionary):
 	var cell : Vector2i = kwargs["cell"]

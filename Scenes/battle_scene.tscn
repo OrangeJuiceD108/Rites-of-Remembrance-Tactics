@@ -25,10 +25,10 @@
 [ext_resource type="Script" uid="uid://cxdlvj8ygl7u8" path="res://Scripts/Managers/States/Player Actions/wait.gd" id="22_c4nf3"]
 [ext_resource type="Script" uid="uid://cwtdh83l3xc1u" path="res://Scripts/Managers/States/Player Turn States/player_idle.gd" id="23_e5k3s"]
 [ext_resource type="PackedScene" uid="uid://x5450tsh8xbp" path="res://Scenes/UI/unit_summary.tscn" id="23_ys5i7"]
-[ext_resource type="Script" uid="uid://ldsqrfangmum" path="res://Scripts/Managers/States/Player Turn States/player_unit_selected.gd" id="24_n0n13"]
+[ext_resource type="Script" uid="uid://ldsqrfangmum" path="res://Scripts/Managers/States/Player Turn States/player_selecting_destination.gd" id="24_n0n13"]
 [ext_resource type="PackedScene" uid="uid://dl7an4nc2x3yj" path="res://Scenes/UI/unit_quick_info.tscn" id="25_ejyr1"]
-[ext_resource type="Script" uid="uid://chu5j5ditvitn" path="res://Scripts/Managers/States/Player Turn States/player_unit_staged.gd" id="25_nm4fv"]
-[ext_resource type="Script" uid="uid://rp7kusf4btyq" path="res://Scripts/Managers/States/Player Turn States/player_action_selected.gd" id="26_n1mwy"]
+[ext_resource type="Script" uid="uid://chu5j5ditvitn" path="res://Scripts/Managers/States/Player Turn States/player_selecting_action.gd" id="25_nm4fv"]
+[ext_resource type="Script" uid="uid://rp7kusf4btyq" path="res://Scripts/Managers/States/Player Turn States/player_targeting.gd" id="26_n1mwy"]
 [ext_resource type="PackedScene" uid="uid://buyc1v4vfucll" path="res://Scenes/UI/battle_summary.tscn" id="26_ojquc"]
 [ext_resource type="Script" uid="uid://dobnum318hu58" path="res://Scripts/UI/States/state_ui_idle.gd" id="27_qmv22"]
 [ext_resource type="Script" uid="uid://kr3x70tnkpgy" path="res://Scripts/UI/States/state_actions_menu.gd" id="28_7cjar"]
@@ -91,13 +91,13 @@ script = ExtResource("22_c4nf3")
 [node name="Idle" type="Node" parent="Turn Orchestrator/Player Turn Controller/States" unique_id=1493256684]
 script = ExtResource("23_e5k3s")
 
-[node name="Unit Selected" type="Node" parent="Turn Orchestrator/Player Turn Controller/States" unique_id=529743375]
+[node name="Selecting Destination" type="Node" parent="Turn Orchestrator/Player Turn Controller/States" unique_id=529743375]
 script = ExtResource("24_n0n13")
 
-[node name="Unit Staged" type="Node" parent="Turn Orchestrator/Player Turn Controller/States" unique_id=406933659]
+[node name="Selecting Action" type="Node" parent="Turn Orchestrator/Player Turn Controller/States" unique_id=406933659]
 script = ExtResource("25_nm4fv")
 
-[node name="Action Selected" type="Node" parent="Turn Orchestrator/Player Turn Controller/States" unique_id=1814679073]
+[node name="Targeting" type="Node" parent="Turn Orchestrator/Player Turn Controller/States" unique_id=1814679073]
 script = ExtResource("26_n1mwy")
 
 [node name="Tile Highlighter" type="Node" parent="Turn Orchestrator/Player Turn Controller" unique_id=593576916]
