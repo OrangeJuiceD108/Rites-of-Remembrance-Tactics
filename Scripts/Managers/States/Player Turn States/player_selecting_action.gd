@@ -14,6 +14,7 @@ func enter(kwargs: Dictionary):
 		var action = controller.actions[action_type]
 		if action.is_available():
 			available_actions.append(action)
+	
 	var new_kwargs = {
 		"actions": available_actions,
 		"cell": cell

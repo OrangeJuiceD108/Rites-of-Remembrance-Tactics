@@ -11,7 +11,8 @@ class_name Unit_Class extends Resource
 enum Tag {ARMORED, BEAST, DRAGON, MONSTER, UNARMORED}
 @export var tags : Array[Tag]
 
-@export var skills : Array[Skill]
+# TODO: FIX THIS
+#@export var skills : Array[Skill]
 
 @export var base_speed : int
 

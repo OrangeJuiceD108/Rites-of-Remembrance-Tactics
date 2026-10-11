@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://d2piqkn7vx0rh"]
+
+[ext_resource type="Script" uid="uid://c7mse6ee16qje" path="res://Scripts/Items/item.gd" id="1_xycr1"]
+[ext_resource type="Script" uid="uid://dyj4ckai36ytt" path="res://Scripts/Items/weapon_component.gd" id="2_bvx1c"]
+
+[node name="Steel Sword" type="Node" unique_id=1095608502]
+script = ExtResource("1_xycr1")
+item_name = "Steel Sword"
+breakable = true
+max_durability = 30
+cost = 600
+
+[node name="Weapon Component" type="Node" parent="." unique_id=726119879]
+script = ExtResource("2_bvx1c")
+type = 8
+weapon_rank = 1
+attack_range = Vector2i(1, 1)
+weight = 10
+might = 8
+hit_rate = 75
+weapon_experience = 1
+physical = true

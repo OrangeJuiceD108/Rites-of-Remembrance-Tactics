@@ -36,7 +36,7 @@ func _update_preview(player: Unit, enemy: Unit):
 	
 	enemy_unit_name.text = enemy.name
 	_update_stats(enemy_stats, preview.defender_sheet, preview.defender_attack)
-	enemy_weapon.text = preview.defender_sheet.weapon.data.name
+	enemy_weapon.text = preview.defender_sheet.weapon.item_name
 	# TODO: Assign weapon image
 
 func _update_stats(stats: VBoxContainer, sheet: Battle_Sheet, attack: Attack_Data):

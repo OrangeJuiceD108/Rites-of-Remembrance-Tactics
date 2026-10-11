@@ -17,9 +17,8 @@
 [ext_resource type="Script" uid="uid://ccqujefrpmg43" path="res://Scripts/Unit Scripts/unit.gd" id="10_n0n13"]
 [ext_resource type="Script" uid="uid://en0qmn8r5yr7" path="res://Scripts/Unit Scripts/Unit Components/inventory.gd" id="11_e5k3s"]
 [ext_resource type="Resource" uid="uid://dx0omlh4qlxqk" path="res://Resources/Classes/myrmidon.tres" id="11_nm4fv"]
-[ext_resource type="PackedScene" uid="uid://dcxilpqhrids6" path="res://Scenes/Equipment/weapon.tscn" id="12_n0n13"]
-[ext_resource type="Resource" uid="uid://53w3gasr7cf0" path="res://Resources/Weapons/iron_sword.tres" id="13_nm4fv"]
-[ext_resource type="Resource" uid="uid://tl4npjwa2e6g" path="res://Resources/Weapons/steel_sword.tres" id="14_n1mwy"]
+[ext_resource type="PackedScene" uid="uid://nvg5cen8y3a1" path="res://Scenes/Items/Weapons/iron_sword.tscn" id="13_c4nf3"]
+[ext_resource type="PackedScene" uid="uid://d2piqkn7vx0rh" path="res://Scenes/Items/Weapons/steel_sword.tscn" id="14_e5k3s"]
 [ext_resource type="PackedScene" uid="uid://craa7tm3puosj" path="res://Scenes/UI/action_menu_button.tscn" id="15_f856b"]
 [ext_resource type="Script" uid="uid://bab8r7o5qekg3" path="res://Scripts/UI/inventory_menu.gd" id="18_kbww3"]
 [ext_resource type="Script" uid="uid://b0mq6vs26645a" path="res://Scripts/Managers/Turn Managers/turn_orchestrator.gd" id="19_7cjar"]
@@ -30,6 +29,7 @@
 [ext_resource type="Script" uid="uid://cxdlvj8ygl7u8" path="res://Scripts/Managers/States/Player Actions/wait.gd" id="22_c4nf3"]
 [ext_resource type="Script" uid="uid://cwtdh83l3xc1u" path="res://Scripts/Managers/States/Player Turn States/player_idle.gd" id="23_e5k3s"]
 [ext_resource type="PackedScene" uid="uid://x5450tsh8xbp" path="res://Scenes/UI/unit_summary.tscn" id="23_ys5i7"]
+[ext_resource type="Script" uid="uid://i3jq0j7yyoh1" path="res://Scripts/Managers/States/Player Turn States/player_selecting_item.gd" id="24_e5k3s"]
 [ext_resource type="Script" uid="uid://ldsqrfangmum" path="res://Scripts/Managers/States/Player Turn States/player_selecting_destination.gd" id="24_n0n13"]
 [ext_resource type="PackedScene" uid="uid://dl7an4nc2x3yj" path="res://Scenes/UI/unit_quick_info.tscn" id="25_ejyr1"]
 [ext_resource type="Script" uid="uid://chu5j5ditvitn" path="res://Scripts/Managers/States/Player Turn States/player_selecting_action.gd" id="25_nm4fv"]
@@ -37,7 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://buyc1v4vfucll" path="res://Scenes/UI/battle_summary.tscn" id="26_ojquc"]
 [ext_resource type="Script" uid="uid://dobnum318hu58" path="res://Scripts/UI/States/state_ui_idle.gd" id="27_qmv22"]
 [ext_resource type="Script" uid="uid://kr3x70tnkpgy" path="res://Scripts/UI/States/state_actions_menu.gd" id="28_7cjar"]
-[ext_resource type="Script" uid="uid://b678bq3oetcdc" path="res://Scripts/UI/States/state_weapons_menu.gd" id="29_ws7nl"]
+[ext_resource type="Script" uid="uid://b678bq3oetcdc" path="res://Scripts/UI/States/state_inventory_menu.gd" id="29_ws7nl"]
 [ext_resource type="Script" uid="uid://bnbrmgh2mlio8" path="res://Scripts/UI/States/state_battle_preview.gd" id="30_juv4x"]
 
 [node name="BattleScene" type="Node2D" unique_id=1232431842]
@@ -79,17 +79,14 @@ region_rect = Rect2(0, 0, 16, 16)
 
 [node name="Inventory" type="Node" parent="Unit Manager/Player Manager/Test Player" unique_id=1454576629 node_paths=PackedStringArray("equipped_weapon")]
 script = ExtResource("11_e5k3s")
-equipped_weapon = NodePath("Weapon")
+equipped_weapon = NodePath("Iron Sword")
 
-[node name="Weapon" parent="Unit Manager/Player Manager/Test Player/Inventory" unique_id=277838901 instance=ExtResource("12_n0n13")]
-data = ExtResource("13_nm4fv")
+[node name="Iron Sword" parent="Unit Manager/Player Manager/Test Player/Inventory" unique_id=1560134746 instance=ExtResource("13_c4nf3")]
 
-[node name="Weapon2" parent="Unit Manager/Player Manager/Test Player/Inventory" unique_id=1738461762 instance=ExtResource("12_n0n13")]
-data = ExtResource("14_n1mwy")
-
-[node name="Weapon3" parent="Unit Manager/Player Manager/Test Player/Inventory" unique_id=1304993966 instance=ExtResource("12_n0n13")]
-data = ExtResource("13_nm4fv")
+[node name="Iron Sword2" parent="Unit Manager/Player Manager/Test Player/Inventory" unique_id=1525167348 instance=ExtResource("13_c4nf3")]
 durability = 15
+
+[node name="Steel Sword" parent="Unit Manager/Player Manager/Test Player/Inventory" unique_id=1095608502 instance=ExtResource("14_e5k3s")]
 
 [node name="Enemy Manager" type="Node" parent="Unit Manager" unique_id=1150292512]
 script = ExtResource("6_7cjar")
@@ -102,10 +99,9 @@ unit_class = ExtResource("11_nm4fv")
 
 [node name="Inventory" type="Node" parent="Unit Manager/Enemy Manager/Test Enemy" unique_id=1606027133 node_paths=PackedStringArray("equipped_weapon")]
 script = ExtResource("11_e5k3s")
-equipped_weapon = NodePath("Weapon")
+equipped_weapon = NodePath("Iron Sword")
 
-[node name="Weapon" parent="Unit Manager/Enemy Manager/Test Enemy/Inventory" unique_id=1754859235 instance=ExtResource("12_n0n13")]
-data = ExtResource("13_nm4fv")
+[node name="Iron Sword" parent="Unit Manager/Enemy Manager/Test Enemy/Inventory" unique_id=468778253 instance=ExtResource("13_c4nf3")]
 
 [node name="Sprite2D" type="Sprite2D" parent="Unit Manager/Enemy Manager/Test Enemy" unique_id=883424504]
 z_index = 2
@@ -140,6 +136,9 @@ script = ExtResource("24_n0n13")
 
 [node name="Selecting Action" type="Node" parent="Turn Orchestrator/Player Turn Controller/States" unique_id=406933659]
 script = ExtResource("25_nm4fv")
+
+[node name="Selecting Item" type="Node" parent="Turn Orchestrator/Player Turn Controller/States" unique_id=128849019]
+script = ExtResource("24_e5k3s")
 
 [node name="Targeting" type="Node" parent="Turn Orchestrator/Player Turn Controller/States" unique_id=1814679073]
 script = ExtResource("26_n1mwy")
@@ -205,7 +204,7 @@ script = ExtResource("27_qmv22")
 [node name="State_Actions_Menu" type="Node" parent="UI Manager/States" unique_id=772516386]
 script = ExtResource("28_7cjar")
 
-[node name="State_Weapons_Menu" type="Node" parent="UI Manager/States" unique_id=1437525090]
+[node name="State_Inventory_Menu" type="Node" parent="UI Manager/States" unique_id=1437525090]
 script = ExtResource("29_ws7nl")
 
 [node name="State_Battle_Preview" type="Node" parent="UI Manager/States" unique_id=763926209]

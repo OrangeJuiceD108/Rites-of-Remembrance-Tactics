@@ -16,7 +16,7 @@ func _init(a: Unit_Readout, d: Unit_Readout, cr: int, hr: int, dmg: int):
 static func generate(atk: Battle_Sheet, def: Battle_Sheet):
 	var cr = atk.crit_rate - def.crit_rate
 	var accuracy = atk.accuracy - def.avoid
-	var dmg = atk.attack - (def.defense if atk.weapon.data.physical else def.resistance)
+	var dmg = atk.attack - (def.defense if atk.weapon.get_component(Weapon_Component).physical else def.resistance)
 	
 	return Attack_Data.new(atk.unit, def.unit, cr, accuracy, dmg)
 

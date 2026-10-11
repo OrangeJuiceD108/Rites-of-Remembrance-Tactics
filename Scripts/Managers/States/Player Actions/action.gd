@@ -10,16 +10,19 @@ var controller : Player_Turn_Controller
 @abstract
 func is_available() -> bool
 
-func get_targetable_cells():
-	pass
-
 func action_selected():
 	pass
 
 func on_targeting():
 	pass
 
+func get_targetable_cells():
+	pass
+
 func confirm_cell(_cell: Vector2i):
+	pass
+
+func backtrack():
 	pass
 
 func cancel():

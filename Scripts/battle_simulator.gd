@@ -79,7 +79,7 @@ static func _generate_reports(attacks: Array[Attack_Result]):
 		
 		reports[defender].damage += i.damage
 		
-		reports[attacker].weapon_experience += attacker.weapon.data.weapon_experience
+		reports[attacker].weapon_experience += attacker.weapon.get_component(Weapon_Component).weapon_experience
 		var damage_xp = (31 + effective_level[defender] - effective_level[attacker] + defender.unit_class.experience_bonus_damage - attacker.unit_class.experience_bonus_damage) / attacker.unit_class.class_power
 		
 		reports[attacker].experience += damage_xp

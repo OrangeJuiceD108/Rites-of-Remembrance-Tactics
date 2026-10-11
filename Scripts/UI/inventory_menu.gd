@@ -2,7 +2,8 @@ class_name Inventory_Menu extends VBoxContainer
 
 @export var button_scene : PackedScene
 
-signal weapon_chosen()
+signal item_chosen(item: Item, inventory: Inventory)
+signal item_hovered(item: Item, inventory: Inventory)
 
 func _ready():
 	var anchors = Constants.get_anchors_for_corner(self, Vector2i.UP + Vector2i.LEFT)
@@ -11,46 +12,29 @@ func _ready():
 	anchor_left = anchors[Vector2i.LEFT]
 	anchor_right = anchors[Vector2i.RIGHT]
 
-func show_element(unit: Unit, weapons_only: bool):
-	if weapons_only: 
-		_build_attack(unit.inventory)
-	else:
-		# TODO: FILL
-		pass
+func show_element(items: Array[Item], inventory: Inventory):
+	for child in get_children():
+		child.queue_free()
+	
+	for item in items:
+		_add_item_button(item, inventory)
+	
 	# WARNING: CURSOR SCREWING TEMPORARY
 	%"Cursor".disable_cursor()
 	visible = true
+
+func _add_item_button(item: Item, inventory: Inventory):
+	var button = button_scene.instantiate()
+	button.get_node("Name").text = item.item_name
+	if item.breakable:
+		button.get_node("Durability").text = str(item.durability)
+	else:
+		button.get_node("Durability").text = ""
+	button.pressed.connect(func(): item_chosen.emit(item, inventory))
+	button.mouse_entered.connect(func(): item_hovered.emit(item, inventory))
+	add_child(button)
 
 func hide_element():
 	# WARNING: CURSOR SCREWING TEMPORARY
 	%"Cursor".enable_cursor()
 	visible = false
-
-func _build_attack(inventory: Inventory):
-	for child in get_children():
-		child.queue_free()
-	
-	for weapon in inventory.get_weapons():
-		_add_weapon_button(weapon, inventory)
-
-func _add_weapon_button(weapon: Weapon, inventory: Inventory):
-	var button = button_scene.instantiate()
-	button.get_node("Name").text = weapon.data.name
-	button.get_node("Durability").text = str(weapon.durability)
-	button.pressed.connect(_weapon_clicked.bind(weapon, inventory))
-	button.mouse_entered.connect(_weapon_hovered.bind(weapon, inventory))
-	add_child(button)
-
-func _weapon_clicked(weapon: Weapon, inventory: Inventory):
-	inventory.equip(weapon)
-	weapon_chosen.emit()
-
-func _weapon_hovered(weapon: Weapon, inventory: Inventory):
-	inventory.equip(weapon)
-	$"../Unit Summary".populate_summary()
-
-func build_item():
-	for child in get_children():
-		child.queue_free()
-	
-	# TODO: Complete items menu

@@ -1,7 +1,7 @@
 @abstract
 class_name Player_Turn_State extends Node
 
-enum State {IDLE, SELECTING_DESTINATION, SELECTING_ACTION, TARGETING} 
+enum State {IDLE, SELECTING_DESTINATION, SELECTING_ACTION, SELECTING_ITEM, TARGETING} 
 var state : State
 
 var faction : Faction

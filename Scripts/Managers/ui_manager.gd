@@ -1,6 +1,7 @@
 class_name UI_Manager extends Control
 
-signal weapon_chosen()
+signal item_chosen(item: Item, inventory: Inventory)
+signal item_hovered(item: Item, inventory: Inventory)
 
 var state : UI_State
 var states : Dictionary[UI_State.State, UI_State]
@@ -13,12 +14,16 @@ func _ready():
 		states[child.state] = child
 	state = states[UI_State.State.IDLE]
 	
-	$"Inventory Menu".weapon_chosen.connect(_on_weapon_chosen)
+	$"Inventory Menu".item_chosen.connect(_on_item_chosen)
+	$"Inventory Menu".item_hovered.connect(_on_item_hovered)
 
 func change_state(new_state: UI_State.State, kwargs: Dictionary):
 	state.exit()
 	state = states[new_state]
 	state.enter(kwargs)
 
-func _on_weapon_chosen():
-	weapon_chosen.emit()
+func _on_item_chosen(item: Item, inventory: Inventory):
+	item_chosen.emit(item, inventory)
+
+func _on_item_hovered(item: Item, inventory: Inventory):
+	item_hovered.emit(item, inventory)

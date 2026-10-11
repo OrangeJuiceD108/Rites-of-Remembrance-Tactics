@@ -2,7 +2,7 @@
 class_name UI_State extends Node
 
 var state : State
-enum State {IDLE, ACTIONS_MENU, WEAPONS_MENU, BATTLE_PREVIEW}
+enum State {IDLE, ACTIONS_MENU, INVENTORY_MENU, BATTLE_PREVIEW}
 
 func enter(_kwargs: Dictionary):
 	pass

@@ -1,4 +1,4 @@
-class_name Weapon_Data extends Equipment_Data
+class_name Weapon_Component extends Node
 
 # TODO: Enforce property setting, so errors like missing weapon type don't occur
 # TODO: Weapon image
@@ -27,13 +27,9 @@ enum WeaponRank {
 
 @export var weapon_experience : int
 
-@export var base_durability : int
-
 # If signature weapon of a specific unit, this stores the name; otherwise null
 @export var signature_unit : String 
 
 @export var physical : bool
 
 @export var reaver : bool
-
-@export var skills : Array[Skill]

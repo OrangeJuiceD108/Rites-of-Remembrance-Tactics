@@ -3,7 +3,7 @@ class_name Unit_Readout extends Node
 var unit_class : Unit_Class
 var level : int
 
-var weapon : Weapon
+var weapon : Item
 
 # Base states
 var hp : int

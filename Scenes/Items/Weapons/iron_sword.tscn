@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://nvg5cen8y3a1"]
+
+[ext_resource type="Script" uid="uid://c7mse6ee16qje" path="res://Scripts/Items/item.gd" id="1_eqfip"]
+[ext_resource type="Script" uid="uid://dyj4ckai36ytt" path="res://Scripts/Items/weapon_component.gd" id="2_0j08p"]
+
+[node name="Iron Sword" type="Node" unique_id=1560134746]
+script = ExtResource("1_eqfip")
+item_name = "Iron Sword"
+breakable = true
+max_durability = 46
+cost = 460
+
+[node name="Weapon Component" type="Node" parent="." unique_id=1636159636]
+script = ExtResource("2_0j08p")
+type = 8
+attack_range = Vector2i(1, 1)
+weight = 5
+might = 5
+hit_rate = 90
+weapon_experience = 1
+physical = true

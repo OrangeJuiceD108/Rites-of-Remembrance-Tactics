@@ -9,7 +9,7 @@ var faction : Faction
 var level : int
 var experience : int
 
-var weapon_rank : Weapon_Data.WeaponRank
+var weapon_rank : Weapon_Component.WeaponRank
 var weapon_experience : int
 
 var hp : int

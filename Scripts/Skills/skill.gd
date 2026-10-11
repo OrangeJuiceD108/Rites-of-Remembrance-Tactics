@@ -1,25 +1,25 @@
 @abstract
-class_name Skill extends Resource
+class_name Skill extends Node
 
-var name : String
+var skill_name : String
 
 enum CallSignal {EQUIP, BATTLE_STARTED, ATTACK_CALCULATING, ATTACK_SEQUENCING, ATTACK_LANDED, BATTLE_ENDED}
 var call_signals : Array[CallSignal]
 
-enum SkillSource {NONE, UNIT, ITEM, WEAPON}
+enum SkillSource {NONE, UNIT, ITEM}
 var skill_source : SkillSource = SkillSource.NONE
 
-# FIXME: Wrong data types
-var attached_item : Item_Data
-var attached_weapon : Weapon
-var attached_unit : Unit
+var connected_unit : Unit
 
 func _init():
 	assert(name != "", get_script().get_global_name() + " has not set name!")
 	assert(skill_source != SkillSource.NONE, get_script().get_global_name() + " has not set skill_source!")
 
 @abstract
-func on_equip(unit: Unit, weapon: Weapon)
+func equip(unit: Unit)
+
+@abstract
+func on_equip(unit: Unit, item: Item)
 
 @abstract
 func on_battle_started(attacker_readout: Unit_Readout, defender_readout: Unit_Readout)

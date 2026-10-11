@@ -4,6 +4,7 @@ func _init():
 	state = State.SELECTING_DESTINATION
 
 func enter(kwargs: Dictionary):
+	%"UI Manager".change_state(UI_State.State.IDLE, {}) #redundant?
 	var unit : Unit = kwargs["unit"]
 	controller.select_unit(unit)
 

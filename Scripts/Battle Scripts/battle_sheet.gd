@@ -5,7 +5,7 @@ var unit : Unit_Readout
 # Speed of attacker
 var attack_speed : int:
 	get:
-		var restrictive_weight = weapon.data.weight - unit.constitution
+		var restrictive_weight = weapon.get_component(Weapon_Component).weight - unit.constitution
 		if restrictive_weight < 0:
 			restrictive_weight = 0
 		return unit.stats[Constants.Stat.SPD] - restrictive_weight + attack_speed_mod
@@ -13,8 +13,9 @@ var attack_speed_mod : int
 
 var attack : int:
 	get:
-		var atk := (weapon.data.might + advantage) + effective_bonus + attack_mod
-		if weapon.data.physical:
+		var weapon_component = weapon.get_component(Weapon_Component)
+		var atk = (weapon_component.might + advantage) + effective_bonus + attack_mod
+		if weapon_component.physical:
 			atk += unit.stats[Constants.Stat.STR]
 		else:
 			atk += unit.stats[Constants.Stat.MAG]
@@ -24,16 +25,16 @@ var attack_mod : int
 var accuracy : int:
 	get:
 		@warning_ignore("integer_division")
-		return weapon.data.hit_rate + (unit.stats[Constants.Stat.SKL] * 2) + (unit.stats[Constants.Stat.LCK] / 2) + (advantage * 15) + accuracy_mod
+		return weapon.get_component(Weapon_Component).hit_rate + (unit.stats[Constants.Stat.SKL] * 2) + (unit.stats[Constants.Stat.LCK] / 2) + (advantage * 15) + accuracy_mod
 var accuracy_mod : int
 
 var crit_rate : int:
 	get:
 		@warning_ignore("integer_division")
-		return weapon.data.crit_rate + (unit.stats[Constants.Stat.SKL] / 2) + crit_rate_mod
+		return weapon.get_component(Weapon_Component).crit_rate + (unit.stats[Constants.Stat.SKL] / 2) + crit_rate_mod
 var crit_rate_mod : int
 
-var weapon : Weapon
+var weapon : Item
 
 enum Advantage {
 	ADVANTAGE = 1,
@@ -70,16 +71,18 @@ func _init(unit_readout: Unit_Readout, enemy_readout: Unit_Readout):
 	weapon = unit.weapon
 	var enemy_weapon = enemy_readout.weapon
 	
-	if weapon_advantage(weapon.data, enemy_weapon.data):
+	if weapon_advantage(weapon, enemy_weapon):
 		advantage = Advantage.ADVANTAGE
-	elif weapon_advantage(enemy_weapon.data, weapon.data):
+	elif weapon_advantage(enemy_weapon, weapon):
 		advantage = Advantage.DISADVANTAGE
 	else: 
 		advantage = Advantage.NEUTRAL
 	
 	effective_bonus = 1
 
-static func weapon_advantage(weapon_one: Weapon_Data, weapon_two: Weapon_Data):
+static func weapon_advantage(one: Item, two: Item):
+	var weapon_one = one.get_component(Weapon_Component)
+	var weapon_two = two.get_component(Weapon_Component)
 	if not weapon_one.reaver and not weapon_two.reaver and Constants.WeaponAdvantage[weapon_one.type] == weapon_two.type:
 		return true
 	if weapon_one.reaver and weapon_two.reaver and Constants.WeaponAdvantage[weapon_one.type] == weapon_two.type:

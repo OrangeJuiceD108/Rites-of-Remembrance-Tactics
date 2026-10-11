@@ -1,7 +1,7 @@
 extends Node
 
 @warning_ignore("unused_signal")
-signal on_equip(unit: Unit, weapon: Weapon)
+signal on_equip(unit: Unit, item: Item)
 
 @warning_ignore("unused_signal")
 signal on_battle_started(attacker_readout: Unit_Readout, defender_readout: Unit_Readout)
