@@ -13,8 +13,13 @@
 [ext_resource type="Resource" uid="uid://cfgmlxwqsgsyy" path="res://Resources/Factions/test_enemy_faction.tres" id="8_juv4x"]
 [ext_resource type="Script" uid="uid://dts8a2ge86ooj" path="res://Scripts/UI/action_menu.gd" id="9_ms847"]
 [ext_resource type="Texture2D" uid="uid://d26qirm76x0xs" path="res://Assets/Sprites/attackSprite.png" id="9_xdap8"]
-[ext_resource type="PackedScene" uid="uid://co2j0l3ldtclf" path="res://Scenes/Test Units/test_enemy.tscn" id="10_juv4x"]
-[ext_resource type="PackedScene" uid="uid://cj70pgbgci72k" path="res://Scenes/Test Units/test_player.tscn" id="11_juv4x"]
+[ext_resource type="Texture2D" uid="uid://lm2chlv04p5v" path="res://Assets/Sprites/Free 1x.png" id="10_c4nf3"]
+[ext_resource type="Script" uid="uid://ccqujefrpmg43" path="res://Scripts/Unit Scripts/unit.gd" id="10_n0n13"]
+[ext_resource type="Script" uid="uid://en0qmn8r5yr7" path="res://Scripts/Unit Scripts/Unit Components/inventory.gd" id="11_e5k3s"]
+[ext_resource type="Resource" uid="uid://dx0omlh4qlxqk" path="res://Resources/Classes/myrmidon.tres" id="11_nm4fv"]
+[ext_resource type="PackedScene" uid="uid://dcxilpqhrids6" path="res://Scenes/Equipment/weapon.tscn" id="12_n0n13"]
+[ext_resource type="Resource" uid="uid://53w3gasr7cf0" path="res://Resources/Weapons/iron_sword.tres" id="13_nm4fv"]
+[ext_resource type="Resource" uid="uid://tl4npjwa2e6g" path="res://Resources/Weapons/steel_sword.tres" id="14_n1mwy"]
 [ext_resource type="PackedScene" uid="uid://craa7tm3puosj" path="res://Scenes/UI/action_menu_button.tscn" id="15_f856b"]
 [ext_resource type="Script" uid="uid://bab8r7o5qekg3" path="res://Scripts/UI/inventory_menu.gd" id="18_kbww3"]
 [ext_resource type="Script" uid="uid://b0mq6vs26645a" path="res://Scripts/Managers/Turn Managers/turn_orchestrator.gd" id="19_7cjar"]
@@ -60,15 +65,54 @@ enemy_registry = ExtResource("6_lrrec")
 script = ExtResource("6_7cjar")
 faction = ExtResource("7_ws7nl")
 
-[node name="Test Player" parent="Unit Manager/Player Manager" unique_id=48564084 instance=ExtResource("11_juv4x")]
+[node name="Test Player" type="Node2D" parent="Unit Manager/Player Manager" unique_id=265338095]
 position = Vector2(8, 8)
+script = ExtResource("10_n0n13")
+unit_class = ExtResource("11_nm4fv")
+
+[node name="Sprite2D" type="Sprite2D" parent="Unit Manager/Player Manager/Test Player" unique_id=514178926]
+z_index = 2
+texture_filter = 1
+texture = ExtResource("10_c4nf3")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="Inventory" type="Node" parent="Unit Manager/Player Manager/Test Player" unique_id=1454576629 node_paths=PackedStringArray("equipped_weapon")]
+script = ExtResource("11_e5k3s")
+equipped_weapon = NodePath("Weapon")
+
+[node name="Weapon" parent="Unit Manager/Player Manager/Test Player/Inventory" unique_id=277838901 instance=ExtResource("12_n0n13")]
+data = ExtResource("13_nm4fv")
+
+[node name="Weapon2" parent="Unit Manager/Player Manager/Test Player/Inventory" unique_id=1738461762 instance=ExtResource("12_n0n13")]
+data = ExtResource("14_n1mwy")
+
+[node name="Weapon3" parent="Unit Manager/Player Manager/Test Player/Inventory" unique_id=1304993966 instance=ExtResource("12_n0n13")]
+data = ExtResource("13_nm4fv")
+durability = 15
 
 [node name="Enemy Manager" type="Node" parent="Unit Manager" unique_id=1150292512]
 script = ExtResource("6_7cjar")
 faction = ExtResource("8_juv4x")
 
-[node name="Test Enemy" parent="Unit Manager/Enemy Manager" unique_id=1804764990 instance=ExtResource("10_juv4x")]
+[node name="Test Enemy" type="Node2D" parent="Unit Manager/Enemy Manager" unique_id=2033215083]
 position = Vector2(56, 168)
+script = ExtResource("10_n0n13")
+unit_class = ExtResource("11_nm4fv")
+
+[node name="Inventory" type="Node" parent="Unit Manager/Enemy Manager/Test Enemy" unique_id=1606027133 node_paths=PackedStringArray("equipped_weapon")]
+script = ExtResource("11_e5k3s")
+equipped_weapon = NodePath("Weapon")
+
+[node name="Weapon" parent="Unit Manager/Enemy Manager/Test Enemy/Inventory" unique_id=1754859235 instance=ExtResource("12_n0n13")]
+data = ExtResource("13_nm4fv")
+
+[node name="Sprite2D" type="Sprite2D" parent="Unit Manager/Enemy Manager/Test Enemy" unique_id=883424504]
+z_index = 2
+texture_filter = 1
+texture = ExtResource("10_c4nf3")
+region_enabled = true
+region_rect = Rect2(20, 0, 16, 16)
 
 [node name="Turn Orchestrator" type="Node" parent="." unique_id=1352941330]
 unique_name_in_owner = true
