@@ -1,6 +1,5 @@
 class_name UI_Manager extends Control
 
-signal action_chosen(action: Constants.ActionFlags)
 signal weapon_chosen()
 
 var state : UI_State
@@ -14,16 +13,12 @@ func _ready():
 		states[child.state] = child
 	state = states[UI_State.State.IDLE]
 	
-	$"Action Menu".action_chosen.connect(_on_action_chosen)
 	$"Inventory Menu".weapon_chosen.connect(_on_weapon_chosen)
 
 func change_state(new_state: UI_State.State, kwargs: Dictionary):
 	state.exit()
 	state = states[new_state]
 	state.enter(kwargs)
-
-func _on_action_chosen(action: Constants.ActionFlags):
-	action_chosen.emit(action)
 
 func _on_weapon_chosen():
 	weapon_chosen.emit()

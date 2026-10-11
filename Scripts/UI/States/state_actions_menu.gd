@@ -6,7 +6,7 @@ func _init():
 	state = State.ACTIONS_MENU
 
 func enter(kwargs: Dictionary):
-	var actions : int = kwargs["actions"]
+	var actions : Array[Action] = kwargs["actions"]
 	var cell : Vector2i = kwargs["cell"]
 	action_menu.show_element(actions, cell)
 

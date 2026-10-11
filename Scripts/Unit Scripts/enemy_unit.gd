@@ -1,5 +1,0 @@
-class_name Enemy_Unit extends NPC_Unit
-
-# TODO: Implement run_turn()
-func run_turn():
-	pass

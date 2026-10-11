@@ -1,6 +1,8 @@
-class_name Enemy_Unit_Manager extends Node
+class_name Faction_Manager extends Node
 
-var units: Array[Enemy_Unit]
+@export var faction : Faction
+
+var units: Array[Unit]
 var occupied_tiles : Array[Vector2i]:
 	get:
 		var tiles : Array[Vector2i]
@@ -8,19 +10,14 @@ var occupied_tiles : Array[Vector2i]:
 			tiles.append(unit.grid_position)
 		return tiles
 
-func _ready() -> void:
+func _ready():
 	for child in get_children():
-		if child is Enemy_Unit:
+		if child is Unit:
 			units.append(child)
-			occupied_tiles.append(child.grid_position)
+			child.faction = faction
 
 func get_unit_at_cell(cell: Vector2i):
-	if !occupied_tiles.has(cell):
-		return null
-	
 	for unit in units:
 		if unit.grid_position == cell:
 			return unit
-	
-	push_error("Tile incorrectly occupied")
 	return null

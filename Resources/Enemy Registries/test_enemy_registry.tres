@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Enemy_Registry" format=3 uid="uid://dujab2jqw8ha1"]
+
+[ext_resource type="Script" uid="uid://c5o3vwgxpaqrk" path="res://Scripts/Resources/Factions/hostile_pair.gd" id="1_mhjm2"]
+[ext_resource type="Resource" uid="uid://rns6qqj7k4wg" path="res://Resources/Factions/test_player_faction.tres" id="2_kb1bl"]
+[ext_resource type="Resource" uid="uid://cfgmlxwqsgsyy" path="res://Resources/Factions/test_enemy_faction.tres" id="3_kqsgu"]
+[ext_resource type="Script" uid="uid://dee6lnpxwbl37" path="res://Scripts/Resources/Factions/enemy_registry.gd" id="4_h5vrp"]
+
+[sub_resource type="Resource" id="Resource_juv4x"]
+script = ExtResource("1_mhjm2")
+a = ExtResource("2_kb1bl")
+b = ExtResource("3_kqsgu")
+metadata/_custom_type_script = "uid://c5o3vwgxpaqrk"
+
+[resource]
+script = ExtResource("4_h5vrp")
+pairs = Array[ExtResource("1_mhjm2")]([SubResource("Resource_juv4x")])
+metadata/_custom_type_script = "uid://dee6lnpxwbl37"

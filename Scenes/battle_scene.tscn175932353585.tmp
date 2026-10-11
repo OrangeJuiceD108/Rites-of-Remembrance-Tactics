@@ -1,0 +1,166 @@
+[gd_scene format=3 uid="uid://bshu5pb00rhay"]
+
+[ext_resource type="PackedScene" uid="uid://mil0y5xo8uek" path="res://Scenes/cursor.tscn" id="1_b25br"]
+[ext_resource type="Texture2D" uid="uid://dbjwqhu2e0lrq" path="res://Assets/Sprites/pixil-frame-0.png" id="2_20f6w"]
+[ext_resource type="Script" uid="uid://c0vpw1mdgfoyo" path="res://Scripts/Managers/map_manager.gd" id="2_anwxn"]
+[ext_resource type="Script" uid="uid://bsf7g6w3rbamn" path="res://Scripts/Managers/Unit Managers/unit_manager.gd" id="3_anwxn"]
+[ext_resource type="Resource" uid="uid://tqmbpkncy0yn" path="res://Resources/test_map_data.tres" id="4_84vmf"]
+[ext_resource type="Script" uid="uid://c7lpbfbjq73wn" path="res://Scripts/Managers/Unit Managers/faction_manager.gd" id="6_7cjar"]
+[ext_resource type="Resource" uid="uid://rns6qqj7k4wg" path="res://Resources/Factions/test_player_faction.tres" id="7_ws7nl"]
+[ext_resource type="Texture2D" uid="uid://bjy5c0t0vjwbb" path="res://Assets/Sprites/moveSprite.png" id="8_84vmf"]
+[ext_resource type="Script" uid="uid://dinq04oenst3p" path="res://Scripts/Managers/ui_manager.gd" id="8_ed262"]
+[ext_resource type="Resource" uid="uid://cfgmlxwqsgsyy" path="res://Resources/Factions/test_enemy_faction.tres" id="8_juv4x"]
+[ext_resource type="Script" uid="uid://dts8a2ge86ooj" path="res://Scripts/UI/action_menu.gd" id="9_ms847"]
+[ext_resource type="Texture2D" uid="uid://d26qirm76x0xs" path="res://Assets/Sprites/attackSprite.png" id="9_xdap8"]
+[ext_resource type="PackedScene" uid="uid://co2j0l3ldtclf" path="res://Scenes/Test Units/test_enemy.tscn" id="10_juv4x"]
+[ext_resource type="PackedScene" uid="uid://cj70pgbgci72k" path="res://Scenes/Test Units/test_player.tscn" id="11_juv4x"]
+[ext_resource type="PackedScene" uid="uid://craa7tm3puosj" path="res://Scenes/UI/action_menu_button.tscn" id="15_f856b"]
+[ext_resource type="Script" uid="uid://bab8r7o5qekg3" path="res://Scripts/UI/inventory_menu.gd" id="18_kbww3"]
+[ext_resource type="Script" uid="uid://b0mq6vs26645a" path="res://Scripts/Managers/Turn Managers/turn_orchestrator.gd" id="19_7cjar"]
+[ext_resource type="PackedScene" uid="uid://dalvta44tdjlj" path="res://Scenes/UI/item_menu_button.tscn" id="19_vol83"]
+[ext_resource type="Script" uid="uid://v423lnsbhbq0" path="res://Scripts/Managers/Turn Managers/player_turn_controller.gd" id="20_ws7nl"]
+[ext_resource type="Script" uid="uid://drxuo5oxwfkei" path="res://Scripts/tile_highlighter.gd" id="21_juv4x"]
+[ext_resource type="Script" uid="uid://diltqi3twtgot" path="res://Scripts/Managers/States/Player Actions/attack.gd" id="21_ytpxr"]
+[ext_resource type="Script" uid="uid://cxdlvj8ygl7u8" path="res://Scripts/Managers/States/Player Actions/wait.gd" id="22_c4nf3"]
+[ext_resource type="Script" uid="uid://cwtdh83l3xc1u" path="res://Scripts/Managers/States/Player Turn States/player_idle.gd" id="23_e5k3s"]
+[ext_resource type="PackedScene" uid="uid://x5450tsh8xbp" path="res://Scenes/UI/unit_summary.tscn" id="23_ys5i7"]
+[ext_resource type="Script" uid="uid://ldsqrfangmum" path="res://Scripts/Managers/States/Player Turn States/player_unit_selected.gd" id="24_n0n13"]
+[ext_resource type="PackedScene" uid="uid://dl7an4nc2x3yj" path="res://Scenes/UI/unit_quick_info.tscn" id="25_ejyr1"]
+[ext_resource type="Script" uid="uid://chu5j5ditvitn" path="res://Scripts/Managers/States/Player Turn States/player_unit_staged.gd" id="25_nm4fv"]
+[ext_resource type="Script" uid="uid://rp7kusf4btyq" path="res://Scripts/Managers/States/Player Turn States/player_action_selected.gd" id="26_n1mwy"]
+[ext_resource type="PackedScene" uid="uid://buyc1v4vfucll" path="res://Scenes/UI/battle_summary.tscn" id="26_ojquc"]
+[ext_resource type="Script" uid="uid://dobnum318hu58" path="res://Scripts/UI/States/state_ui_idle.gd" id="27_qmv22"]
+[ext_resource type="Script" uid="uid://kr3x70tnkpgy" path="res://Scripts/UI/States/state_actions_menu.gd" id="28_7cjar"]
+[ext_resource type="Script" uid="uid://b678bq3oetcdc" path="res://Scripts/UI/States/state_weapons_menu.gd" id="29_ws7nl"]
+[ext_resource type="Script" uid="uid://bnbrmgh2mlio8" path="res://Scripts/UI/States/state_battle_preview.gd" id="30_juv4x"]
+
+[node name="BattleScene" type="Node2D" unique_id=1232431842]
+
+[node name="Cursor" parent="." unique_id=354903339 instance=ExtResource("1_b25br")]
+unique_name_in_owner = true
+position = Vector2(8, 8)
+
+[node name="Sprite2D" type="Sprite2D" parent="Cursor" unique_id=889907251]
+z_index = 10
+texture_filter = 1
+texture = ExtResource("2_20f6w")
+
+[node name="Map Manager" type="Node" parent="." unique_id=963683314]
+unique_name_in_owner = true
+script = ExtResource("2_anwxn")
+map_data = ExtResource("4_84vmf")
+
+[node name="Unit Manager" type="Node" parent="." unique_id=1941506250]
+unique_name_in_owner = true
+script = ExtResource("3_anwxn")
+
+[node name="Player Manager" type="Node" parent="Unit Manager" unique_id=1898777696]
+script = ExtResource("6_7cjar")
+faction = ExtResource("7_ws7nl")
+
+[node name="Test Player" parent="Unit Manager/Player Manager" unique_id=48564084 instance=ExtResource("11_juv4x")]
+position = Vector2(8, 8)
+
+[node name="Enemy Manager" type="Node" parent="Unit Manager" unique_id=1150292512]
+script = ExtResource("6_7cjar")
+faction = ExtResource("8_juv4x")
+
+[node name="Test Enemy" parent="Unit Manager/Enemy Manager" unique_id=1804764990 instance=ExtResource("10_juv4x")]
+position = Vector2(56, 168)
+
+[node name="Turn Orchestrator" type="Node" parent="." unique_id=1352941330]
+unique_name_in_owner = true
+script = ExtResource("19_7cjar")
+
+[node name="Player Turn Controller" type="Node" parent="Turn Orchestrator" unique_id=1974305009]
+script = ExtResource("20_ws7nl")
+faction = ExtResource("7_ws7nl")
+
+[node name="Actions" type="Node" parent="Turn Orchestrator/Player Turn Controller" unique_id=736428722]
+
+[node name="Attack" type="Node" parent="Turn Orchestrator/Player Turn Controller/Actions" unique_id=1839364836]
+script = ExtResource("21_ytpxr")
+
+[node name="Wait" type="Node" parent="Turn Orchestrator/Player Turn Controller/Actions" unique_id=2063302089]
+script = ExtResource("22_c4nf3")
+
+[node name="States" type="Node" parent="Turn Orchestrator/Player Turn Controller" unique_id=1644403914]
+
+[node name="Idle" type="Node" parent="Turn Orchestrator/Player Turn Controller/States" unique_id=1493256684]
+script = ExtResource("23_e5k3s")
+
+[node name="Unit Selected" type="Node" parent="Turn Orchestrator/Player Turn Controller/States" unique_id=529743375]
+script = ExtResource("24_n0n13")
+
+[node name="Unit Staged" type="Node" parent="Turn Orchestrator/Player Turn Controller/States" unique_id=406933659]
+script = ExtResource("25_nm4fv")
+
+[node name="Action Selected" type="Node" parent="Turn Orchestrator/Player Turn Controller/States" unique_id=1814679073]
+script = ExtResource("26_n1mwy")
+
+[node name="Tile Highlighter" type="Node" parent="Turn Orchestrator/Player Turn Controller" unique_id=593576916]
+script = ExtResource("21_juv4x")
+move_cell_sprite = ExtResource("8_84vmf")
+attack_cell_sprite = ExtResource("9_xdap8")
+
+[node name="UI Manager" type="Control" parent="." unique_id=2037411589]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("8_ed262")
+
+[node name="Action Menu" type="VBoxContainer" parent="UI Manager" unique_id=19769032]
+visible = false
+z_index = 10
+layout_mode = 0
+offset_right = 31.0
+offset_bottom = 40.0
+mouse_filter = 0
+script = ExtResource("9_ms847")
+button_scene = ExtResource("15_f856b")
+
+[node name="Inventory Menu" type="VBoxContainer" parent="UI Manager" unique_id=860073143]
+visible = false
+z_index = 10
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("18_kbww3")
+button_scene = ExtResource("19_vol83")
+
+[node name="Unit Summary" parent="UI Manager" unique_id=568590766 instance=ExtResource("23_ys5i7")]
+visible = false
+z_index = 10
+layout_mode = 1
+anchors_preset = -1
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Unit Quick Info" parent="UI Manager" unique_id=2080571300 instance=ExtResource("25_ejyr1")]
+visible = false
+z_index = 10
+layout_mode = 0
+
+[node name="Battle Summary" parent="UI Manager" unique_id=974342808 instance=ExtResource("26_ojquc")]
+visible = false
+z_index = 10
+layout_mode = 0
+
+[node name="States" type="Node" parent="UI Manager" unique_id=44870358]
+
+[node name="State_Idle" type="Node" parent="UI Manager/States" unique_id=1813117272]
+script = ExtResource("27_qmv22")
+
+[node name="State_Actions_Menu" type="Node" parent="UI Manager/States" unique_id=772516386]
+script = ExtResource("28_7cjar")
+
+[node name="State_Weapons_Menu" type="Node" parent="UI Manager/States" unique_id=1437525090]
+script = ExtResource("29_ws7nl")
+
+[node name="State_Battle_Preview" type="Node" parent="UI Manager/States" unique_id=763926209]
+script = ExtResource("30_juv4x")
